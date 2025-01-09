@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke - Web Developer</title>
 
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph Meta Tags for Facebook Sharing -->
     <meta property="og:title" content="Luke - Web Developer">
     <meta property="og:description" content="Welcome to Luke's portfolio. I specialize in creating modern, high-tech websites that bring your vision to life.">
-    <meta property="og:image" content="logo.ico">
+    <meta property="og:image" content="logo.ico"> <!-- Your logo -->
     <meta property="og:url" content="https://reyzhaven.com">
     <meta property="og:type" content="website">
 
@@ -18,7 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* General Styles */
+        /* Basic Theme */
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
@@ -28,8 +28,146 @@
             transition: background-color 0.3s ease;
         }
 
-        .hidden {
-            display: none;
+        .navbar {
+            background: linear-gradient(90deg, #2c2c54, #212642);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #58a6ff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #dcdcdc !important;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            background-image: url('hero-image.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 2rem;
+        }
+
+        /* Hero Section */
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #58a6ff;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            animation: typing 3s steps(30) 1s 1 normal both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .packages,
+        .skills,
+        .testimonials,
+        .contact {
+            padding: 50px 20px;
+        }
+
+        .package-card, .skills-card, .testimonial-card {
+            background: #2a2a40;
+            border: 1px solid #383850;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .package-card:hover,
+        .skills-card:hover,
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background-color: #58a6ff;
+            animation: progressBar 2s ease-out forwards;
+        }
+
+        @keyframes progressBar {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #212642, #2c2c54);
+            color: #dcdcdc;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #383850;
+        }
+
+        .domain-selector {
+            background: #2a2a40;
+            border: 1px solid #383850;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .domain-selector h3 {
+            color: #58a6ff;
+        }
+
+        .domain-selector .domain-box {
+            background-color: #1e1e2f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: #dcdcdc;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .domain-selector .domain-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Loading Screen */
@@ -40,100 +178,11 @@
             width: 100%;
             height: 100%;
             background: #212642;
-            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: fadeOut 3s ease-in-out forwards;
-        }
-
-        @keyframes fadeOut {
-            100% {
-                opacity: 0;
-                display: none;
-            }
-        }
-
-        /* Navbar */
-        .navbar {
-            background: linear-gradient(90deg, #2c2c54, #212642);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar-brand {
-            color: #58a6ff !important;
-        }
-
-        /* Hero Section */
-        .parallax {
-            background-image: url('hero-image.jpg');
-            background-size: cover;
-            height: 100vh;
-            text-align: center;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #58a6ff;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 20px;
-        }
-
-        /* Login Section */
-        #login-container {
-            margin: 50px auto;
-            text-align: center;
-            background: #2a2a40;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        input {
-            margin: 10px 0;
-            padding: 10px;
-            width: calc(100% - 22px);
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(90deg, #212642, #2c2c54);
-            color: #dcdcdc;
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid #383850;
+            animation: fadeOut 5s ease-in-out forwards;
         }
 
         /* Dark Mode Toggle */
@@ -141,116 +190,346 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #2c2c54;
+            background-color: #2c2c54;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #58a6ff;
             padding: 10px;
             border-radius: 50%;
             color: #fff;
+            display: none;
             cursor: pointer;
-            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        /* Image Gallery */
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Testimonial Carousel */
+        .carousel-item img {
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal .modal-content {
+            background: #2a2a40;
+            padding: 30px;
+            border-radius: 10px;
+            color: #dcdcdc;
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-modal .modal-content input {
+            background-color: #1e1e2f;
+            border: 1px solid #383850;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            color: #dcdcdc;
+            margin: 10px 0;
+        }
+
+        .login-modal .modal-content button {
+            background-color: #58a6ff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .login-modal .modal-content button:hover {
+            background-color: #3f8cdb;
+        }
+
+        .login-modal .close-btn {
+            background-color: transparent;
+            border: none;
+            color: #dcdcdc;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
     </style>
 </head>
 
 <body>
     <!-- Loading Screen -->
-    <div class="loading-screen">
-        <h1>Loading...</h1>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <h1>Loading...</h1>
+            <p>Please wait while we load the content</p>
+        </div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Luke - Web Developer</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="openLoginWindow()">Login</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="parallax">
-        <div class="hero">
-            <h1>Welcome to My Portfolio</h1>
-            <p>I build high-tech websites to bring your vision to life.</p>
-        </div>
-    </div>
+    <!-- Parallax Hero Section -->
+    <section class="parallax">
+        <h1>Welcome to My Portfolio</h1>
+        <p>I'm a passionate Web Developer, building stunning websites!</p>
+    </section>
 
-    <!-- Login Section -->
-    <div id="login-container" class="hidden">
-        <h2>Login to Access Features</h2>
-        <div id="login-options">
-            <button id="google-login">Login with Google</button>
-            <button id="email-login">Login with Email</button>
+    <!-- Service Packages -->
+    <section class="packages container">
+        <h2 class="text-center mb-4">Service Packages</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="package-card">
+                    <h3>Starter Package</h3>
+                    <img src="1.png" class="img-fluid" alt="Starter Package">
+                    <p>₱500: Basic static website with custom UI. Perfect for personal projects.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="package-card">
+                    <h3>Advanced Package</h3>
+                    <img src="2.png" class="img-fluid" alt="Advanced Package">
+                    <p>₱1000: Dynamic website with advanced features like forms and interactive UI.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <img src="3.png" class="img-fluid" alt="Premium Package">
+                    <p>₱1500: Fully responsive website with content management system.</p>
+                </div>
+            </div>
         </div>
-        <form id="email-login-form" class="hidden">
-            <input type="email" id="email" placeholder="Enter your email" required>
-            <input type="password" id="password" placeholder="Enter your password" required>
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills container">
+        <h2 class="text-center mb-4">Skills</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="skills-card">
+                    <h3>Frontend Development</h3>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="skills-card">
+                    <h3>Backend Development</h3>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials container">
+        <h2 class="text-center mb-4">Testimonials</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="testimonials/1.jpg" class="d-block w-100" alt="Client 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>John Doe</h5>
+                        <p>Luke did an amazing job on my website. Highly recommended!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="testimonials/2.jpg" class="d-block w-100" alt="Client 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Jane Smith</h5>
+                        <p>Professional, fast, and reliable. Will work with Luke again!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact container">
+        <h2 class="text-center mb-4">Contact Me</h2>
+        <p class="text-center">Feel free to reach out for collaborations or inquiries.</p>
+    </section>
 
     <!-- Footer -->
-    <div class="footer">
-        <p>© 2025 Luke - Web Developer. All Rights Reserved.</p>
+    <footer class="footer">
+        <p>&copy; 2025 Luke's Portfolio</p>
+    </footer>
+
+    <!-- Domain Selector -->
+    <section class="domain-selector container">
+        <h3>Choose Your Domain</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="domain-box">
+                    <p>reyzhaven.com</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="domain-box">
+                    <p>luke-webdev.com</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="domain-box">
+                    <p>lukeportfolio.net</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeLoginWindow()">&times;</button>
+            <h3>Login</h3>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
     </div>
 
-    <!-- Dark Mode Toggle -->
-    <button class="dark-mode-toggle">🌙</button>
-
+    <!-- JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const loadingScreen = document.querySelector(".loading-screen");
-            const loginContainer = document.getElementById("login-container");
-            const emailLoginButton = document.getElementById("email-login");
-            const googleLoginButton = document.getElementById("google-login");
-            const emailLoginForm = document.getElementById("email-login-form");
-            const emailInput = document.getElementById("email");
-            const passwordInput = document.getElementById("password");
-            const darkModeToggle = document.querySelector(".dark-mode-toggle");
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
 
-            // Simulate loading screen
-            setTimeout(() => {
-                loadingScreen.style.display = "none";
-                loginContainer.classList.remove("hidden");
-            }, 3000);
-
-            // Show email login form
-            emailLoginButton.addEventListener("click", () => {
-                emailLoginForm.classList.remove("hidden");
-                emailLoginButton.classList.add("hidden");
-            });
-
-            // Simulate Google Login
-            googleLoginButton.addEventListener("click", () => {
-                alert("Google login functionality coming soon!");
-            });
-
-            // Handle email login submission
-            emailLoginForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const email = emailInput.value.trim();
-                const password = passwordInput.value.trim();
-
-                if (!validateEmail(email)) {
-                    alert("Please enter a valid email address.");
-                    return;
-                }
-
-                if (password.length < 6) {
-                    alert("Password must be at least 6 characters long.");
-                    return;
-                }
-
-                alert("Login successful!");
-            });
-
-            // Email validation function
-            function validateEmail(email) {
-                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return regex.test(email);
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 200) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
             }
+        });
 
-            // Dark Mode Toggle
-            darkModeToggle.addEventListener("click", () => {
-                document.body.classList.toggle("dark-mode");
-            });
+        scrollTopBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Login Modal
+        const loginModal = document.getElementById("loginModal");
+
+        function openLoginWindow() {
+            loginModal.style.display = "flex";
+        }
+
+        function closeLoginWindow() {
+            loginModal.style.display = "none";
+        }
+
+        function login() {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            alert(`Logged in with email: ${email}`);
+            closeLoginWindow();
+        }
+
+        // Loading Screen
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                document.getElementById("loadingScreen").style.display = "none";
+            }, 3000);
         });
     </script>
 </body>
