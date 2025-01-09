@@ -26,6 +26,10 @@
             color: #58a6ff !important;
         }
 
+        .navbar-nav .nav-link {
+            color: #dcdcdc !important;
+        }
+
         .hero {
             text-align: center;
             padding: 50px 20px;
@@ -56,6 +60,56 @@
             padding: 20px;
             border-top: 1px solid #383850;
         }
+
+        .dropdown-menu {
+            background: #2a2a40;
+            border-radius: 8px;
+            min-width: 200px;
+        }
+
+        .dropdown-item {
+            color: #dcdcdc !important;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #383850;
+        }
+
+        .domain-selector {
+            background: #2a2a40;
+            border: 1px solid #383850;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .domain-selector select {
+            background: #1e1e2f;
+            color: #dcdcdc;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .package-card h3,
+        .domain-selector h3 {
+            color: #58a6ff;
+        }
+
+        .domain-selector .btn {
+            background-color: #58a6ff;
+            border: none;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .domain-selector .btn:hover {
+            background-color: #007bff;
+        }
     </style>
 </head>
 
@@ -63,6 +117,19 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Luke - Web Developer</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#" onclick="googleLogin()">Login with Google</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="facebookLogin()">Login with Facebook</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -92,7 +159,32 @@
                     <p>₱2500: Dynamic website with backend integration and API setup.</p>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="package-card">
+                    <h3>Ultimate Package</h3>
+                    <p>₱3500: Fully customizable website with advanced features and API integrations.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="package-card">
+                    <h3>Enterprise Package</h3>
+                    <p>₱5000: Enterprise-level website with multi-user authentication and high scalability.</p>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <section class="domain-selector container">
+        <h3>Choose Your Domain Name</h3>
+        <p>Select a domain for your website and choose features:</p>
+        <select id="domainSelect">
+            <option value="orender.com">orender.com</option>
+            <option value="techfury.com">techfury.com</option>
+            <option value="mydomain.com">mydomain.com</option>
+            <option value="webbuilder.com">webbuilder.com</option>
+            <option value="cloudspace.com">cloudspace.com</option>
+        </select>
+        <button class="btn mt-3" onclick="customizeDomain()">Customize Domain Features</button>
     </section>
 
     <footer class="footer">
@@ -137,13 +229,16 @@
                     console.error(error.message);
                 });
         }
+
+        // Domain customization
+        function customizeDomain() {
+            const domain = document.getElementById("domainSelect").value;
+            alert(`You selected ${domain}. Now let's customize your domain features!`);
+        }
     </script>
 
-    <section class="login-section text-center mt-4">
-        <h2>Login or Register</h2>
-        <button class="btn btn-primary mt-3" onclick="googleLogin()">Login with Google</button>
-        <button class="btn btn-secondary mt-3" onclick="facebookLogin()">Login with Facebook</button>
-    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
