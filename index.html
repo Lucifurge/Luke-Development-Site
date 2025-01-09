@@ -18,7 +18,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* Basic Theme */
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
@@ -28,6 +34,7 @@
             transition: background-color 0.3s ease;
         }
 
+        /* Navbar Styling */
         .navbar {
             background: linear-gradient(90deg, #2c2c54, #212642);
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
@@ -46,33 +53,31 @@
             color: #dcdcdc !important;
         }
 
-        /* Parallax Effect */
-        .parallax {
-            background-image: url('hero-image.jpg');
-            background-attachment: fixed;
-            background-size: cover;
-            height: 100vh;
-            color: #fff;
+        /* Hero Section */
+        .hero {
+            position: relative;
             text-align: center;
+            background: url('hero-image.jpg') center/cover fixed;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            font-size: 2rem;
         }
 
-        /* Hero Section */
         .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 4rem;
+            font-weight: 700;
             color: #58a6ff;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 2s ease-out;
         }
 
         .hero p {
             font-size: 1.2rem;
-            margin-top: 20px;
-            animation: typing 3s steps(30) 1s 1 normal both;
+            color: #dcdcdc;
+            animation: typing 4s steps(50) 1s 1 normal both;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         @keyframes fadeIn {
@@ -95,30 +100,62 @@
             }
         }
 
-        .packages,
-        .skills,
-        .testimonials,
-        .contact {
-            padding: 50px 20px;
+        /* Domain Selector Section */
+        .domain-selector {
+            background: #2a2a40;
+            border-radius: 12px;
+            margin-top: 50px;
+            padding: 30px;
+            color: #dcdcdc;
         }
 
-        .package-card, .skills-card, .testimonial-card {
-            background: #2a2a40;
-            border: 1px solid #383850;
-            border-radius: 12px;
-            padding: 20px;
+        .domain-selector h3 {
+            color: #58a6ff;
+            font-size: 2rem;
             text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .domain-box {
+            background-color: #1e1e2f;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: #dcdcdc;
+            text-align: center;
+            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .package-card:hover,
-        .skills-card:hover,
-        .testimonial-card:hover {
-            transform: translateY(-10px);
+        .domain-box:hover {
+            transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Progress Bar */
+        /* Section Cards */
+        .section-card {
+            background: #2a2a40;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            color: #dcdcdc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-card h3 {
+            color: #58a6ff;
+            font-size: 1.8rem;
+        }
+
+        .section-card p {
+            font-size: 1rem;
+        }
+
         .progress-bar {
             background-color: #58a6ff;
             animation: progressBar 2s ease-out forwards;
@@ -134,6 +171,7 @@
             }
         }
 
+        /* Footer Styling */
         .footer {
             background: linear-gradient(90deg, #212642, #2c2c54);
             color: #dcdcdc;
@@ -142,37 +180,51 @@
             border-top: 1px solid #383850;
         }
 
-        .domain-selector {
-            background: #2a2a40;
-            border: 1px solid #383850;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .domain-selector h3 {
-            color: #58a6ff;
-        }
-
-        .domain-selector .domain-box {
-            background-color: #1e1e2f;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            color: #dcdcdc;
-            text-align: center;
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #58a6ff;
+            padding: 10px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
-        .domain-selector .domain-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        .dark-mode-toggle:hover {
+            background-color: #3f8cdb;
         }
 
-        /* Login/Register Modal */
-        .login-modal,
-        .register-modal {
+        .dark-mode-toggle i {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background-color: #58a6ff;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .scroll-top:hover {
+            background-color: #3f8cdb;
+        }
+
+        .scroll-top i {
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        /* Modal Styling */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -186,10 +238,10 @@
 
         .modal-content {
             background: #2a2a40;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             color: #dcdcdc;
-            width: 300px;
+            width: 400px;
             text-align: center;
         }
 
@@ -198,7 +250,7 @@
             border: 1px solid #383850;
             border-radius: 5px;
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             color: #dcdcdc;
             margin: 10px 0;
         }
@@ -206,10 +258,11 @@
         .modal-content button {
             background-color: #58a6ff;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border-radius: 5px;
             color: #fff;
             cursor: pointer;
+            width: 100%;
         }
 
         .modal-content button:hover {
@@ -223,8 +276,32 @@
             font-size: 1.5rem;
             cursor: pointer;
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-content h1 {
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .loading-content p {
+            font-size: 1.2rem;
+            color: #ddd;
         }
     </style>
 </head>
@@ -238,7 +315,7 @@
         </div>
     </div>
 
-    <!-- Dark Mode Toggle Button -->
+    <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle" id="darkModeToggle">
         <i class="fas fa-moon"></i>
     </div>
@@ -265,6 +342,12 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to My Portfolio</h1>
+        <p>I'm Luke, a web developer who turns ideas into code.</p>
+    </div>
+
     <!-- Domain Selector Section -->
     <div class="domain-selector">
         <h3>Available Domains</h3>
@@ -279,8 +362,9 @@
         </div>
     </div>
 
+    <!-- Modal Section -->
     <!-- Login Modal -->
-    <div class="login-modal" id="loginModal">
+    <div class="modal" id="loginModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeLoginWindow()">&times;</button>
             <h2>Login</h2>
@@ -291,7 +375,7 @@
     </div>
 
     <!-- Register Modal -->
-    <div class="register-modal" id="registerModal">
+    <div class="modal" id="registerModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeRegisterWindow()">&times;</button>
             <h2>Register</h2>
@@ -299,6 +383,11 @@
             <input type="password" id="registerPassword" placeholder="Password">
             <button onclick="submitRegister()">Register</button>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Luke | All Rights Reserved</p>
     </div>
 
     <script>
@@ -321,7 +410,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        // Login and Register Modal
+        // Modal Window Controls
         function openLoginWindow() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -338,56 +427,45 @@
             document.getElementById('registerModal').style.display = 'none';
         }
 
+        // Login & Register API Submission
         function submitLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
 
-            fetch('https://login-production-bb8a.up.railway.app/', {
+            // Use fetch API to send login data
+            fetch('/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: password })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
             })
             .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Login successful!');
-                    closeLoginWindow();
-                } else {
-                    alert('Invalid credentials');
-                }
-            })
-            .catch(error => {
-                alert('An error occurred');
-            });
+            .then(data => alert('Logged in successfully!'))
+            .catch(error => alert('Login failed: ' + error));
         }
 
         function submitRegister() {
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
+            const email = document.getElementById("registerEmail").value;
+            const password = document.getElementById("registerPassword").value;
 
-            fetch('https://your-backend-url-for-register.com', {
+            // Use fetch API to send registration data
+            fetch('/register', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: password })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
             })
             .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Registration successful!');
-                    closeRegisterWindow();
-                } else {
-                    alert('Registration failed');
-                }
-            })
-            .catch(error => {
-                alert('An error occurred');
-            });
+            .then(data => alert('Registered successfully!'))
+            .catch(error => alert('Registration failed: ' + error));
         }
+
+        // Loading Screen
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                document.getElementById("loadingScreen").style.display = "none";
+            }, 1000);
+        });
     </script>
+
 </body>
 
 </html>
