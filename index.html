@@ -170,100 +170,9 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #212642;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 5s ease-in-out forwards;
-        }
-
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #2c2c54;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #58a6ff;
-            padding: 10px;
-            border-radius: 50%;
-            color: #fff;
-            display: none;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-                display: none;
-            }
-        }
-
-        /* Image Gallery */
-        .gallery img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .gallery-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Testimonial Carousel */
-        .carousel-item img {
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        /* Login Modal */
-        .login-modal {
+        /* Login/Register Modal */
+        .login-modal,
+        .register-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -275,7 +184,7 @@
             align-items: center;
         }
 
-        .login-modal .modal-content {
+        .modal-content {
             background: #2a2a40;
             padding: 30px;
             border-radius: 10px;
@@ -284,7 +193,7 @@
             text-align: center;
         }
 
-        .login-modal .modal-content input {
+        .modal-content input {
             background-color: #1e1e2f;
             border: 1px solid #383850;
             border-radius: 5px;
@@ -294,7 +203,7 @@
             margin: 10px 0;
         }
 
-        .login-modal .modal-content button {
+        .modal-content button {
             background-color: #58a6ff;
             border: none;
             padding: 10px 20px;
@@ -303,11 +212,11 @@
             cursor: pointer;
         }
 
-        .login-modal .modal-content button:hover {
+        .modal-content button:hover {
             background-color: #3f8cdb;
         }
 
-        .login-modal .close-btn {
+        .close-btn {
             background-color: transparent;
             border: none;
             color: #dcdcdc;
@@ -348,54 +257,71 @@
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0);" onclick="openLoginWindow()">Login</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="openRegisterWindow()">Register</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Parallax Section -->
-    <section class="parallax">
-        <div class="hero">
-            <h1>Welcome to My Portfolio</h1>
-            <p>I'm Luke, a passionate Web Developer</p>
+    <!-- Domain Selector Section -->
+    <div class="domain-selector">
+        <h3>Available Domains</h3>
+        <div class="domain-box">
+            <a href="https://webname.vercel.app" target="_blank">webname.vercel.app</a>
         </div>
-    </section>
+        <div class="domain-box">
+            <a href="https://webname.railway.app" target="_blank">webname.railway.app</a>
+        </div>
+        <div class="domain-box">
+            <a href="https://webname.render.app" target="_blank">webname.render.app</a>
+        </div>
+    </div>
 
     <!-- Login Modal -->
     <div class="login-modal" id="loginModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeLoginWindow()">&times;</button>
-            <h3>Login</h3>
-            <form id="loginForm">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
+            <h2>Login</h2>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="submitLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="register-modal" id="registerModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeRegisterWindow()">&times;</button>
+            <h2>Register</h2>
+            <input type="email" id="registerEmail" placeholder="Email">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button onclick="submitRegister()">Register</button>
         </div>
     </div>
 
     <script>
         // Dark Mode Toggle
-        document.getElementById('darkModeToggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
         });
 
         // Scroll to Top Button
-        window.onscroll = function() {
-            var scrollBtn = document.getElementById('scrollTopBtn');
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                scrollBtn.style.display = 'block';
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                scrollTopBtn.style.display = "block";
             } else {
-                scrollBtn.style.display = 'none';
+                scrollTopBtn.style.display = "none";
             }
-        };
-
-        document.getElementById('scrollTopBtn').addEventListener('click', function() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        // Login Modal
+        // Login and Register Modal
         function openLoginWindow() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -404,11 +330,17 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        // Handle Login Form Submission
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
+        function openRegisterWindow() {
+            document.getElementById('registerModal').style.display = 'flex';
+        }
+
+        function closeRegisterWindow() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        function submitLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
 
             fetch('https://login-production-bb8a.up.railway.app/', {
                 method: 'POST',
@@ -429,7 +361,32 @@
             .catch(error => {
                 alert('An error occurred');
             });
-        });
+        }
+
+        function submitRegister() {
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            fetch('https://your-backend-url-for-register.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Registration successful!');
+                    closeRegisterWindow();
+                } else {
+                    alert('Registration failed');
+                }
+            })
+            .catch(error => {
+                alert('An error occurred');
+            });
+        }
     </script>
 </body>
 
