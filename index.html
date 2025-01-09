@@ -45,6 +45,14 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            animation: fadeOut 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeOut {
+            100% {
+                opacity: 0;
+                display: none;
+            }
         }
 
         /* Navbar */
@@ -127,6 +135,19 @@
             padding: 20px;
             border-top: 1px solid #383850;
         }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c2c54;
+            padding: 10px;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1001;
+        }
     </style>
 </head>
 
@@ -170,6 +191,9 @@
         <p>© 2025 Luke - Web Developer. All Rights Reserved.</p>
     </div>
 
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle">🌙</button>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loadingScreen = document.querySelector(".loading-screen");
@@ -179,6 +203,7 @@
             const emailLoginForm = document.getElementById("email-login-form");
             const emailInput = document.getElementById("email");
             const passwordInput = document.getElementById("password");
+            const darkModeToggle = document.querySelector(".dark-mode-toggle");
 
             // Simulate loading screen
             setTimeout(() => {
@@ -221,6 +246,11 @@
                 const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(email);
             }
+
+            // Dark Mode Toggle
+            darkModeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+            });
         });
     </script>
 </body>
