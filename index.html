@@ -10,7 +10,7 @@
     <meta property="og:title" content="Luke - Web Developer">
     <meta property="og:description" content="Welcome to Luke's portfolio. I specialize in creating modern, high-tech websites that bring your vision to life.">
     <meta property="og:image" content="logo.ico"> <!-- Your logo -->
-    <meta property="og:url" content="https://reyzhaven.com">
+    <meta property="og:url" content="https://luke-development-site.onrender.com/#services">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="logo.ico" type="image/x-icon">
@@ -18,6 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* Basic Theme */
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
@@ -116,80 +117,38 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .skills {
-            background: #2a2a40;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        /* Floating Login Window Style */
-        .login-window {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #2a2a40;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            width: 350px;
-            z-index: 9999;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        /* Close Button */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            color: #dcdcdc;
-            font-size: 1.5rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Button styles */
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-        }
-
-        .login-btn img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .login-btn.google {
-            background-color: #db4437;
-            color: white;
-        }
-
-        .login-btn.facebook {
-            background-color: #3b5998;
-            color: white;
-        }
-
-        /* Overlay */
-        .overlay {
-            display: none;
+        /* Loading Screen Style */
+        .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
+            background: #212642;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: #58a6ff;
+        }
+
+        .loading-content h1 {
+            font-size: 3rem;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                display: none;
+            }
         }
 
         /* Slide In Animation */
@@ -226,6 +185,14 @@
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <h1>Loading...</h1>
+            <p>Please wait while we load the content</p>
+        </div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Luke - Web Developer</a>
@@ -374,6 +341,12 @@
             document.getElementById('loginWindow').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
         }
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 3000); // Hide loading screen after 3 seconds
+        };
     </script>
 </body>
 
