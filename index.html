@@ -101,6 +101,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
+        /* Floating Login Window Style */
         .login-window {
             display: none;
             position: fixed;
@@ -111,26 +112,54 @@
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            width: 300px;
+            width: 350px;
             z-index: 9999;
+            animation: slideIn 0.3s ease-out;
         }
 
-        .login-window .btn {
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            color: #dcdcdc;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Button styles */
+        .login-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
         }
 
-        .login-window .btn-google {
+        .login-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .login-btn.google {
             background-color: #db4437;
             color: white;
         }
 
-        .login-window .btn-facebook {
+        .login-btn.facebook {
             background-color: #3b5998;
             color: white;
         }
 
+        /* Overlay */
         .overlay {
             display: none;
             position: fixed;
@@ -142,18 +171,16 @@
             z-index: 9998;
         }
 
-        .modal-header {
-            text-align: center;
-        }
-
-        .modal-header h5 {
-            font-size: 1.5rem;
-            color: #58a6ff;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        /* Slide In Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
         }
     </style>
 </head>
@@ -219,13 +246,19 @@
         <p>&copy; 2025 Luke. All Rights Reserved.</p>
     </footer>
 
+    <!-- Login Modal -->
     <div class="overlay" id="overlay"></div>
     <div class="login-window" id="loginWindow">
+        <button class="close-btn" onclick="closeLoginWindow()">×</button>
         <div class="modal-header">
             <h5>Login</h5>
         </div>
-        <button class="btn btn-google" onclick="googleLogin()">Login with Google</button>
-        <button class="btn btn-facebook" onclick="facebookLogin()">Login with Facebook</button>
+        <button class="login-btn google" onclick="googleLogin()">
+            <img src="google.png" alt="Google Logo"> Login with Google
+        </button>
+        <button class="login-btn facebook" onclick="facebookLogin()">
+            <img src="fb.png" alt="Facebook Logo"> Login with Facebook
+        </button>
     </div>
 
     <script>
@@ -269,26 +302,23 @@
                 });
         }
 
-        // Open login window
+        // Open Login Window
         function openLoginWindow() {
-            document.getElementById("overlay").style.display = "block";
-            document.getElementById("loginWindow").style.display = "block";
+            document.getElementById('loginWindow').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
         }
 
-        // Close login window
+        // Close Login Window
         function closeLoginWindow() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("loginWindow").style.display = "none";
+            document.getElementById('loginWindow').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         }
 
-        // Redirect to Facebook
+        // Redirect to Facebook after selecting domain
         function redirectToFacebook() {
             window.location.href = "https://www.facebook.com/tasogare.saya";
         }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
