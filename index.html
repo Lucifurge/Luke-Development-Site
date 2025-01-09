@@ -5,17 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke - Web Developer</title>
+    
+    <!-- Open Graph Meta Tags for Facebook Sharing -->
+    <meta property="og:title" content="Luke - Web Developer">
+    <meta property="og:description" content="Welcome to Luke's portfolio. I specialize in creating modern, high-tech websites that bring your vision to life.">
+    <meta property="og:image" content="logo.ico"> <!-- Your logo -->
+    <meta property="og:url" content="https://reyzhaven.com">
+    <meta property="og:type" content="website">
+
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
             font-family: "Fira Code", monospace;
             margin: 0;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         .navbar {
@@ -35,14 +43,13 @@
         .hero {
             text-align: center;
             padding: 50px 20px;
-            background: url('hero-bg.jpg') no-repeat center center/cover;
-            color: white;
         }
 
         .hero h1 {
             font-size: 3rem;
             font-weight: bold;
             color: #58a6ff;
+            animation: fadeIn 1s ease-out;
         }
 
         .hero p {
@@ -50,11 +57,14 @@
             margin-top: 20px;
         }
 
-        .packages, .services {
+        .packages,
+        .skills,
+        .testimonials,
+        .contact {
             padding: 50px 20px;
         }
 
-        .package-card, .service-card {
+        .package-card, .skills-card, .testimonial-card {
             background: #2a2a40;
             border: 1px solid #383850;
             border-radius: 12px;
@@ -63,7 +73,9 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .package-card:hover, .service-card:hover {
+        .package-card:hover,
+        .skills-card:hover,
+        .testimonial-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
@@ -102,6 +114,12 @@
         .domain-selector .domain-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .skills {
+            background: #2a2a40;
+            border-radius: 12px;
+            padding: 20px;
         }
 
         /* Floating Login Window Style */
@@ -186,6 +204,24 @@
                 transform: translate(-50%, -50%);
             }
         }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Testimonial Carousel */
+        .carousel-item img {
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -195,12 +231,6 @@
             <a class="navbar-brand" href="#">Luke - Web Developer</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#packages">Packages</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0);" onclick="openLoginWindow()">Login</a>
                     </li>
@@ -214,144 +244,135 @@
         <p>I specialize in creating modern, high-tech websites that bring your vision to life.</p>
     </header>
 
-    <section class="services container" id="services">
-        <h2 class="text-center mb-4">Our Services</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="service-card">
-                    <img src="1.png" alt="Service 1" class="img-fluid">
-                    <h3>Web Design</h3>
-                    <p>Create custom, responsive designs that engage users and enhance the overall user experience.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service-card">
-                    <img src="2.png" alt="Service 2" class="img-fluid">
-                    <h3>Backend Development</h3>
-                    <p>Robust server-side development to power your website’s logic, performance, and database.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service-card">
-                    <img src="3.png" alt="Service 3" class="img-fluid">
-                    <h3>SEO Optimization</h3>
-                    <p>Improve your website’s visibility and ranking in search engines for better traffic.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="packages container" id="packages">
+    <!-- Services Section -->
+    <section class="packages container">
         <h2 class="text-center mb-4">Service Packages</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Starter Package</h3>
-                    <img src="4.png" alt="Starter Package" class="img-fluid mb-3">
+                    <img src="1.png" class="img-fluid" alt="Starter Package">
                     <p>₱500: Basic static website with custom UI. Perfect for personal projects.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Pro Package</h3>
-                    <img src="5.png" alt="Pro Package" class="img-fluid mb-3">
+                    <img src="2.png" class="img-fluid" alt="Pro Package">
                     <p>₱1500: Responsive website with authentication (Google & Facebook login).</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Premium Package</h3>
-                    <img src="4.png" alt="Premium Package" class="img-fluid mb-3">
+                    <img src="3.png" class="img-fluid" alt="Premium Package">
                     <p>₱2500: Dynamic website with backend integration and API setup.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="domain-selector container">
-        <h3>Select a Domain</h3>
-        <p>Choose a domain for your website, click to go to my Facebook and DM me for more details.</p>
-        <div class="domain-box" onclick="redirectToFacebook()">webname/orender.com</div>
-        <div class="domain-box" onclick="redirectToFacebook()">webname/vercel.com</div>
-        <div class="domain-box" onclick="redirectToFacebook()">webname/railway.com</div>
+    <!-- Skills Section -->
+    <section class="skills container">
+        <h3 class="text-center mb-4">My Skills</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="skills-card">
+                    <h4>Web Development</h4>
+                    <p>Building responsive and modern websites using HTML, CSS, and JavaScript.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="skills-card">
+                    <h4>Backend Development</h4>
+                    <p>Creating scalable server-side solutions with Node.js, PHP, and Python.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="skills-card">
+                    <h4>Database Management</h4>
+                    <p>Designing and optimizing relational databases with MySQL, MongoDB, and Firebase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Carousel -->
+    <section class="testimonials container">
+        <h3 class="text-center mb-4">Client Testimonials</h3>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="4.png" class="d-block mx-auto" alt="Client 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p>"Luke's team delivered an outstanding website for my business. Highly recommend!"</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="5.png" class="d-block mx-auto" alt="Client 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p>"Fantastic service! The website was exactly what I envisioned."</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact container">
+        <h3 class="text-center mb-4">Contact Me</h3>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+        </form>
     </section>
 
     <footer class="footer">
         <p>&copy; 2025 Luke. All Rights Reserved.</p>
-        <a href="mailto:luke@example.com">Contact</a> | <a href="#services">Services</a> | <a href="#packages">Packages</a>
     </footer>
 
     <!-- Login Modal -->
     <div class="overlay" id="overlay"></div>
     <div class="login-window" id="loginWindow">
         <button class="close-btn" onclick="closeLoginWindow()">×</button>
-        <div class="modal-header">
-            <h5>Login</h5>
+        <h3>Login to Your Account</h3>
+        <div class="login-btn google">
+            <img src="google-icon.png" alt="Google"> Login with Google
         </div>
-        <button class="login-btn google" onclick="googleLogin()">
-            <img src="google.png" alt="Google Logo"> Login with Google
-        </button>
-        <button class="login-btn facebook" onclick="facebookLogin()">
-            <img src="fb.png" alt="Facebook Logo"> Login with Facebook
-        </button>
+        <div class="login-btn facebook">
+            <img src="facebook-icon.png" alt="Facebook"> Login with Facebook
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyD4_Vc5VLxh1rXfIEWnwz2scIltD2bC0ZM",
-            authDomain: "luke-dev-site.firebaseapp.com",
-            projectId: "luke-dev-site",
-            storageBucket: "luke-dev-site.appspot.com",
-            messagingSenderId: "212068670785",
-            appId: "1:212068670785:web:041b70e5b63f9e7fc04fef"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.getAuth(app);
-
-        // Google Login
-        function googleLogin() {
-            const provider = new firebase.GoogleAuthProvider();
-            firebase.signInWithPopup(auth, provider)
-                .then((result) => {
-                    alert(`Welcome, ${result.user.displayName}`);
-                    closeLoginWindow();
-                })
-                .catch((error) => {
-                    console.error(error.message);
-                });
-        }
-
-        // Facebook Login
-        function facebookLogin() {
-            const provider = new firebase.FacebookAuthProvider();
-            firebase.signInWithPopup(auth, provider)
-                .then((result) => {
-                    alert(`Welcome, ${result.user.displayName}`);
-                    closeLoginWindow();
-                })
-                .catch((error) => {
-                    console.error(error.message);
-                });
-        }
-
-        // Open Login Window
         function openLoginWindow() {
             document.getElementById('loginWindow').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
 
-        // Close Login Window
         function closeLoginWindow() {
             document.getElementById('loginWindow').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
-        }
-
-        // Redirect to Facebook after selecting domain
-        function redirectToFacebook() {
-            window.location.href = "https://www.facebook.com/tasogare.saya";
         }
     </script>
 </body>
