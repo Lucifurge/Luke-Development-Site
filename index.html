@@ -9,7 +9,7 @@
     <!-- Open Graph Meta Tags for Facebook Sharing -->
     <meta property="og:title" content="Luke - Web Developer">
     <meta property="og:description" content="Welcome to Luke's portfolio. I specialize in creating modern, high-tech websites that bring your vision to life.">
-    <meta property="og:image" content="logo.ico">
+    <meta property="og:image" content="logo.ico"> <!-- Your logo -->
     <meta property="og:url" content="https://reyzhaven.com">
     <meta property="og:type" content="website">
 
@@ -18,6 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* Basic Theme */
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
@@ -33,6 +34,7 @@
             position: sticky;
             top: 0;
             z-index: 999;
+            transition: background-color 0.3s ease;
         }
 
         .navbar-brand {
@@ -44,6 +46,7 @@
             color: #dcdcdc !important;
         }
 
+        /* Parallax Effect */
         .parallax {
             background-image: url('hero-image.jpg');
             background-attachment: fixed;
@@ -58,6 +61,7 @@
             font-size: 2rem;
         }
 
+        /* Hero Section */
         .hero h1 {
             font-size: 3rem;
             font-weight: bold;
@@ -81,13 +85,26 @@
             }
         }
 
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
         .packages,
         .skills,
-        .gallery {
+        .testimonials,
+        .contact {
             padding: 50px 20px;
         }
 
-        .package-card, .skills-card {
+        .package-card,
+        .skills-card,
+        .testimonial-card {
             background: #2a2a40;
             border: 1px solid #383850;
             border-radius: 12px;
@@ -97,13 +114,26 @@
         }
 
         .package-card:hover,
-        .skills-card:hover {
+        .skills-card:hover,
+        .testimonial-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
+        /* Progress Bar */
         .progress-bar {
             background-color: #58a6ff;
+            animation: progressBar 2s ease-out forwards;
+        }
+
+        @keyframes progressBar {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+            }
         }
 
         .footer {
@@ -111,6 +141,7 @@
             color: #dcdcdc;
             text-align: center;
             padding: 20px;
+            border-top: 1px solid #383850;
         }
 
         .domain-selector {
@@ -140,94 +171,105 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
-    </style>
-</head>
 
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Luke - Web Developer</a>
-        </div>
-    </nav>
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #212642;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 5s ease-in-out forwards;
+        }
 
-    <!-- Parallax Hero Section -->
-    <section class="parallax">
-        <h1>Welcome to My Portfolio</h1>
-        <p>I'm a passionate Web Developer, building stunning websites!</p>
-    </section>
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2c2c54;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
 
-    <!-- Services Section -->
-    <section class="packages container">
-        <h2 class="text-center mb-4">Service Packages</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Starter Package</h3>
-                    <img src="1.png" class="img-fluid" alt="Starter Package">
-                    <p>₱500: Basic static website with custom UI. Perfect for personal projects.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Pro Package</h3>
-                    <img src="2.png" class="img-fluid" alt="Pro Package">
-                    <p>₱1500: Responsive website with authentication (Google & Facebook login).</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Premium Package</h3>
-                    <img src="3.png" class="img-fluid" alt="Premium Package">
-                    <p>₱2500: Dynamic website with backend integration and API setup.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #58a6ff;
+            padding: 10px;
+            border-radius: 50%;
+            color: #fff;
+            display: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
 
-    <!-- Skills Section -->
-    <section class="skills container">
-        <h2 class="text-center mb-4">Skills</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="skills-card">
-                    <h3>HTML</h3>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 90%;">90%</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="skills-card">
-                    <h3>CSS</h3>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 85%;">85%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
 
-    <!-- Domain Selector -->
-    <section class="domain-selector container">
-        <h3 class="text-center mb-4">Choose Your Domain</h3>
-        <div class="domain-box" onclick="window.location.href='https://www.facebook.com/tasogare.saya'">
-            webname/orender.com
-        </div>
-        <div class="domain-box" onclick="window.location.href='https://www.facebook.com/tasogare.saya'">
-            webname/vercel.com
-        </div>
-        <div class="domain-box" onclick="window.location.href='https://www.facebook.com/tasogare.saya'">
-            webname/railway.com
-        </div>
-    </section>
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Luke - All Rights Reserved</p>
-    </footer>
+        /* Image Gallery */
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
 
-</html>
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Testimonial Carousel */
+        .carousel-item img {
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
