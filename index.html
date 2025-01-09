@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke - Web Developer</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js"></script>
@@ -35,6 +36,17 @@
             padding: 50px 20px;
         }
 
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
         .packages {
             padding: 50px 20px;
         }
@@ -61,21 +73,6 @@
             border-top: 1px solid #383850;
         }
 
-        .dropdown-menu {
-            background: #2a2a40;
-            border-radius: 8px;
-            min-width: 200px;
-        }
-
-        .dropdown-item {
-            color: #dcdcdc !important;
-            transition: background 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background-color: #383850;
-        }
-
         .domain-selector {
             background: #2a2a40;
             border: 1px solid #383850;
@@ -86,19 +83,6 @@
 
         .domain-selector h3 {
             color: #58a6ff;
-        }
-
-        .domain-selector .btn {
-            background-color: #58a6ff;
-            border: none;
-            color: #fff;
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .domain-selector .btn:hover {
-            background-color: #007bff;
         }
 
         .domain-selector .domain-box {
@@ -116,6 +100,61 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
+
+        .login-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2a2a40;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            z-index: 9999;
+        }
+
+        .login-window .btn {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .login-window .btn-google {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .login-window .btn-facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .modal-header {
+            text-align: center;
+        }
+
+        .modal-header h5 {
+            font-size: 1.5rem;
+            color: #58a6ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
     </style>
 </head>
 
@@ -125,14 +164,8 @@
             <a class="navbar-brand" href="#">Luke - Web Developer</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Login
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="googleLogin()">Login with Google</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="facebookLogin()">Login with Facebook</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="openLoginWindow()">Login</a>
                     </li>
                 </ul>
             </div>
@@ -165,31 +198,19 @@
                     <p>₱2500: Dynamic website with backend integration and API setup.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Ultimate Package</h3>
-                    <p>₱3500: Fully customizable website with advanced features and API integrations.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Enterprise Package</h3>
-                    <p>₱5000: Enterprise-level website with multi-user authentication and high scalability.</p>
-                </div>
-            </div>
         </div>
     </section>
 
     <section class="domain-selector container">
         <h3>Select a Domain</h3>
         <p>Choose a subdomain for your website:</p>
-        <div class="domain-box" onclick="alert('You selected orender.com')">
+        <div class="domain-box" onclick="redirectToFacebook()">
             orender.com
         </div>
-        <div class="domain-box" onclick="alert('You selected verce.com')">
+        <div class="domain-box" onclick="redirectToFacebook()">
             verce.com
         </div>
-        <div class="domain-box" onclick="alert('You selected railway.com')">
+        <div class="domain-box" onclick="redirectToFacebook()">
             railway.com
         </div>
     </section>
@@ -198,15 +219,24 @@
         <p>&copy; 2025 Luke. All Rights Reserved.</p>
     </footer>
 
+    <div class="overlay" id="overlay"></div>
+    <div class="login-window" id="loginWindow">
+        <div class="modal-header">
+            <h5>Login</h5>
+        </div>
+        <button class="btn btn-google" onclick="googleLogin()">Login with Google</button>
+        <button class="btn btn-facebook" onclick="facebookLogin()">Login with Facebook</button>
+    </div>
+
     <script>
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyD4_Vc5VLxh1rXfIEWnwz2scIltD2bC0ZM",
+            authDomain: "luke-dev-site.firebaseapp.com",
+            projectId: "luke-dev-site",
+            storageBucket: "luke-dev-site.appspot.com",
+            messagingSenderId: "212068670785",
+            appId: "1:212068670785:web:041b70e5b63f9e7fc04fef"
         };
 
         // Initialize Firebase
@@ -219,6 +249,7 @@
             firebase.signInWithPopup(auth, provider)
                 .then((result) => {
                     alert(`Welcome, ${result.user.displayName}`);
+                    closeLoginWindow();
                 })
                 .catch((error) => {
                     console.error(error.message);
@@ -231,10 +262,28 @@
             firebase.signInWithPopup(auth, provider)
                 .then((result) => {
                     alert(`Welcome, ${result.user.displayName}`);
+                    closeLoginWindow();
                 })
                 .catch((error) => {
                     console.error(error.message);
                 });
+        }
+
+        // Open login window
+        function openLoginWindow() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("loginWindow").style.display = "block";
+        }
+
+        // Close login window
+        function closeLoginWindow() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("loginWindow").style.display = "none";
+        }
+
+        // Redirect to Facebook
+        function redirectToFacebook() {
+            window.location.href = "https://www.facebook.com/tasogare.saya";
         }
     </script>
 
