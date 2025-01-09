@@ -15,6 +15,7 @@
             color: #dcdcdc;
             font-family: "Fira Code", monospace;
             margin: 0;
+            scroll-behavior: smooth;
         }
 
         .navbar {
@@ -34,6 +35,8 @@
         .hero {
             text-align: center;
             padding: 50px 20px;
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: white;
         }
 
         .hero h1 {
@@ -47,11 +50,11 @@
             margin-top: 20px;
         }
 
-        .packages {
+        .packages, .services {
             padding: 50px 20px;
         }
 
-        .package-card {
+        .package-card, .service-card {
             background: #2a2a40;
             border: 1px solid #383850;
             border-radius: 12px;
@@ -60,7 +63,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .package-card:hover {
+        .package-card:hover, .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
@@ -177,6 +180,7 @@
                 opacity: 0;
                 transform: translate(-50%, -60%);
             }
+
             to {
                 opacity: 1;
                 transform: translate(-50%, -50%);
@@ -192,6 +196,12 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#packages">Packages</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0);" onclick="openLoginWindow()">Login</a>
                     </li>
                 </ul>
@@ -204,24 +214,54 @@
         <p>I specialize in creating modern, high-tech websites that bring your vision to life.</p>
     </header>
 
-    <section class="packages container">
+    <section class="services container" id="services">
+        <h2 class="text-center mb-4">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="1.png" alt="Service 1" class="img-fluid">
+                    <h3>Web Design</h3>
+                    <p>Create custom, responsive designs that engage users and enhance the overall user experience.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="2.png" alt="Service 2" class="img-fluid">
+                    <h3>Backend Development</h3>
+                    <p>Robust server-side development to power your website’s logic, performance, and database.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="3.png" alt="Service 3" class="img-fluid">
+                    <h3>SEO Optimization</h3>
+                    <p>Improve your website’s visibility and ranking in search engines for better traffic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="packages container" id="packages">
         <h2 class="text-center mb-4">Service Packages</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Starter Package</h3>
+                    <img src="4.png" alt="Starter Package" class="img-fluid mb-3">
                     <p>₱500: Basic static website with custom UI. Perfect for personal projects.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Pro Package</h3>
+                    <img src="5.png" alt="Pro Package" class="img-fluid mb-3">
                     <p>₱1500: Responsive website with authentication (Google & Facebook login).</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Premium Package</h3>
+                    <img src="4.png" alt="Premium Package" class="img-fluid mb-3">
                     <p>₱2500: Dynamic website with backend integration and API setup.</p>
                 </div>
             </div>
@@ -230,20 +270,15 @@
 
     <section class="domain-selector container">
         <h3>Select a Domain</h3>
-        <p>Choose a domain for you website click the domain for you to go to my fb and dm me for avail of the website:</p>
-        <div class="domain-box" onclick="redirectToFacebook()">
-           webname/ orender.com
-        </div>
-        <div class="domain-box" onclick="redirectToFacebook()">
-           webname/ vercel.com
-        </div>
-        <div class="domain-box" onclick="redirectToFacebook()">
-            webname/railway.com
-        </div>
+        <p>Choose a domain for your website, click to go to my Facebook and DM me for more details.</p>
+        <div class="domain-box" onclick="redirectToFacebook()">webname/orender.com</div>
+        <div class="domain-box" onclick="redirectToFacebook()">webname/vercel.com</div>
+        <div class="domain-box" onclick="redirectToFacebook()">webname/railway.com</div>
     </section>
 
     <footer class="footer">
         <p>&copy; 2025 Luke. All Rights Reserved.</p>
+        <a href="mailto:luke@example.com">Contact</a> | <a href="#services">Services</a> | <a href="#packages">Packages</a>
     </footer>
 
     <!-- Login Modal -->
