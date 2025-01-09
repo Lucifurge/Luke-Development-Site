@@ -84,16 +84,6 @@
             margin-top: 20px;
         }
 
-        .domain-selector select {
-            background: #1e1e2f;
-            color: #dcdcdc;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            width: 100%;
-        }
-
-        .package-card h3,
         .domain-selector h3 {
             color: #58a6ff;
         }
@@ -109,6 +99,22 @@
 
         .domain-selector .btn:hover {
             background-color: #007bff;
+        }
+
+        .domain-selector .domain-box {
+            background-color: #1e1e2f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: #dcdcdc;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .domain-selector .domain-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -175,16 +181,17 @@
     </section>
 
     <section class="domain-selector container">
-        <h3>Choose Your Domain Name</h3>
-        <p>Select a domain for your website and choose features:</p>
-        <select id="domainSelect">
-            <option value="orender.com">orender.com</option>
-            <option value="techfury.com">techfury.com</option>
-            <option value="mydomain.com">mydomain.com</option>
-            <option value="webbuilder.com">webbuilder.com</option>
-            <option value="cloudspace.com">cloudspace.com</option>
-        </select>
-        <button class="btn mt-3" onclick="customizeDomain()">Customize Domain Features</button>
+        <h3>Select a Domain</h3>
+        <p>Choose a subdomain for your website:</p>
+        <div class="domain-box" onclick="alert('You selected orender.com')">
+            orender.com
+        </div>
+        <div class="domain-box" onclick="alert('You selected verce.com')">
+            verce.com
+        </div>
+        <div class="domain-box" onclick="alert('You selected railway.com')">
+            railway.com
+        </div>
     </section>
 
     <footer class="footer">
@@ -228,12 +235,6 @@
                 .catch((error) => {
                     console.error(error.message);
                 });
-        }
-
-        // Domain customization
-        function customizeDomain() {
-            const domain = document.getElementById("domainSelect").value;
-            alert(`You selected ${domain}. Now let's customize your domain features!`);
         }
     </script>
 
