@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke - Web Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js"></script>
     <style>
         body {
             background-color: #1e1e2f;
             color: #dcdcdc;
             font-family: "Fira Code", monospace;
-            background-image: linear-gradient(120deg, #1f2937, #111827);
             margin: 0;
         }
 
@@ -27,11 +28,7 @@
 
         .hero {
             text-align: center;
-            padding: 100px 20px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
+            padding: 50px 20px;
         }
 
         .packages {
@@ -59,11 +56,6 @@
             padding: 20px;
             border-top: 1px solid #383850;
         }
-
-        .auth-buttons .btn {
-            width: 100%;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 
@@ -76,62 +68,82 @@
 
     <header class="hero">
         <h1>Welcome to My Portfolio</h1>
-        <p>Your vision, brought to life at <strong>webname.orender.com</strong>.</p>
+        <p>I specialize in creating modern, high-tech websites that bring your vision to life.</p>
     </header>
 
     <section class="packages container">
-        <h2 class="text-center mb-4">Give Me 5 Package Offers</h2>
+        <h2 class="text-center mb-4">Service Packages</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="package-card">
-                    <h3>Basic Setup</h3>
-                    <p>Get started with a basic website setup, including static pages and a responsive design. </p>
-                    <p><strong>500 pesos</strong></p>
+                    <h3>Starter Package</h3>
+                    <p>₱500: Basic static website with custom UI. Perfect for personal projects.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
-                    <h3>Login & Register Customization</h3>
-                    <p>Full implementation of login and register features with a custom UI. Perfect for personal or small business projects.</p>
-                    <p><strong>500 pesos</strong></p>
+                    <h3>Pro Package</h3>
+                    <p>₱1500: Responsive website with authentication (Google & Facebook login).</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
-                    <h3>UI/UX Tweaks</h3>
-                    <p>Enhance your website with minor UI and UX adjustments to improve user experience.</p>
-                    <p><strong>500 pesos</strong></p>
+                    <h3>Premium Package</h3>
+                    <p>₱2500: Dynamic website with backend integration and API setup.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login or Sign Up</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="auth-buttons">
-                        <a href="auth.php?provider=google" class="btn btn-danger">Login with Google</a>
-                        <a href="auth.php?provider=facebook" class="btn btn-primary">Login with Facebook</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <footer class="footer">
-        <p>&copy; 2025 Luke. Hosted at <strong>webname.orender.com</strong>. All Rights Reserved.</p>
+        <p>&copy; 2025 Luke. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.getAuth(app);
+
+        // Google Login
+        function googleLogin() {
+            const provider = new firebase.GoogleAuthProvider();
+            firebase.signInWithPopup(auth, provider)
+                .then((result) => {
+                    alert(`Welcome, ${result.user.displayName}`);
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
+        }
+
+        // Facebook Login
+        function facebookLogin() {
+            const provider = new firebase.FacebookAuthProvider();
+            firebase.signInWithPopup(auth, provider)
+                .then((result) => {
+                    alert(`Welcome, ${result.user.displayName}`);
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                });
+        }
+    </script>
+
+    <section class="login-section text-center mt-4">
+        <h2>Login or Register</h2>
+        <button class="btn btn-primary mt-3" onclick="googleLogin()">Login with Google</button>
+        <button class="btn btn-secondary mt-3" onclick="facebookLogin()">Login with Facebook</button>
+    </section>
 </body>
 
 </html>
