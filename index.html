@@ -34,11 +34,11 @@
             font-size: 3rem;
         }
 
-        .services {
+        .packages {
             padding: 50px 20px;
         }
 
-        .service-card {
+        .package-card {
             background: #2a2a40;
             border: 1px solid #383850;
             border-radius: 12px;
@@ -47,20 +47,9 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .service-card:hover {
+        .package-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .slideshow {
-            max-width: 600px;
-            margin: 30px auto;
-        }
-
-        .slideshow img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .footer {
@@ -71,18 +60,9 @@
             border-top: 1px solid #383850;
         }
 
-        .modal-content {
-            background: #2a2a40;
-            color: #dcdcdc;
-            border-radius: 12px;
-        }
-
-        .modal-header {
-            border-bottom: 1px solid #383850;
-        }
-
-        .modal-footer {
-            border-top: 1px solid #383850;
+        .auth-buttons .btn {
+            width: 100%;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -96,104 +76,62 @@
 
     <header class="hero">
         <h1>Welcome to My Portfolio</h1>
-        <p>I specialize in creating modern, high-tech websites that bring your vision to life.</p>
+        <p>Your vision, brought to life at <strong>webname.orender.com</strong>.</p>
     </header>
 
-    <section class="services container">
-        <h2 class="text-center mb-4">Services</h2>
+    <section class="packages container">
+        <h2 class="text-center mb-4">Give Me 5 Package Offers</h2>
         <div class="row">
             <div class="col-md-4">
-                <div class="service-card">
-                    <h3>Custom Websites</h3>
-                    <p>Fully tailored solutions to match your unique needs.</p>
+                <div class="package-card">
+                    <h3>Basic Setup</h3>
+                    <p>Get started with a basic website setup, including static pages and a responsive design. </p>
+                    <p><strong>500 pesos</strong></p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="service-card">
-                    <h3>Responsive Design</h3>
-                    <p>Websites that look great on any device.</p>
+                <div class="package-card">
+                    <h3>Login & Register Customization</h3>
+                    <p>Full implementation of login and register features with a custom UI. Perfect for personal or small business projects.</p>
+                    <p><strong>500 pesos</strong></p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="service-card">
-                    <h3>Maintenance</h3>
-                    <p>Keep your website updated and running smoothly.</p>
+                <div class="package-card">
+                    <h3>UI/UX Tweaks</h3>
+                    <p>Enhance your website with minor UI and UX adjustments to improve user experience.</p>
+                    <p><strong>500 pesos</strong></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="slideshow container">
-        <h2 class="text-center mb-4">My Work</h2>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="image1.jpg" class="d-block w-100" alt="Project 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="image2.png" class="d-block w-100" alt="Project 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="image3.jpg" class="d-block w-100" alt="Project 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="image4.png" class="d-block w-100" alt="Project 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="image5.jpg" class="d-block w-100" alt="Project 5">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2025 Luke. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Modal Popup -->
-    <div class="modal fade" id="advertiseModal" tabindex="-1" aria-labelledby="advertiseModalLabel" aria-hidden="true">
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="advertiseModalLabel">Exclusive Offer!</h5>
+                    <h5 class="modal-title" id="loginModalLabel">Login or Sign Up</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Looking for a stunning, modern website? Contact me today and get a 10% discount on your first project!</p>
+                    <div class="auth-buttons">
+                        <a href="auth.php?provider=google" class="btn btn-danger">Login with Google</a>
+                        <a href="auth.php?provider=facebook" class="btn btn-primary">Login with Facebook</a>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Learn More</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer class="footer">
+        <p>&copy; 2025 Luke. Hosted at <strong>webname.orender.com</strong>. All Rights Reserved.</p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Show the modal popup after 3 seconds
-        window.onload = function () {
-            setTimeout(function () {
-                var myModal = new bootstrap.Modal(document.getElementById('advertiseModal'));
-                myModal.show();
-            }, 3000);
-        };
-    </script>
 </body>
 
 </html>
