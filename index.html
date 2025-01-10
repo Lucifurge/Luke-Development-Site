@@ -4,94 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
     <h1>User Authentication</h1>
-
+    
+    <!-- Registration Form -->
     <h2>Register</h2>
-    <form id="register-form">
-        <input type="text" id="register-name" placeholder="Name" required><br>
-        <input type="email" id="register-email" placeholder="Email" required><br>
-        <input type="password" id="register-password" placeholder="Password" required><br>
-        <button type="submit">Register</button>
-    </form>
+    <input type="email" id="register-email" placeholder="Enter your email" required />
+    <input type="password" id="register-password" placeholder="Enter your password" required />
+    <input type="text" id="register-name" placeholder="Enter your name" required />
+    <button id="register-btn">Register</button>
 
+    <!-- Login Form -->
     <h2>Login</h2>
-    <form id="login-form">
-        <input type="email" id="login-email" placeholder="Email" required><br>
-        <input type="password" id="login-password" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-    </form>
+    <input type="email" id="login-email" placeholder="Enter your email" required />
+    <input type="password" id="login-password" placeholder="Enter your password" required />
+    <button id="login-btn">Login</button>
 
     <script>
-        // Initialize Supabase client with URL and Key
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Initialize Supabase client
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds'; // Your Supabase Key
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Handle Registration
-        document.getElementById('register-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const name = document.getElementById('register-name').value;
+        // Register user
+        document.getElementById('register-btn').addEventListener('click', async () => {
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
+            const name = document.getElementById('register-name').value;
 
             try {
-                // Register user in Supabase Auth
                 const { user, error } = await supabase.auth.signUp({
-                    email,
-                    password
+                    email: email,
+                    password: password,
                 });
 
                 if (error) {
-                    console.error('Registration error:', error);
-                    alert('Registration failed: ' + error.message);
-                } else {
-                    // Insert user details into the database (optional)
-                    const { data, error } = await supabase
-                        .from('users')
-                        .insert([{ name, email, password }]); // Store the password here for this example (hash on backend ideally)
-
-                    if (error) {
-                        console.error('Error inserting user into database:', error);
-                        alert('Error inserting user into database.');
-                    } else {
-                        alert('Registration successful!');
-                    }
+                    alert('Error: ' + error.message);
+                    return;
                 }
+
+                // Insert user data into the 'users' table
+                const { data, error: dbError } = await supabase.from('users').insert([
+                    { email: email, name: name, password: password }
+                ]);
+
+                if (dbError) {
+                    alert('Error inserting user data: ' + dbError.message);
+                    return;
+                }
+
+                alert('User registered successfully!');
             } catch (error) {
-                console.error('Error during registration:', error);
-                alert('An error occurred. Please try again.');
+                console.error('Error: ', error);
+                alert('Registration failed!');
             }
         });
 
-        // Handle Login
-        document.getElementById('login-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
+        // Login user
+        document.getElementById('login-btn').addEventListener('click', async () => {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
             try {
-                // Login user with Supabase
-                const { session, error } = await supabase.auth.signInWithPassword({
-                    email,
-                    password
+                const { user, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
                 });
 
                 if (error) {
-                    console.error('Login error:', error);
-                    alert('Login failed: ' + error.message);
-                } else {
-                    alert(`Welcome back, ${session.user.email}!`);
+                    alert('Error: ' + error.message);
+                    return;
                 }
+
+                alert('Login successful! Welcome ' + user.email);
             } catch (error) {
-                console.error('Error during login:', error);
-                alert('An error occurred. Please try again.');
-            }
-        });
-    </script>
-</body>
-</html>
+                console.error('Erro
