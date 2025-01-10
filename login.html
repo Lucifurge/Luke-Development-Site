@@ -5,34 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Luke Development Web Services</title>
     <link rel="icon" href="logo.ico" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        window.onload = () => {
-            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-            async function loginUser(username, password) {
-                const { data, error } = await _supabase.auth.signInWithPassword({
-                    email: username,
-                    password: password,
-                });
-                if (error) {
-                    console.error('Error logging in:', error.message);
-                    alert('Login failed: ' + error.message);
-                } else {
-                    console.log('Login successful:', data);
-                    alert('User logged in successfully!');
-                }
-            }
-
-            document.getElementById('login-btn').addEventListener('click', () => {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                loginUser(username, password);
-            });
-        };
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
             background-color: #1e1e2f;
@@ -42,161 +15,177 @@
             background-attachment: fixed;
             transition: background 0.5s ease;
             overflow-x: hidden;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            position: relative;
-        }
-
-        .background-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .moving-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: bold;
-            white-space: nowrap;
-            animation: move-text 10s linear infinite;
-        }
-
-        @keyframes move-text {
-            0% {
-                transform: translate(-50%, -50%) translateX(100%);
-            }
-            100% {
-                transform: translate(-50%, -50%) translateX(-100%);
-            }
         }
 
         .navbar {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 30px;
-            font-size: 1.2rem;
-            color: white;
+            background: linear-gradient(90deg, #2c2c54, #212642);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .navbar a {
-            text-decoration: none;
-            color: white;
+        .navbar-brand {
             font-weight: bold;
-            transition: color 0.3s ease;
+            color: #58a6ff !important;
+            font-size: 1.5rem;
         }
 
-        .navbar a:hover {
-            color: #58a6ff;
+        .navbar-nav .nav-link {
+            color: #dcdcdc !important;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        .form-container {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 40px;
+        .navbar-nav .nav-link:hover {
+            color: #7b92ff !important;
+            transform: scale(1.1);
+        }
+
+        .hero {
             text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            padding: 100px 20px;
+            background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            margin-top: 1rem;
         }
 
-        .form-container h1 {
-            color: #58a6ff;
+        .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        .form-container input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background-color: #2a2a40;
-            border: 1px solid #383850;
-            border-radius: 10px;
-            color: #dcdcdc;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
         }
 
-        .form-container input:focus {
-            border-color: #58a6ff;
-            box-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
         }
 
-        .form-container button {
-            background-color: #58a6ff;
+        .hero .btn {
+            background: #58a6ff;
             color: white;
             font-size: 1.2rem;
             padding: 12px 25px;
             border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .form-container button:hover {
-            background-color: #7b92ff;
-            transform: scale(1.05);
+        .hero .btn:hover {
+            background: #7b92ff;
+            box-shadow: 0 6px 15px rgba(123, 146, 255, 0.7);
         }
 
-        .form-container a {
-            display: block;
-            margin-top: 20px;
+        .login-form {
+            background: #2a2a40;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+        }
+
+        .login-form input {
+            background-color: #383850;
+            border: 1px solid #2a2a40;
             color: #dcdcdc;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            width: 100%;
         }
 
-        .form-container a:hover {
-            color: #58a6ff;
+        .login-form button {
+            background: #58a6ff;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 25px;
+            width: 100%;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background: #7b92ff;
+            box-shadow: 0 6px 15px rgba(123, 146, 255, 0.7);
         }
 
         .footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
+            background: linear-gradient(90deg, #212642, #2c2c54);
             color: #dcdcdc;
-            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #383850;
+        }
+
+        .footer a {
+            color: #58a6ff;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #7b92ff;
         }
     </style>
 </head>
 <body>
-    <video class="background-video" autoplay loop muted>
-        <source src="saa.gif" type="gif">
-    </video>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Luke Development</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="register.html">Register</a>
-    </div>
+    <header class="hero">
+        <h1>Login to Your Account</h1>
+        <p>Access your development services and projects</p>
+    </header>
 
-    <div class="moving-text">Welcome to Luke Development Web Services</div>
-
-    <div class="form-container">
-        <h1>Login to Luke Development</h1>
-        <input type="text" id="username" placeholder="Email" />
-        <input type="password" id="password" placeholder="Password" />
-        <button id="login-btn">Login</button>
-        <a href="register.html">Don't have an account? Register here</a>
-    </div>
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="login-form">
+                    <h2 class="text-center mb-4">Login</h2>
+                    <form action="login-handler.php" method="POST">
+                        <input type="text" name="username" placeholder="Username" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                    <p class="text-center mt-3">
+                        Don't have an account? <a href="register.html" style="color: #58a6ff;">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+        <p>
+            <a href="https://github.com/luke" target="_blank">GitHub</a> | 
+            <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
+            <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+        </p>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
