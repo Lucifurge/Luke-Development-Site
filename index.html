@@ -4,33 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <!-- Ensure you're including the supabase-js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- Supabase SDK -->
 </head>
 <body>
     <h1>User Authentication</h1>
+
+    <!-- Registration Form -->
     <h2>Register</h2>
     <form id="register-form">
-        <input type="text" id="register-name" placeholder="Name" required><br>
-        <input type="email" id="register-email" placeholder="Email" required><br>
-        <input type="password" id="register-password" placeholder="Password" required><br>
+        <input type="text" id="register-name" placeholder="Name" required><br> <!-- Username field -->
+        <input type="email" id="register-email" placeholder="Email" required><br> <!-- Email field -->
+        <input type="password" id="register-password" placeholder="Password" required><br> <!-- Password field -->
         <button type="submit">Register</button>
     </form>
 
+    <!-- Login Form -->
     <h2>Login</h2>
     <form id="login-form">
-        <input type="email" id="login-email" placeholder="Email" required><br>
-        <input type="password" id="login-password" placeholder="Password" required><br>
+        <input type="email" id="login-email" placeholder="Email" required><br> <!-- Email field -->
+        <input type="password" id="login-password" placeholder="Password" required><br> <!-- Password field -->
         <button type="submit">Login</button>
     </form>
 
     <script>
-        // Correctly initialize Supabase client after loading the SDK
+        // Initialize Supabase client with URL and Key
         const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Anon Key
-
-        // Initialize Supabase client correctly
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
         // Handle Registration
         document.getElementById('register-form').addEventListener('submit', async (event) => {
@@ -41,19 +41,20 @@
             const password = document.getElementById('register-password').value;
 
             try {
+                // Register the user with Supabase
                 const { data, error } = await supabase.auth.signUp({
                     email: email,
                     password: password,
                 });
 
                 if (error) {
-                    alert(error.message);
+                    alert(error.message); // Show error message if any
                 } else {
                     alert('User registered successfully');
-                    // Optionally, save the name and email in your users table
+                    // Insert the user's name and email into the "users" table
                     const { error: insertError } = await supabase
                         .from('users')
-                        .insert([{ email, name }]);
+                        .insert([{ email, name }]); // Store name and email
 
                     if (insertError) {
                         console.error('Error inserting user data:', insertError.message);
@@ -73,15 +74,16 @@
             const password = document.getElementById('login-password').value;
 
             try {
+                // Attempt login with Supabase
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
                     password: password,
                 });
 
                 if (error) {
-                    alert(error.message);
+                    alert(error.message); // Show error message if any
                 } else {
-                    alert(`Welcome, ${data.user.email}!`);
+                    alert(`Welcome, ${data.user.email}!`); // Success message
                 }
             } catch (error) {
                 console.error('Error during login:', error);
