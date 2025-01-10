@@ -258,11 +258,11 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        window.onload = () => {
-            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+   <script>
+    window.onload = () => {
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Check user authentication status
         function checkAuthStatus() {
@@ -285,13 +285,12 @@
             });
         }
 
-        // On page load, check user status
-        window.onload = function () {
-            checkAuthStatus();
-            setTimeout(() => {
-                document.getElementById("loadingScreen").classList.add("hide");
-            }, 3000); // Hide loading screen after 3 seconds
-        };
-    </script>
+        // Check authentication and hide loading screen
+        checkAuthStatus();
+        setTimeout(() => {
+            document.getElementById("loadingScreen").classList.add("hide");
+        }, 3000); // Hide loading screen after 3 seconds
+    };
+</script>
 </body>
 </html>
