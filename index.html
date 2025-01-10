@@ -236,38 +236,48 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.onload = () => {
-            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+     <script>
+    window.onload = () => {
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-            // Check user authentication status
-            async function checkAuthStatus() {
-                const { data: user, error } = await _supabase.auth.getUser();
+        // Check user authentication status
+        async function checkAuthStatus() {
+            const { data: user, error } = await _supabase.auth.getUser();
 
-                if (user) {
-                    document.getElementById('profileLink').style.display = 'block';
-                    document.getElementById('logoutLink').style.display = 'block';
-                    document.getElementById('loginLink').style.display = 'none';
-                    document.getElementById('registerLink').style.display = 'none';
-                } else {
-                    document.getElementById('profileLink').style.display = 'none';
-                    document.getElementById('logoutLink').style.display = 'none';
-                    document.getElementById('loginLink').style.display = 'block';
-                    document.getElementById('registerLink').style.display = 'block';
-                }
+            if (user) {
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('logoutLink').style.display = 'block';
+                document.getElementById('loginLink').style.display = 'none';
+                document.getElementById('registerLink').style.display = 'none';
+            } else {
+                document.getElementById('profileLink').style.display = 'none';
+                document.getElementById('logoutLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'block';
+                document.getElementById('registerLink').style.display = 'block';
             }
+        }
 
-            // Logout function
-            function logout() {
-                _supabase.auth.signOut().then(() => {
-                    window.location.href = 'index.html'; // Redirect to home after logout
-                });
+        // Logout function
+        async function logout() {
+            const { error } = await _supabase.auth.signOut();
+            if (error) {
+                console.error('Error signing out:', error.message);
+            } else {
+                window.location.href = 'index.html'; // Redirect to home after logout
             }
+        }
 
-            // Check authentication
-            checkAuthStatus();
-        };
-    </script>
+        // Attach logout function to the logout link
+        document.getElementById('logoutLink').addEventListener('click', (e) => {
+            e.preventDefault();  // Prevent default action (anchor tag)
+            logout();  // Call the logout function
+        });
+
+        // Check authentication
+        checkAuthStatus();
+    };
+</script>
 </body>
 </html>
