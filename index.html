@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.23.0/dist/umd/supabase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.11.0/dist/supabase.min.js"></script>
 </head>
 <body>
     <h1>User Authentication</h1>
@@ -24,9 +24,9 @@
     </form>
 
     <script>
-        // Initialize Supabase client with your project's URL and API key
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Supabase URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds'; // Supabase API Key
+        // Initialize Supabase client
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Handle Registration
@@ -38,18 +38,20 @@
             const password = document.getElementById('register-password').value;
 
             try {
-                // Create user in Supabase
-                const { data, error } = await supabase
-                    .from('users')
-                    .insert([{ name, email, password }]);
+                // Register the user
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                });
 
                 if (error) {
-                    throw new Error(error.message);
+                    alert('Error during registration: ' + error.message);
+                } else {
+                    alert('Registration successful. Please check your email for verification!');
                 }
-
-                alert('User registered successfully');
             } catch (error) {
-                alert('Error during registration: ' + error.message);
+                console.error('Error during registration:', error);
+                alert('An error occurred. Please try again.');
             }
         });
 
@@ -61,21 +63,20 @@
             const password = document.getElementById('login-password').value;
 
             try {
-                // Check user credentials in Supabase
-                const { data, error } = await supabase
-                    .from('users')
-                    .select('*')
-                    .eq('email', email)
-                    .eq('password', password)
-                    .single();  // Get a single user
+                // Login the user
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
 
-                if (error || !data) {
-                    throw new Error('Invalid email or password');
+                if (error) {
+                    alert('Error during login: ' + error.message);
+                } else {
+                    alert(`Welcome, ${data.user.email}!`);
                 }
-
-                alert(`Welcome, ${data.name}!`);
             } catch (error) {
-                alert('Error during login: ' + error.message);
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
             }
         });
     </script>
