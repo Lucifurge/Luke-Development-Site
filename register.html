@@ -43,11 +43,12 @@
             overflow-x: hidden;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
         }
 
-        .background-video {
+        /* Remove video, instead use image for the background */
+        .background-image {
             position: absolute;
             top: 0;
             left: 0;
@@ -175,9 +176,9 @@
     </style>
 </head>
 <body>
-    <video class="background-video" autoplay loop muted>
-        <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-    </video>
+
+    <!-- Background GIF as an image -->
+    <img class="background-image" src="saa.gif" alt="Background GIF">
 
     <div class="navbar">
         <a href="index.html">Home</a>
