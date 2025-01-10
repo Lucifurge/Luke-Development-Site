@@ -268,8 +268,9 @@
     const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     // Check user authentication status
-    function checkAuthStatus() {
-        const user = _supabase.auth.user();
+    async function checkAuthStatus() {
+        const { data: user, error } = await _supabase.auth.getUser();
+
         if (user) {
             document.getElementById('profileLink').style.display = 'block';
             document.getElementById('logoutLink').style.display = 'block';
