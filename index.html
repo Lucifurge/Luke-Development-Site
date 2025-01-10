@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
+    <!-- Ensure you're including the supabase-js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
@@ -24,10 +25,12 @@
     </form>
 
     <script>
-        // Initialize the Supabase client with your Supabase URL and Key
+        // Ensure you're initializing supabase after the script is loaded
         const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Anon Key
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);  // Initialize Supabase client
+
+        // Initialize Supabase client
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey); 
 
         // Handle Registration
         document.getElementById('register-form').addEventListener('submit', async (event) => {
