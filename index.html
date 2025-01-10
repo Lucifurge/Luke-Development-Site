@@ -8,23 +8,7 @@
 </head>
 <body>
     <h1>User Authentication</h1>
-
-    <!-- Registration Form -->
-    <h2>Register</h2>
-    <form id="register-form">
-        <input type="text" id="register-name" placeholder="Name" required><br> <!-- Username field -->
-        <input type="email" id="register-email" placeholder="Email" required><br> <!-- Email field -->
-        <input type="password" id="register-password" placeholder="Password" required><br> <!-- Password field -->
-        <button type="submit">Register</button>
-    </form>
-
-    <!-- Login Form -->
-    <h2>Login</h2>
-    <form id="login-form">
-        <input type="email" id="login-email" placeholder="Email" required><br> <!-- Email field -->
-        <input type="password" id="login-password" placeholder="Password" required><br> <!-- Password field -->
-        <button type="submit">Login</button>
-    </form>
+    <button id="test-connection">Test Connection</button>
 
     <script>
         // Initialize Supabase client with URL and Key
@@ -32,62 +16,21 @@
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Handle Registration
-        document.getElementById('register-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-
+        // Test the connection to Supabase
+        document.getElementById('test-connection').addEventListener('click', async () => {
             try {
-                // Register the user with Supabase
-                const { data, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password,
-                });
+                const { data, error } = await supabase.from('users').select('*'); // Test query on users table
 
                 if (error) {
-                    alert(error.message); // Show error message if any
+                    console.error('Error connecting to Supabase:', error);
+                    alert('Failed to connect to Supabase');
                 } else {
-                    alert('User registered successfully');
-                    // Insert the user's name and email into the "users" table
-                    const { error: insertError } = await supabase
-                        .from('users')
-                        .insert([{ email, name }]); // Store name and email
-
-                    if (insertError) {
-                        console.error('Error inserting user data:', insertError.message);
-                    }
+                    console.log('Connection successful:', data);
+                    alert('Successfully connected to Supabase!');
                 }
             } catch (error) {
-                console.error('Error during registration:', error);
-                alert('An error occurred. Please try again.');
-            }
-        });
-
-        // Handle Login
-        document.getElementById('login-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            try {
-                // Attempt login with Supabase
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
-
-                if (error) {
-                    alert(error.message); // Show error message if any
-                } else {
-                    alert(`Welcome, ${data.user.email}!`); // Success message
-                }
-            } catch (error) {
-                console.error('Error during login:', error);
-                alert('An error occurred. Please try again.');
+                console.error('Error:', error);
+                alert('An error occurred while testing the connection.');
             }
         });
     </script>
