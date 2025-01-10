@@ -4,44 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supabase Authentication</title>
-    <script type="module">
-        import createClient from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-        // Define Supabase credentials
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-        const supabase = createClient(supabaseUrl, supabaseKey);
+    <!-- Include Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- OR -->
+    <!-- <script src="https://unpkg.com/@supabase/supabase-js@2"></script> -->
 
-        // Example functions
-        async function registerUser(username, password) {
-            const { data, error } = await supabase.auth.signUp({
-                email: username,
-                password: password,
-            });
-            if (error) {
-                console.error('Error registering user:', error.message);
-                alert('Registration failed: ' + error.message);
-            } else {
-                console.log('Registration successful:', data);
-                alert('User registered successfully!');
-            }
-        }
-
-        async function loginUser(username, password) {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: username,
-                password: password,
-            });
-            if (error) {
-                console.error('Error logging in:', error.message);
-                alert('Login failed: ' + error.message);
-            } else {
-                console.log('Login successful:', data);
-                alert('User logged in successfully!');
-            }
-        }
-
+    <script>
+        // Wait for the page to load before interacting with the DOM
         window.onload = () => {
+            const { createClient } = supabase;
+
+            // Define Supabase credentials
+            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+
+            // Create the Supabase client
+            const _supabase = createClient(supabaseUrl, supabaseKey);
+
+            // Example function to register a user
+            async function registerUser(username, password) {
+                const { data, error } = await _supabase.auth.signUp({
+                    email: username,
+                    password: password,
+                });
+                if (error) {
+                    console.error('Error registering user:', error.message);
+                    alert('Registration failed: ' + error.message);
+                } else {
+                    console.log('Registration successful:', data);
+                    alert('User registered successfully!');
+                }
+            }
+
+            // Example function to log in a user
+            async function loginUser(username, password) {
+                const { data, error } = await _supabase.auth.signInWithPassword({
+                    email: username,
+                    password: password,
+                });
+                if (error) {
+                    console.error('Error logging in:', error.message);
+                    alert('Login failed: ' + error.message);
+                } else {
+                    console.log('Login successful:', data);
+                    alert('User logged in successfully!');
+                }
+            }
+
+            // Event listeners for the buttons
             document.getElementById('register-btn').addEventListener('click', () => {
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
