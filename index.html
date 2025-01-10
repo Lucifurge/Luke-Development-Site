@@ -7,9 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- Supabase SDK -->
 </head>
 <body>
-    <h1>User Authentication</h1>
-    <button id="test-connection">Test Connection</button>
-
     <h2>Register</h2>
     <form id="register-form">
         <input type="text" id="username" placeholder="Username" required><br>
@@ -25,10 +22,10 @@
     </form>
 
     <script>
-        // Initialize Supabase client with your Supabase URL and Key
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co'; // Your Supabase URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds'; // Your Supabase Key
-        const supabase = createClient(supabaseUrl, supabaseKey);
+        // Initialize Supabase client after library is loaded
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key
+        const supabase = Supabase.createClient(supabaseUrl, supabaseKey); // Make sure `createClient` is accessed correctly
 
         // Test connection to Supabase
         document.getElementById('test-connection').addEventListener('click', async () => {
