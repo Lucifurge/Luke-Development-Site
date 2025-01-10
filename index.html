@@ -243,23 +243,18 @@
 
     // Check user authentication status
 async function checkAuthStatus() {
-    const { data: { session }, error } = await _supabase.auth.getSession();
+    const { data: { user }, error } = await _supabase.auth.getSession();
 
     if (error) {
         console.error('Error fetching session:', error.message);
-        return;
-    }
-
-    console.log("Session:", session); // Debugging line
-
-    if (session && session.user) {
-        // User is logged in
+    } else if (user) {
+        // Show profile and logout links, hide login and register links
         document.getElementById('profileLink').style.display = 'block';
         document.getElementById('logoutLink').style.display = 'block';
         document.getElementById('loginLink').style.display = 'none';
         document.getElementById('registerLink').style.display = 'none';
     } else {
-        // User is logged out
+        // Show login and register links, hide profile and logout links
         document.getElementById('profileLink').style.display = 'none';
         document.getElementById('logoutLink').style.display = 'none';
         document.getElementById('loginLink').style.display = 'block';
