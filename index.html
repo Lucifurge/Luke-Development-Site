@@ -56,6 +56,12 @@
             font-weight: bold;
         }
 
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
         .hero p {
             font-size: 1.5rem;
             margin: 20px 0;
@@ -71,33 +77,46 @@
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .hero .btn:hover {
-            background: #7b92ff;
-        }
-
         .footer {
-            background-color: #212642;
-            color: #dcdcdc;
-            padding: 30px 0;
             text-align: center;
-            font-size: 1rem;
-            margin-top: 50px;
+            padding: 20px;
+            background-color: #111827;
+            border-top: 1px solid #383850;
         }
 
         .footer a {
             color: #58a6ff;
-            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            color: #7b92ff;
         }
 
-        .loading-text {
-            font-size: 1.5rem;
-            color: #fff;
+        #servicePackages {
+            padding: 50px 20px;
             text-align: center;
-            padding: 50px;
+        }
+
+        .package-card {
+            background: #2a2a40;
+            border: 1px solid #383850;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
         }
 
         #loadingScreen {
@@ -106,17 +125,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #111827;
             display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 1000;
+            align-items: center;
+            color: #dcdcdc;
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
         }
 
-        #navLinks .nav-link {
-            font-size: 1.1rem;
+        #loadingScreen.hide {
+            opacity: 0;
+            pointer-events: none;
         }
-
     </style>
 </head>
 <body>
@@ -131,21 +155,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto" id="navLinks">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Features</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#servicePackages">Services</a>
                     </li>
-                    <li class="nav-item" id="loginLink">
+                    <li class="nav-item" id="loginLink" style="display: none;">
                         <a class="nav-link" href="login.html">Login</a>
                     </li>
-                    <li class="nav-item" id="registerLink">
+                    <li class="nav-item" id="registerLink" style="display: none;">
                         <a class="nav-link" href="register.html">Register</a>
-                    </li>
-                    <li class="nav-item" id="profileLink" style="display: none;">
-                        <a class="nav-link" href="profile.html">Profile</a>
                     </li>
                     <li class="nav-item" id="logoutLink" style="display: none;">
                         <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
@@ -161,65 +182,71 @@
         <a href="#servicePackages" class="btn">Explore Services</a>
     </header>
 
-    <div id="features" class="container py-5">
-        <h2 class="text-center text-white mb-4">Features</h2>
-        <div class="row">
+    <section id="features" class="container features">
+        <div class="row text-center">
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Fast & Secure</h5>
-                        <p class="card-text">Our services are built with speed and security in mind, ensuring that you get the best performance and protection.</p>
-                    </div>
+                <div class="feature-card">
+                    <h3>Custom Solutions</h3>
+                    <p>Tailored development services to meet your needs.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Scalable Solutions</h5>
-                        <p class="card-text">We offer scalable solutions to fit your needs, whether you're a small startup or an enterprise-level business.</p>
-                    </div>
+                <div class="feature-card">
+                    <h3>Affordable Pricing</h3>
+                    <p>Competitive pricing with flexible packages.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Expert Support</h5>
-                        <p class="card-text">Our team of experts is here to help you every step of the way, ensuring that your projects run smoothly.</p>
-                    </div>
+                <div class="feature-card">
+                    <h3>Expert Support</h3>
+                    <p>Round-the-clock support to ensure your success.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="servicePackages" class="container py-5">
-        <h2 class="text-center text-white mb-4">Our Service Packages</h2>
+    <section id="servicePackages" class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Basic Package</h5>
-                        <p class="card-text">Ideal for small businesses. Includes basic web development, hosting, and support.</p>
-                    </div>
+                <div class="package-card">
+                    <h3>Starter Package</h3>
+                    <p>₱300 - Basic Development Package</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Standard Package</h5>
-                        <p class="card-text">A step up with advanced features, custom branding, and premium support.</p>
-                    </div>
+                <div class="package-card">
+                    <h3>Professional Package</h3>
+                    <p>₱500 - Advanced Development Package</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Premium Package</h5>
-                        <p class="card-text">For businesses that need it all—custom web design, e-commerce, and 24/7 support.</p>
-                    </div>
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <p>₱1000 - Premium Development Package</p>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="as.png" class="d-block w-100" alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="sd.png" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="fs.png" class="d-block w-100" alt="Slide 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="sh.png" class="d-block w-100" alt="Slide 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="fg.png" class="d-block w-100" alt="Slide 5">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
@@ -230,27 +257,22 @@
         </p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize Supabase
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Supabase setup
+        const supabase = Supabase.createClient('your_supabase_url', 'your_supabase_key');
 
-        // Check if the user is logged in
+        // Check user authentication status
         function checkAuthStatus() {
             const user = supabase.auth.user();
             if (user) {
-                // User is logged in, show profile and logout
-                document.getElementById('profileLink').style.display = 'block';
-                document.getElementById('logoutLink').style.display = 'block';
                 document.getElementById('loginLink').style.display = 'none';
                 document.getElementById('registerLink').style.display = 'none';
+                document.getElementById('logoutLink').style.display = 'block';
             } else {
-                // User is not logged in, show login and register
-                document.getElementById('profileLink').style.display = 'none';
-                document.getElementById('logoutLink').style.display = 'none';
                 document.getElementById('loginLink').style.display = 'block';
                 document.getElementById('registerLink').style.display = 'block';
+                document.getElementById('logoutLink').style.display = 'none';
             }
         }
 
