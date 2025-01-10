@@ -173,30 +173,33 @@
         </div>
     </div>
 
-  <script>
+    <script>
         window.onload = () => {
             const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
             const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
             const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // Handle the login form submission
-        document.getElementById('loginForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            // Handle the login form submission
+            document.getElementById('loginForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
 
-            // Attempt to login
-            const { user, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
+                // Attempt to login
+                const { user, error } = await _supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    alert('Error logging in: ' + error.message);
+                } else {
+                    window.location.href = 'index.html'; // Redirect to home page after login
+                }
             });
+        };
+    </script>
 
-            if (error) {
-                alert('Error logging in: ' + error.message);
-            } else {
-                window.location.href = 'index.html'; // Redirect to home page after login
-            }
-        });
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
