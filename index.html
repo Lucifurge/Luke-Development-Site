@@ -244,6 +244,8 @@
             // Check user authentication status
             async function checkAuthStatus() {
                 const { data: user, error } = await _supabase.auth.getUser();
+                console.log("User:", user);
+                console.log("Error:", error);
 
                 if (user) {
                     // Show profile and logout links, hide login and register links
@@ -262,6 +264,7 @@
 
             // Logout function
             async function logout() {
+                console.log("Attempting to logout...");
                 const { error } = await _supabase.auth.signOut();
                 if (error) {
                     console.error('Error signing out:', error.message);
