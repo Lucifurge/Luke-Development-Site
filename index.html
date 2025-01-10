@@ -356,60 +356,61 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        window.onload = () => {
-            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+   <script>
+    window.onload = () => {
+        // Remove the loading screen after the page has loaded
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hide');
+        }, 3000); // Delay of 3 seconds before hiding the loading screen
+        
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
 
-            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-            async function registerUser(username, password) {
-                const { data, error } = await _supabase.auth.signUp({
-                    email: username,
-                    password: password,
-                });
-                if (error) {
-                    console.error('Error registering user:', error.message);
-                    alert('Registration failed: ' + error.message);
-                } else {
-                    console.log('Registration successful:', data);
-                    alert('User registered successfully!');
-                }
-            }
-
-            async function loginUser(username, password) {
-                const { data, error } = await _supabase.auth.signInWithPassword({
-                    email: username,
-                    password: password,
-                });
-                if (error) {
-                    console.error('Error logging in:', error.message);
-                    alert('Login failed: ' + error.message);
-                } else {
-                    console.log('Login successful:', data);
-                    alert('User logged in successfully!');
-                }
-            }
-
-            document.getElementById('registerForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const username = document.getElementById('registerEmail').value;
-                const password = document.getElementById('registerPassword').value;
-                registerUser(username, password);
+        async function registerUser(username, password) {
+            const { data, error } = await _supabase.auth.signUp({
+                email: username,
+                password: password,
             });
+            if (error) {
+                console.error('Error registering user:', error.message);
+                alert('Registration failed: ' + error.message);
+            } else {
+                console.log('Registration successful:', data);
+                alert('User registered successfully!');
+            }
+        }
 
-            document.getElementById('loginForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const username = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                loginUser(username, password);
+        async function loginUser(username, password) {
+            const { data, error } = await _supabase.auth.signInWithPassword({
+                email: username,
+                password: password,
             });
+            if (error) {
+                console.error('Error logging in:', error.message);
+                alert('Login failed: ' + error.message);
+            } else {
+                console.log('Login successful:', data);
+                alert('User logged in successfully!');
+            }
+        }
 
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hide');
-            }, 3000);
-        };
-    </script>
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            registerUser(username, password);
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            loginUser(username, password);
+        });
+    };
+</script>
 </body>
 
 </html>
