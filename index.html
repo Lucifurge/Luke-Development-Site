@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.11.0/dist/supabase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
     <h1>User Authentication</h1>
@@ -24,10 +24,10 @@
     </form>
 
     <script>
-        // Initialize Supabase client
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Initialize the Supabase client with your Supabase URL and Key
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Anon Key
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);  // Initialize Supabase client
 
         // Handle Registration
         document.getElementById('register-form').addEventListener('submit', async (event) => {
@@ -38,16 +38,23 @@
             const password = document.getElementById('register-password').value;
 
             try {
-                // Register the user
                 const { data, error } = await supabase.auth.signUp({
                     email: email,
                     password: password,
                 });
 
                 if (error) {
-                    alert('Error during registration: ' + error.message);
+                    alert(error.message);
                 } else {
-                    alert('Registration successful. Please check your email for verification!');
+                    alert('User registered successfully');
+                    // Optionally, save the name and email in your users table
+                    const { error: insertError } = await supabase
+                        .from('users')
+                        .insert([{ email, name }]);
+
+                    if (insertError) {
+                        console.error('Error inserting user data:', insertError.message);
+                    }
                 }
             } catch (error) {
                 console.error('Error during registration:', error);
@@ -63,14 +70,13 @@
             const password = document.getElementById('login-password').value;
 
             try {
-                // Login the user
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
                     password: password,
                 });
 
                 if (error) {
-                    alert('Error during login: ' + error.message);
+                    alert(error.message);
                 } else {
                     alert(`Welcome, ${data.user.email}!`);
                 }
