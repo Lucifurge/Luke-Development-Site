@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Luke Development Web Services</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        window.onload = () => {
+              const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+            async function loginUser(username, password) {
+                const { data, error } = await _supabase.auth.signInWithPassword({
+                    email: username,
+                    password: password,
+                });
+                if (error) {
+                    console.error('Error logging in:', error.message);
+                    alert('Login failed: ' + error.message);
+                } else {
+                    console.log('Login successful:', data);
+                    alert('User logged in successfully!');
+                }
+            }
+
+            document.getElementById('login-btn').addEventListener('click', () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                loginUser(username, password);
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1>Login to Luke Development</h1>
+    <input type="text" id="username" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="login-btn">Login</button>
+    <a href="register.html">Don't have an account? Register here</a>
+</body>
+</html>
