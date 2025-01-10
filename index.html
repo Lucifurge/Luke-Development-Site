@@ -12,26 +12,6 @@
         body {
             font-family: Arial, sans-serif;
         }
-        /* Style for the loading screen */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            z-index: 9999;
-        }
-
-        /* Hide the loading screen */
-        .hide {
-            display: none;
-        }
 
         /* Style for the form */
         .form-container {
@@ -80,11 +60,6 @@
 
     <script>
         window.onload = () => {
-            // Remove the loading screen after the page has loaded
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hide');
-            }, 3000); // Delay of 3 seconds before hiding the loading screen
-            
             const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
             const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
 
@@ -137,9 +112,6 @@
     </script>
 </head>
 <body>
-
-    <!-- Loading Screen -->
-    <div id="loadingScreen">Loading...</div>
 
     <!-- Navigation Bar -->
     <nav>
