@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Luke Development Web Services</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        window.onload = () => {
+            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+            const supabaseKey = 'your-supabase-key';
+            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+            async function registerUser(username, password) {
+                const { data, error } = await _supabase.auth.signUp({
+                    email: username,
+                    password: password,
+                });
+                if (error) {
+                    console.error('Error registering user:', error.message);
+                    alert('Registration failed: ' + error.message);
+                } else {
+                    console.log('Registration successful:', data);
+                    alert('User registered successfully!');
+                }
+            }
+
+            document.getElementById('register-btn').addEventListener('click', () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                registerUser(username, password);
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1>Register for Luke Development</h1>
+    <input type="text" id="username" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="register-btn">Register</button>
+    <a href="login.html">Already have an account? Login here</a>
+</body>
+</html>
