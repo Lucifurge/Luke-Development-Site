@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <!-- Include Supabase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- Supabase SDK -->
 </head>
 <body>
     <h1>User Authentication</h1>
@@ -26,13 +25,13 @@
     </form>
 
     <script>
-        // Initialize Supabase client with URL and Key
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key (anon key)
-        
-        // Wait for the page to load
         window.onload = () => {
-            const supabase = createClient(supabaseUrl, supabaseKey); // Initialize Supabase client
+            // Initialize Supabase client with URL and Key
+            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';  // Your Supabase URL
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';  // Your Supabase Key (anon key)
+
+            // Initialize the Supabase client using createClient
+            const supabase = createClient(supabaseUrl, supabaseKey);
 
             // Test connection to Supabase
             document.getElementById('test-connection').addEventListener('click', async () => {
