@@ -4,80 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Authentication</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- Supabase SDK -->
 </head>
 <body>
     <h1>User Authentication</h1>
-    
-    <!-- Registration Form -->
-    <h2>Register</h2>
-    <input type="email" id="register-email" placeholder="Enter your email" required />
-    <input type="password" id="register-password" placeholder="Enter your password" required />
-    <input type="text" id="register-name" placeholder="Enter your name" required />
-    <button id="register-btn">Register</button>
+    <button id="test-connection">Test Connection</button>
 
-    <!-- Login Form -->
+    <h2>Register</h2>
+    <form id="register-form">
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="text" id="name" placeholder="Name" required><br>
+        <button type="submit">Register</button>
+    </form>
+
     <h2>Login</h2>
-    <input type="email" id="login-email" placeholder="Enter your email" required />
-    <input type="password" id="login-password" placeholder="Enter your password" required />
-    <button id="login-btn">Login</button>
+    <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required><br>
+        <input type="password" id="login-password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
 
     <script>
-        // Initialize Supabase client
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        // Initialize Supabase client with your Supabase URL and Key
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co'; // Your Supabase URL
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds'; // Your Supabase Key
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Register user
-        document.getElementById('register-btn').addEventListener('click', async () => {
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const name = document.getElementById('register-name').value;
-
+        // Test connection to Supabase
+        document.getElementById('test-connection').addEventListener('click', async () => {
             try {
-                const { user, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password,
-                });
-
+                const { data, error } = await supabase.from('users').select('*');
                 if (error) {
-                    alert('Error: ' + error.message);
-                    return;
+                    console.error('Error connecting to Supabase:', error);
+                    alert('Failed to connect to Supabase');
+                } else {
+                    console.log('Connection successful:', data);
+                    alert('Successfully connected to Supabase!');
                 }
-
-                // Insert user data into the 'users' table
-                const { data, error: dbError } = await supabase.from('users').insert([
-                    { email: email, name: name, password: password }
-                ]);
-
-                if (dbError) {
-                    alert('Error inserting user data: ' + dbError.message);
-                    return;
-                }
-
-                alert('User registered successfully!');
             } catch (error) {
-                console.error('Error: ', error);
-                alert('Registration failed!');
+                console.error('Error:', error);
+                alert('An error occurred while testing the connection.');
+            }
+        });
+
+        // Register user
+        document.getElementById('register-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                console.error('Registration error:', error);
+                alert('Error registering user');
+            } else {
+                // Save user name to database
+                await supabase
+                    .from('users')
+                    .insert([{ email: email, name: name, password: password }]);
+
+                alert('Registration successful!');
             }
         });
 
         // Login user
-        document.getElementById('login-btn').addEventListener('click', async () => {
+        document.getElementById('login-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
-            try {
-                const { user, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
+            const { user, error } = await supabase.auth.signIn({
+                email: email,
+                password: password,
+            });
 
-                if (error) {
-                    alert('Error: ' + error.message);
-                    return;
-                }
-
-                alert('Login successful! Welcome ' + user.email);
-            } catch (error) {
-                console.error('Erro
+            if (error) {
+                console.error('Login error:', error);
+                alert('Error logging in');
+            } else {
+                alert('Login successful! Welcome, ' + user.email);
+            }
+        });
+    </script>
+</body>
+</html>
