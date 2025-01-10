@@ -242,26 +242,25 @@
     const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     // Check user authentication status
-    async function checkAuthStatus() {
-        const { data: user, error } = await _supabase.auth.getUser();
-        console.log("User:", user);
-        console.log("Error:", error);
+  async function checkAuthStatus() {
+    const { data: { user }, error } = await _supabase.auth.getSession();
 
-        if (user) {
-            // Show profile and logout links, hide login and register links
-            document.getElementById('profileLink').style.display = 'block';
-            document.getElementById('logoutLink').style.display = 'block';
-            document.getElementById('loginLink').style.display = 'none';
-            document.getElementById('registerLink').style.display = 'none';
-        } else {
-            // Show login and register links, hide profile and logout links
-            document.getElementById('profileLink').style.display = 'none';
-            document.getElementById('logoutLink').style.display = 'none';
-            document.getElementById('loginLink').style.display = 'block';
-            document.getElementById('registerLink').style.display = 'block';
-        }
+    if (error) {
+        console.error('Error fetching session:', error.message);
+    } else if (user) {
+        // Show profile and logout links, hide login and register links
+        document.getElementById('profileLink').style.display = 'block';
+        document.getElementById('logoutLink').style.display = 'block';
+        document.getElementById('loginLink').style.display = 'none';
+        document.getElementById('registerLink').style.display = 'none';
+    } else {
+        // Show login and register links, hide profile and logout links
+        document.getElementById('profileLink').style.display = 'none';
+        document.getElementById('logoutLink').style.display = 'none';
+        document.getElementById('loginLink').style.display = 'block';
+        document.getElementById('registerLink').style.display = 'block';
     }
-
+}
     // Logout function
     async function logout() {
         console.log("Attempting to logout...");
