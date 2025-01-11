@@ -118,6 +118,31 @@
             width: 100%;
             height: auto;
         }
+
+        .description {
+            background-color: #212642;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .description h4 {
+            color: #58a6ff;
+            font-size: 1.6rem;
+        }
+
+        .description p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #dcdcdc;
+        }
+
+        .add-ons {
+            color: #58a6ff;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -188,18 +213,47 @@
                 <div class="package-card">
                     <h3>Starter Package</h3>
                     <p>₱300 - Basic Development Package</p>
+                    <div class="description">
+                        <h4>What's Included:</h4>
+                        <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
+                        <p class="add-ons">Add-Ons Available:</p>
+                        <ul>
+                            <li>Custom domain: +₱100</li>
+                            <li>SEO optimization: +₱200</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Professional Package</h3>
                     <p>₱500 - Advanced Development Package</p>
+                    <div class="description">
+                        <h4>What's Included:</h4>
+                        <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
+                        <p class="add-ons">Add-Ons Available:</p>
+                        <ul>
+                            <li>Blog Integration: +₱150</li>
+                            <li>E-commerce setup: +₱400</li>
+                            <li>Analytics setup: +₱250</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Premium Package</h3>
                     <p>₱1000 - Premium Development Package</p>
+                    <div class="description">
+                        <h4>What's Included:</h4>
+                        <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
+                        <p class="add-ons">Add-Ons Available:</p>
+                        <ul>
+                            <li>Social Media Integration: +₱300</li>
+                            <li>Custom API Development: +₱500</li>
+                            <li>Advanced Security Features: +₱350</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
