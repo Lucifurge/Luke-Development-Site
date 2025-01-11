@@ -53,6 +53,7 @@
         .form-container h2 {
             color: #58a6ff;
             margin-bottom: 30px;
+            text-align: center;
         }
 
         .form-container input {
@@ -99,6 +100,56 @@
         .form-container .register-link a:hover {
             text-decoration: underline;
         }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-container input {
+                font-size: 1rem;
+            }
+
+            .form-container .btn-primary {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .navbar-nav .nav-link {
+                font-size: 0.9rem;
+                margin: 0 5px;
+            }
+
+            .form-container {
+                max-width: 100%;
+                margin: 20px;
+            }
+
+            .form-container h2 {
+                font-size: 1.3rem;
+            }
+
+            .form-container input {
+                font-size: 0.9rem;
+            }
+
+            .form-container .btn-primary {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -131,7 +182,7 @@
         <h2>Profile</h2>
         <form id="profileForm">
             <div class="mb-3">
-                <label for="username" class="form-label">Coming Sooon</label>
+                <label for="username" class="form-label">Coming Soon</label>
                 <input type="text" id="username" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Coming Soon</button>
@@ -145,34 +196,29 @@
     <script>
        window.onload = () => {
             const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+            const supabaseKey = 'YOUR_SUPABASE_KEY';
             const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-            // Fetch current user
             const user = _supabase.auth.user();
 
             if (!user) {
-                window.location.href = 'login.html'; // Redirect to login page if not logged in
+                window.location.href = 'login.html';
             } else {
-                // Display the current username if available
                 document.getElementById('username').value = user.user_metadata.username || '';
             }
 
-            // Handle profile form submission
             document.getElementById('profileForm').addEventListener('submit', async function (event) {
                 event.preventDefault();
                 const username = document.getElementById('username').value;
 
-                // Update username in Supabase
-                const { data, error } = await _supabase.auth.update({
-                    data: { username: username }
+                const { error } = await _supabase.auth.update({
+                    data: { username }
                 });
 
                 if (error) {
                     alert('Error updating profile: ' + error.message);
                 } else {
                     alert('Profile updated successfully!');
-                    // Optionally redirect or update the page after success
                 }
             });
         };
