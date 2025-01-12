@@ -143,6 +143,36 @@
             font-weight: bold;
             margin-top: 10px;
         }
+
+        .testimonial-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #2a2a40;
+        }
+
+        .testimonial-card {
+            background-color: #383850;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #dcdcdc;
+        }
+
+        .testimonial-card h5 {
+            font-weight: bold;
+            color: #58a6ff;
+        }
+
     </style>
 </head>
 <body>
@@ -261,74 +291,101 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="as.png" class="d-block w-100" alt="Slide 1">
+                    <img src="testimonial1.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="saaa.png" class="d-block w-100" alt="Slide 2">
+                    <img src="testimonial2.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="fs.png" class="d-block w-100" alt="Slide 3">
+                    <img src="testimonial3.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="sh.png" class="d-block w-100" alt="Slide 4">
+                    <img src="testimonial4.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="fg.png" class="d-block w-100" alt="Slide 5">
+                    <img src="testimonial5.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="testimonial6.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Luke's team did an amazing job with our website! Professional and responsive at every step!"</p>
+                        <h5>John Doe</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"The Premium Package exceeded our expectations. We now have a sleek and functional site."</p>
+                        <h5>Jane Smith</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Excellent service, friendly team, and fast delivery. Highly recommended!"</p>
+                        <h5>Michael Brown</h5>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+        <p>&copy; 2025 Luke Development Web Services. All Rights Reserved.</p>
         <p>
-            <a href="https://github.com/luke" target="_blank">GitHub</a> | 
-            <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
-            <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
         </p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-    // Initialize Supabase client
-    const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-    const supabaseKey = 'your-key-here';
-    const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Initialize Supabase client
+        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKdsY';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Function to check user authentication status
-    async function checkAuthStatus() {
-        const { data: { session }, error } = await _supabase.auth.getSession();
+        // Function to check user authentication status
+        async function checkAuthStatus() {
+            const { data: { session }, error } = await _supabase.auth.getSession();
 
-        if (error) {
-            console.error('Error fetching session:', error.message);
-            return;
+            if (error) {
+                console.error('Error fetching session:', error.message);
+                return;
+            }
+
+            if (session && session.user) {
+                // User is logged in
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('logoutLink').style.display = 'block';
+                document.getElementById('loginLink').style.display = 'none';
+                document.getElementById('registerLink').style.display = 'none';
+            } else {
+                // User is logged out
+                document.getElementById('profileLink').style.display = 'none';
+                document.getElementById('logoutLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'block';
+                document.getElementById('registerLink').style.display = 'block';
+            }
         }
 
-        if (session && session.user) {
-            // User is logged in
-            document.getElementById('profileLink').style.display = 'block';
-            document.getElementById('logoutLink').style.display = 'block';
-            document.getElementById('loginLink').style.display = 'none';
-            document.getElementById('registerLink').style.display = 'none';
-        } else {
-            // User is logged out
-            document.getElementById('profileLink').style.display = 'none';
-            document.getElementById('logoutLink').style.display = 'none';
-            document.getElementById('loginLink').style.display = 'block';
-            document.getElementById('registerLink').style.display = 'block';
+        // Log the user out
+        function logout() {
+            _supabase.auth.signOut().then(() => {
+                // Reload the page to update the UI
+                location.reload();
+            });
         }
-    }
 
-    // Log the user out
-    function logout() {
-        _supabase.auth.signOut().then(() => {
-            // Reload the page to update the UI
-            location.reload();
-        });
-    }
-
-    // Run the checkAuthStatus function when the page loads
-    window.onload = checkAuthStatus;
+        // Run the checkAuthStatus function when the page loads
+        window.onload = checkAuthStatus;
     </script>
 </body>
 </html>
