@@ -114,34 +114,30 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .carousel-item img {
-            width: 100%;
-            height: auto;
+        .carousel-inner {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 0;
         }
 
-        .description {
-            background-color: #212642;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .description h4 {
-            color: #58a6ff;
-            font-size: 1.6rem;
-        }
-
-        .description p {
-            font-size: 1.1rem;
-            margin-top: 10px;
+        .carousel-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 10px;
+            font-size: 1.5rem;
             color: #dcdcdc;
+            font-style: italic;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .add-ons {
-            color: #58a6ff;
+        .carousel-item h5 {
             font-weight: bold;
-            margin-top: 10px;
+            color: #58a6ff;
         }
 
         .testimonial-section {
@@ -150,27 +146,17 @@
             background-color: #2a2a40;
         }
 
-        .testimonial-card {
-            background-color: #383850;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .carousel-item.active {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            color: #dcdcdc;
-        }
-
-        .testimonial-card h5 {
-            font-weight: bold;
-            color: #58a6ff;
+        .carousel-item-next,
+        .carousel-item-prev,
+        .carousel-item-next:active,
+        .carousel-item-prev:active {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
     </style>
@@ -287,50 +273,35 @@
                 </div>
             </div>
         </div>
-
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="testimonial1.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="testimonial2.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="testimonial3.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="testimonial4.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="testimonial5.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="testimonial6.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="testimonial-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
                         <p>"Luke's team did an amazing job with our website! Professional and responsive at every step!"</p>
                         <h5>John Doe</h5>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="carousel-item">
                         <p>"The Premium Package exceeded our expectations. We now have a sleek and functional site."</p>
                         <h5>Jane Smith</h5>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="carousel-item">
                         <p>"Excellent service, friendly team, and fast delivery. Highly recommended!"</p>
                         <h5>Michael Brown</h5>
+                    </div>
+                    <div class="carousel-item">
+                        <p>"We had a fantastic experience with Luke Development. Our site is more professional than ever!"</p>
+                        <h5>Alice Johnson</h5>
+                    </div>
+                    <div class="carousel-item">
+                        <p>"The custom features implemented on our site helped us increase conversions significantly!"</p>
+                        <h5>George White</h5>
+                    </div>
+                    <div class="carousel-item">
+                        <p>"From start to finish, Luke Development was top-notch. Very impressed with their expertise."</p>
+                        <h5>Emily Davis</h5>
                     </div>
                 </div>
             </div>
