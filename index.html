@@ -8,6 +8,7 @@
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         body {
             background-color: #1e1e2f;
@@ -155,6 +156,41 @@
                 transform: translateX(-100%);
             }
         }
+
+        /* Floating Window */
+        #floatingWindow {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #212642;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        #floatingWindow h5 {
+            margin-bottom: 15px;
+        }
+
+        #floatingWindow p {
+            margin-bottom: 20px;
+        }
+
+        #closeWindowBtn {
+            background-color: #58a6ff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #closeWindowBtn:hover {
+            background-color: #7b92ff;
+        }
     </style>
 </head>
 
@@ -230,8 +266,8 @@
                         <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
                         <p class="add-ons">Add-Ons Available:</p>
                         <ul>
-                            <li>Custom domain: +₱100</li>
-                            <li>SEO optimization: +₱200</li>
+                            <li>Additional page: ₱150</li>
+                            <li>Basic SEO optimization: ₱200</li>
                         </ul>
                     </div>
                 </div>
@@ -239,139 +275,135 @@
             <div class="col-md-4">
                 <div class="package-card">
                     <h3>Professional Package</h3>
-                    <p>₱500 - Advanced Development Package</p>
+                    <p>₱600 - Advanced Development Package</p>
                     <div class="description">
                         <h4>What's Included:</h4>
-                        <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
+                        <p>Advanced website development with custom UI/UX design and dynamic content management systems (CMS).</p>
                         <p class="add-ons">Add-Ons Available:</p>
                         <ul>
-                            <li>Blog Integration: +₱150</li>
-                            <li>E-commerce setup: +₱400</li>
-                            <li>Analytics setup: +₱250</li>
+                            <li>Responsive mobile optimization: ₱200</li>
+                            <li>E-commerce setup: ₱500</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="package-card">
-                    <h3>Premium Package</h3>
-                    <p>₱1000 - Premium Development Package</p>
+                    <h3>Enterprise Package</h3>
+                    <p>₱1,200 - Premium Development Package</p>
                     <div class="description">
                         <h4>What's Included:</h4>
-                        <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
+                        <p>Full-stack web development with custom APIs, enterprise-grade security, and performance optimization.</p>
                         <p class="add-ons">Add-Ons Available:</p>
                         <ul>
-                            <li>Social Media Integration: +₱300</li>
-                            <li>Custom API Development: +₱500</li>
-                            <li>Advanced Security Features: +₱350</li>
+                            <li>Cloud hosting setup: ₱300</li>
+                            <li>Advanced SEO & analytics: ₱400</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="as.png" class="d-block w-100" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="saaa.png" class="d-block w-100" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="fs.png" class="d-block w-100" alt="Slide 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="sh.png" class="d-block w-100" alt="Slide 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="fg.png" class="d-block w-100" alt="Slide 5">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="testimonial-section">
-        <h2 class="text-center">What Our Clients Say</h2>
+        <h2>What Our Clients Say</h2>
         <div class="testimonial-slider">
             <div class="testimonial-item">
-                <p>"Luke Development exceeded our expectations with their amazing service and dedication!"</p>
+                <p>"Luke's team helped bring our vision to life! The service was seamless and professional."</p>
                 <h5>- John Doe</h5>
             </div>
             <div class="testimonial-item">
-                <p>"The team was quick to respond and always helpful. Our website has never looked better!"</p>
+                <p>"Amazing experience, top-notch quality and always ready to assist!"</p>
                 <h5>- Sarah Lee</h5>
             </div>
             <div class="testimonial-item">
-                <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
-                <h5>- Mark Spencer</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
-                <h5>- Emma Green</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
-                <h5>- David Kim</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"We were able to launch our site on time with the help of Luke Development’s expert team!"</p>
-                <h5>- Lisa White</h5>
+                <p>"We highly recommend Luke Development for any web project. Truly amazing!"</p>
+                <h5>- Mark Twain</h5>
             </div>
         </div>
     </section>
 
+    <!-- Floating Window -->
+    <div id="floatingWindow">
+        <h5>Need Help?</h5>
+        <p>Click below to chat with us or send an email.</p>
+        <button id="closeWindowBtn">Close</button>
+    </div>
+
     <footer class="footer">
-        <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+        <p>&copy; 2025 Luke Development | All Rights Reserved</p>
         <p>
-            <a href="https://github.com/luke" target="_blank">GitHub</a> | 
-            <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
-            <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            |
+            <a href="terms-of-service.html">Terms of Service</a>
         </p>
     </footer>
+<script>
+    // Initialize Supabase client
+    const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j';
+    const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Supabase client
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j';
-        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    // Function to check user authentication status
+    async function checkAuthStatus() {
+        const { data: { session }, error } = await _supabase.auth.getSession();
 
-        // Function to check user authentication status
-        async function checkAuthStatus() {
-            const { data: { session }, error } = await _supabase.auth.getSession();
-
-            if (error) {
-                console.error('Error fetching session:', error.message);
-                return;
-            }
-
-            if (session && session.user) {
-                // User is logged in
-                document.getElementById('profileLink').style.display = 'block';
-                document.getElementById('logoutLink').style.display = 'block';
-                document.getElementById('loginLink').style.display = 'none';
-                document.getElementById('registerLink').style.display = 'none';
-            } else {
-                // User is logged out
-                document.getElementById('profileLink').style.display = 'none';
-                document.getElementById('logoutLink').style.display = 'none';
-                document.getElementById('loginLink').style.display = 'block';
-                document.getElementById('registerLink').style.display = 'block';
-            }
+        if (error) {
+            console.error('Error fetching session:', error.message);
+            return;
         }
 
-        // Log the user out
-        function logout() {
-            _supabase.auth.signOut().then(() => {
-                // Reload the page to update the UI
-                location.reload();
+        if (session && session.user) {
+            // User is logged in
+            document.getElementById('profileLink').style.display = 'block';
+            document.getElementById('logoutLink').style.display = 'block';
+            document.getElementById('loginLink').style.display = 'none';
+            document.getElementById('registerLink').style.display = 'none';
+        } else {
+            // User is logged out
+            document.getElementById('profileLink').style.display = 'none';
+            document.getElementById('logoutLink').style.display = 'none';
+            document.getElementById('loginLink').style.display = 'block';
+            document.getElementById('registerLink').style.display = 'block';
+        }
+    }
+
+    // Log the user out
+    function logout() {
+        _supabase.auth.signOut().then(() => {
+            alert("You have been logged out.");
+            location.reload();
+        });
+    }
+
+    // Floating window trigger
+    window.onload = function () {
+        setTimeout(() => {
+            document.getElementById("floatingWindow").style.display = "block";
+        }, 5000); // Show the window after 5 seconds
+    };
+
+    document.getElementById("closeWindowBtn").onclick = function () {
+        document.getElementById("floatingWindow").style.display = "none";
+    };
+
+    // EmailJS initialization
+    emailjs.init("bez1W9OQ416p3SP0g");
+
+    // Send email function
+    function sendEmail(event) {
+        event.preventDefault();
+        const form = event.target;
+
+        emailjs.sendForm('service_0b3kfuf', 'template_l4jpqr8', form)
+            .then((response) => {
+                alert("Message sent successfully!");
+                form.reset();
+            }, (error) => {
+                alert("Failed to send message.");
             });
-        }
+    }
+</script>
 
-        // Run the checkAuthStatus function when the page loads
-        window.onload = checkAuthStatus;
-    </script>
-</body>
 
 </html>
