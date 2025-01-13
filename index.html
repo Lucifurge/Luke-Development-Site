@@ -8,6 +8,7 @@
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- EmailJS Script -->
     <style>
         body {
             background-color: #1e1e2f;
@@ -155,6 +156,67 @@
                 transform: translateX(-100%);
             }
         }
+
+        /* Support Button */
+        #supportButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #58a6ff;
+            color: white;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50%;
+            padding: 15px 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #supportButton:hover {
+            background-color: #7b92ff;
+            box-shadow: 0 6px 15px rgba(88, 166, 255, 0.5);
+        }
+
+        .support-window {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #2a2a40;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            z-index: 9999;
+            width: 300px;
+        }
+
+        .support-window input,
+        .support-window textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #1e1e2f;
+            color: white;
+            border: 1px solid #383850;
+            border-radius: 5px;
+        }
+
+        .support-window button {
+            width: 100%;
+            padding: 10px;
+            background-color: #58a6ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .support-window button:hover {
+            background-color: #7b92ff;
+        }
+
     </style>
 </head>
 
@@ -196,141 +258,44 @@
         <a href="#servicePackages" class="btn">Explore Services</a>
     </header>
 
-    <section id="features" class="container features">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <h3>Custom Solutions</h3>
-                    <p>Tailored development services to meet your needs.</p>
-                </div>
+    <section id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="as.png" class="d-block w-100" alt="Slide 1">
             </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <h3>Affordable Pricing</h3>
-                    <p>Competitive pricing with flexible packages.</p>
-                </div>
+            <div class="carousel-item">
+                <img src="saaa.png" class="d-block w-100" alt="Slide 2">
             </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <h3>Expert Support</h3>
-                    <p>Round-the-clock support to ensure your success.</p>
-                </div>
+            <div class="carousel-item">
+                <img src="fs.png" class="d-block w-100" alt="Slide 3">
+            </div>
+            <div class="carousel-item">
+                <img src="sh.png" class="d-block w-100" alt="Slide 4">
+            </div>
+            <div class="carousel-item">
+                <img src="fg.png" class="d-block w-100" alt="Slide 5">
             </div>
         </div>
     </section>
 
-    <section id="servicePackages" class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Starter Package</h3>
-                    <p>₱300 - Basic Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Custom domain: +₱100</li>
-                            <li>SEO optimization: +₱200</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Professional Package</h3>
-                    <p>₱500 - Advanced Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Blog Integration: +₱150</li>
-                            <li>E-commerce setup: +₱400</li>
-                            <li>Analytics setup: +₱250</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Premium Package</h3>
-                    <p>₱1000 - Premium Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Social Media Integration: +₱300</li>
-                            <li>Custom API Development: +₱500</li>
-                            <li>Advanced Security Features: +₱350</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="supportButton" onclick="toggleSupportWindow()">Support</div>
 
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="as.png" class="d-block w-100" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="saaa.png" class="d-block w-100" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="fs.png" class="d-block w-100" alt="Slide 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="sh.png" class="d-block w-100" alt="Slide 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="fg.png" class="d-block w-100" alt="Slide 5">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonial-section">
-        <h2 class="text-center">What Our Clients Say</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial-item">
-                <p>"Luke Development exceeded our expectations with their amazing service and dedication!"</p>
-                <h5>- John Doe</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"The team was quick to respond and always helpful. Our website has never looked better!"</p>
-                <h5>- Sarah Lee</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
-                <h5>- Mark Spencer</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
-                <h5>- Emma Green</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
-                <h5>- David Kim</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"We were able to launch our site on time with the help of Luke Development’s expert team!"</p>
-                <h5>- Lisa White</h5>
-            </div>
-        </div>
-    </section>
+    <div id="supportWindow" class="support-window">
+        <h4>Customer Support</h4>
+        <input type="text" id="name" placeholder="Your Name">
+        <textarea id="message" rows="5" placeholder="Your Message"></textarea>
+        <button onclick="sendSupportMessage()">Send</button>
+    </div>
 
     <footer class="footer">
-        <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+        <p>&copy; 2025 Luke Development Web Services. All rights reserved.</p>
         <p>
-            <a href="https://github.com/luke" target="_blank">GitHub</a> | 
-            <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
-            <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a> |
+            <a href="#">Contact</a>
         </p>
     </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         // Initialize Supabase client
         const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
@@ -371,7 +336,37 @@
 
         // Run the checkAuthStatus function when the page loads
         window.onload = checkAuthStatus;
+
+        function toggleSupportWindow() {
+            const supportWindow = document.getElementById("supportWindow");
+            if (supportWindow.style.display === "none" || supportWindow.style.display === "") {
+                supportWindow.style.display = "block";
+            } else {
+                supportWindow.style.display = "none";
+            }
+        }
+
+        function sendSupportMessage() {
+            const name = document.getElementById("name").value;
+            const message = document.getElementById("message").value;
+
+            if (name && message) {
+                emailjs.init("user_y8fjsoMRwxHeGfHhWQJ0D");
+                emailjs.send("service_a6j1bjt", "template_d0jyzou", {
+                    from_name: name,
+                    message: message,
+                }).then(function (response) {
+                    alert("Message sent successfully!");
+                }, function (error) {
+                    alert("Failed to send message. Please try again later.");
+                });
+            } else {
+                alert("Please fill in both fields.");
+            }
+        }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
