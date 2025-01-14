@@ -411,7 +411,7 @@
         });
 
         // Initialize EmailJS
-        emailjs.init("YOUR_USER_ID"); // Replace with your actual user ID from EmailJS
+        emailjs.init("bez1W9OQ416p3SP0g"); // Replace with your actual user ID from EmailJS
 
         // Show the modal when the support button is clicked
         document.getElementById('supportBtn').addEventListener('click', function() {
@@ -431,7 +431,7 @@
             const userMessage = document.getElementById('userMessage').value;
 
             // Send the email via EmailJS
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+            emailjs.send("service_0b3kfuf", "template_l4jpqr8", {
                 from_email: userEmail,
                 message: userMessage
             })
