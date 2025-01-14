@@ -244,7 +244,12 @@
 }
 
 .modal-content button:hover {
-    background-color: #7b92ff;
+    background-color: #f5deb3; /* Parchment-like color */
+    color: #5a4636; /* A darker brown text color */
+    border: 1px solid #d2b48c; /* Border resembling scroll edges */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    font-style: italic; /* To add a classic feel */
+    transform: scale(1.02); /* Slight scaling for interactivity */
 }
 
 /* Close Button */
@@ -490,9 +495,10 @@ function logout() {
 
 // Call the checkAuthStatus on page load
 window.onload = checkAuthStatus;
+// Initialize EmailJS with your public key
+emailjs.init("bez1W9OQ416p3SP0g"); // Replace with your EmailJS public key
 
-        // Initialize EmailJS
-       // Show the modal when the support button is clicked
+// Show the modal when the support button is clicked
 document.getElementById('supportBtn').addEventListener('click', function() {
     document.getElementById('supportModal').style.display = 'flex';
 });
@@ -509,8 +515,8 @@ document.getElementById('supportForm').addEventListener('submit', function(e) {
     const email = document.getElementById('userEmail').value;
     const message = document.getElementById('userMessage').value;
 
-    // Send the support message via EmailJS or another service
-    emailjs.send("service_0b3kfuf", "service_0b3kfuf", {
+    // Send the support message via EmailJS
+    emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
         user_email: email,
         user_message: message
     }).then(function(response) {
@@ -521,7 +527,11 @@ document.getElementById('supportForm').addEventListener('submit', function(e) {
     }).catch(function(error) {
         console.error('Error sending message:', error);
         alert('Failed to send your message. Please try again later.');
-        document.getElementById('supportBtn').addEventListener('click', function() {
+    });
+});
+
+// Ensure modal toggle actions are consistent
+document.getElementById('supportBtn').addEventListener('click', function() {
     document.getElementById('supportModal').style.display = 'flex';
 });
 
@@ -529,8 +539,6 @@ document.getElementById('closeModal').addEventListener('click', function() {
     document.getElementById('supportModal').style.display = 'none';
 });
 
-    });
-});
 
     </script>
 </body>
