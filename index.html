@@ -187,22 +187,32 @@
             margin-top: 10px;
             width: 100%;
         }
-        /* Floating Support Button */
+/* Floating Support Button */
 #supportBtn {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Adjust size of the emoji */
     padding: 15px;
-    background-color: #58a6ff;
-    color: white;
+    background-color: #007BFF; /* Optional background color */
+    color: white; /* Text color */
     border: none;
+    border-radius: 50%; /* Make it circular */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Adjust to make it a circle */
+    height: 60px; /* Same as width for circular shape */
+    position: fixed; /* For floating effect */
+    bottom: 20px; /* Adjust position */
+    right: 20px; /* Adjust position */
 }
 
+/* Hover Effect */
 #supportBtn:hover {
-    background-color: #7b92ff;
-    transform: scale(1.1);
-    transition: transform 0.2s;
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
 }
+
 
 /* Support Modal */
 .modal {
@@ -425,7 +435,8 @@
                 </div>
             </div>
             <!-- Floating Button -->
-<button id="supportBtn" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <button id="supportBtn" aria-label="Support" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">📜</button>
+
     <i class="fas fa-comments"></i> <!-- FontAwesome icon -->
 </button>
 
@@ -507,13 +518,17 @@ document.getElementById('supportBtn').addEventListener('click', function() {
 document.getElementById('closeModal').addEventListener('click', function() {
     document.getElementById('supportModal').style.display = 'none';
 });
-
-// Handle form submission
 document.getElementById('supportForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const email = document.getElementById('userEmail').value;
-    const message = document.getElementById('userMessage').value;
+    const email = document.getElementById('userEmail').value.trim();
+    const message = document.getElementById('userMessage').value.trim();
+
+    // Validate input fields
+    if (!email || !message) {
+        alert('Please fill in both the email and message fields.');
+        return;
+    }
 
     // Send the support message via EmailJS
     emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
@@ -525,20 +540,10 @@ document.getElementById('supportForm').addEventListener('submit', function(e) {
         // Hide the modal after sending
         document.getElementById('supportModal').style.display = 'none';
     }).catch(function(error) {
-        console.error('Error sending message:', error);
+        console.error('Error sending message:', error.text || error);
         alert('Failed to send your message. Please try again later.');
     });
 });
-
-// Ensure modal toggle actions are consistent
-document.getElementById('supportBtn').addEventListener('click', function() {
-    document.getElementById('supportModal').style.display = 'flex';
-});
-
-document.getElementById('closeModal').addEventListener('click', function() {
-    document.getElementById('supportModal').style.display = 'none';
-});
-
 
     </script>
 </body>
