@@ -187,14 +187,82 @@
             margin-top: 10px;
             width: 100%;
         }
+        /* Floating Support Button */
+#supportBtn {
+    font-size: 1.5rem;
+    padding: 15px;
+    background-color: #58a6ff;
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#supportBtn:hover {
+    background-color: #7b92ff;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+/* Support Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background-color: #58a6ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-content button:hover {
+    background-color: #7b92ff;
+}
+
+/* Close Button */
+.close-btn {
+    font-size: 30px;
+    color: #888;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #555;
+}
     </style>
 </head>
-<body>
-    <div id="loadingScreen">
-        <div class="loading-text">Welcome to Luke Development Web Services...</div>
-    </div>
-
-    <body>
+   <body>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Luke Development</a>
@@ -351,6 +419,24 @@
                     <h5>- Lisa White</h5>
                 </div>
             </div>
+            <!-- Floating Button -->
+<button id="supportBtn" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <i class="fas fa-comments"></i> <!-- FontAwesome icon -->
+</button>
+
+<!-- Modal -->
+<div id="supportModal" style="display: none;" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close-btn">&times;</span>
+        <h2>Support Chat</h2>
+        <form id="supportForm">
+            <input type="email" id="userEmail" placeholder="Your email" required><br>
+            <textarea id="userMessage" placeholder="Your message" rows="4" required></textarea><br>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</div>
+
         </section>
     
     <footer class="footer">
@@ -371,79 +457,81 @@
 
         // Function to check user authentication status
         async function checkAuthStatus() {
-            const { data: { session }, error } = await _supabase.auth.getSession();
+    const { data: { session }, error } = await _supabase.auth.getSession();
 
-            if (error) {
-                console.error('Error fetching session:', error.message);
-                return;
-            }
+    if (error) {
+        console.error('Error fetching session:', error.message);
+        return;
+    }
 
-            if (session && session.user) {
-                // User is logged in
-                document.getElementById('profileLink').style.display = 'block';
-                document.getElementById('logoutLink').style.display = 'block';
-                document.getElementById('loginLink').style.display = 'none';
-                document.getElementById('registerLink').style.display = 'none';
-            } else {
-                // User is logged out
-                document.getElementById('profileLink').style.display = 'none';
-                document.getElementById('logoutLink').style.display = 'none';
-                document.getElementById('loginLink').style.display = 'block';
-                document.getElementById('registerLink').style.display = 'block';
-            }
-        }
+    if (session && session.user) {
+        // User is logged in
+        document.getElementById('profileLink').style.display = 'block';
+        document.getElementById('logoutLink').style.display = 'block';
+        document.getElementById('loginLink').style.display = 'none';
+        document.getElementById('registerLink').style.display = 'none';
+    } else {
+        // User is logged out
+        document.getElementById('profileLink').style.display = 'none';
+        document.getElementById('logoutLink').style.display = 'none';
+        document.getElementById('loginLink').style.display = 'block';
+        document.getElementById('registerLink').style.display = 'block';
+    }
+}
 
-        // Log the user out
-        function logout() {
-            _supabase.auth.signOut().then(() => {
-                // Reload the page to update the UI
-                location.reload();
-            });
-        }
+// Logout function
+function logout() {
+    _supabase.auth.signOut().then(() => {
+        checkAuthStatus(); // Recheck after logout
+    }).catch((error) => {
+        console.error('Error logging out:', error.message);
+    });
+}
 
-        // Run the checkAuthStatus function when the page loads
-        window.onload = checkAuthStatus;
-        window.addEventListener('load', function () {
-            const loadingScreen = document.getElementById('loadingScreen');
-            setTimeout(function () {
-                loadingScreen.classList.add('hide');
-            }, 2000);
-        });
+// Call the checkAuthStatus on page load
+window.onload = checkAuthStatus;
 
         // Initialize EmailJS
-        emailjs.init("bez1W9OQ416p3SP0g"); // Replace with your actual user ID from EmailJS
+       // Show the modal when the support button is clicked
+document.getElementById('supportBtn').addEventListener('click', function() {
+    document.getElementById('supportModal').style.display = 'flex';
+});
 
-        // Show the modal when the support button is clicked
+// Hide the modal when the close button is clicked
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('supportModal').style.display = 'none';
+});
+
+// Handle form submission
+document.getElementById('supportForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('userEmail').value;
+    const message = document.getElementById('userMessage').value;
+
+    // Send the support message via EmailJS or another service
+    emailjs.send("service_0b3kfuf", "service_0b3kfuf", {
+        user_email: email,
+        user_message: message
+    }).then(function(response) {
+        console.log('Message sent successfully:', response);
+        alert('Your message has been sent!');
+        // Hide the modal after sending
+        document.getElementById('supportModal').style.display = 'none';
+    }).catch(function(error) {
+        console.error('Error sending message:', error);
+        alert('Failed to send your message. Please try again later.');
         document.getElementById('supportBtn').addEventListener('click', function() {
-            document.getElementById('supportModal').style.display = 'flex';
-        });
+    document.getElementById('supportModal').style.display = 'flex';
+});
 
-        // Close the modal when the "Close" button is clicked
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('supportModal').style.display = 'none';
-        });
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('supportModal').style.display = 'none';
+});
 
-        // Handle the form submission
-        document.getElementById('supportForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    });
+});
 
-            const userEmail = document.getElementById('userEmail').value;
-            const userMessage = document.getElementById('userMessage').value;
-
-            // Send the email via EmailJS
-            emailjs.send("service_0b3kfuf", "template_l4jpqr8", {
-                from_email: userEmail,
-                message: userMessage
-            })
-            .then(function(response) {
-                console.log('Success:', response);
-                alert('Message sent successfully!');
-                document.getElementById('supportModal').style.display = 'none';
-            }, function(error) {
-                console.log('Error:', error);
-                alert('Failed to send message, please try again!');
-            });
-        });
     </script>
 </body>
 </html>
