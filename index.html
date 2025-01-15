@@ -155,7 +155,6 @@
                 transform: translateX(-100%);
             }
         }
-        /* Basic Styles */
 /* Basic Styles for Buttons and Package Section */
 .packages {
     text-align: center;
@@ -163,7 +162,7 @@
 }
 
 .package-btn {
-    background-color: #003489;
+    background-color: #002576;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -178,69 +177,7 @@
 }
 
 .package-btn:hover {
-    background-color: #84bdff;
-}
-
-/* Modal (Floating Window) Styles */
-.form-modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
-    padding-top: 50px;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 8px;
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Form Styling */
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
+    background-color: #7cbbff;
 }
 
 /* Plain Text Display */
@@ -251,6 +188,20 @@ button:hover {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+/* Plain Text Result Section (for copying) */
+#plain-text-result {
+    display: none;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 
     /* Floating Support Button */
@@ -468,65 +419,28 @@ button:hover {
              </div>
 </div>
 <!-- Carousel Section (you can use your existing code for this) -->
-
 <!-- Packages Section -->
 <section class="packages">
     <h2>Select Your Package</h2>
     <div class="package-buttons">
         <!-- Package Buttons -->
-        <button class="package-btn" onclick="showForm('starter')">Starter Package - ₱300</button>
-        <button class="package-btn" onclick="showForm('professional')">Professional Package - ₱500</button>
-        <button class="package-btn" onclick="showForm('premium')">Premium Package - ₱1000</button>
-        <button class="package-btn" onclick="showForm('facebook-auto-bot')">Facebook Auto Bot - ₱700</button>
-        <button class="package-btn" onclick="showForm('facebook-ai-bot')">Facebook AI Bot - ₱700</button>
-        <button class="package-btn" onclick="showForm('ai-marketing-bot')">AI Marketing Bot - ₱700</button>
-        <button class="package-btn" onclick="showForm('advanced-chatbot')">Advanced Chatbot - ₱700</button>
+        <button class="package-btn" onclick="showPlainText('starter')">Starter Package - ₱300</button>
+        <button class="package-btn" onclick="showPlainText('professional')">Professional Package - ₱500</button>
+        <button class="package-btn" onclick="showPlainText('premium')">Premium Package - ₱1000</button>
+        <button class="package-btn" onclick="showPlainText('facebook-auto-bot')">Facebook Auto Bot - ₱700</button>
+        <button class="package-btn" onclick="showPlainText('facebook-ai-bot')">Facebook AI Bot - ₱700</button>
+        <button class="package-btn" onclick="showPlainText('ai-marketing-bot')">AI Marketing Bot - ₱700</button>
+        <button class="package-btn" onclick="showPlainText('advanced-chatbot')">Advanced Chatbot - ₱700</button>
     </div>
 </section>
 
-<!-- Modal (Floating Window) for Form -->
-<div id="form-modal" class="form-modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeForm()">&times;</span>
-        <h3 id="modal-title">Website Request Form</h3>
-        <form id="website-form" onsubmit="generatePlainText(event)">
-            <label for="name">1. Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-            <label for="email">2. Email Address:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="website-type">3. Website Type:</label>
-            <input type="text" id="website-type" name="website-type" placeholder="Enter the website type" required>
-
-            <label for="goal">4. What is the main goal of your website?</label>
-            <textarea id="goal" name="goal" placeholder="Brief description" required></textarea>
-
-            <label for="design">5. Design Preferences:</label>
-            <input type="text" id="design" name="design" placeholder="Design preferences" required>
-
-            <label for="color">6. Do you have any color preferences or branding guidelines?</label>
-            <input type="text" id="color" name="color" placeholder="Enter color or branding guidelines" required>
-
-            <label for="content">7. Content Requirements:</label>
-            <input type="text" id="content" name="content" placeholder="Do you have content ready?" required>
-
-            <label for="features">8. Do you need any specific features on the website?</label>
-            <input type="text" id="features" name="features" placeholder="Specify features" required>
-
-            <label for="maintenance">9. Ongoing Maintenance or Updates?</label>
-            <input type="text" id="maintenance" name="maintenance" placeholder="Ongoing maintenance?" required>
-
-            <label for="budget">11. Budget:</label>
-            <input type="text" id="budget" name="budget" placeholder="Enter your budget range" required>
-
-            <label for="additional-info">12. Additional Information or Requests:</label>
-            <textarea id="additional-info" name="additional-info" placeholder="Any additional details" required></textarea>
-
-            <button type="submit">Submit Form 📜</button>
-        </form>
-    </div>
+<!-- Plain Text Result Section (for copying) -->
+<div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <h3 id="modal-title">Website Request Form in Plain Text</h3>
+    <pre id="form-text"></pre>
+    <button onclick="copyText()">Copy Text</button>
 </div>
+
 
 <!-- Plain Text Result Section (for copying) -->
 <div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -646,101 +560,178 @@ se
             });
         });
         
-    // Show the form with package-specific details
-function showForm(packageType) {
-    document.getElementById('form-modal').style.display = 'block';
-    document.getElementById('plain-text-result').style.display = 'none'; // Hide the plain text section
-
-    // Set the title of the modal based on the package type
-    const modalTitle = document.getElementById('modal-title');
-    const websiteTypeField = document.getElementById('website-type');
-    websiteTypeField.value = packageType;
+// Show plain text form based on selected package
+function showPlainText(packageType) {
+    let plainTextMessage = '';
     
     switch (packageType) {
         case 'starter':
-            modalTitle.innerText = 'Starter Package - ₱300';
-            document.getElementById('goal').value = 'Basic website setup with home page, contact page, and about page';
-            document.getElementById('design').value = 'Simple and professional';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Starter Package - ₱300
+            4. What is the main goal of your website?
+               - Basic website setup with home page, contact page, and about page
+            5. Design Preferences:
+               - Simple and professional design
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱300
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'professional':
-            modalTitle.innerText = 'Professional Package - ₱500';
-            document.getElementById('goal').value = 'Advanced website with additional pages, custom styling, and more features';
-            document.getElementById('design').value = 'Advanced, custom design';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Professional Package - ₱500
+            4. What is the main goal of your website?
+               - Advanced website with additional pages, custom styling, and more features
+            5. Design Preferences:
+               - Advanced, custom design
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱500
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'premium':
-            modalTitle.innerText = 'Premium Package - ₱1000';
-            document.getElementById('goal').value = 'Fully optimized, large-scale business or online presence';
-            document.getElementById('design').value = 'Premium design, high performance';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Premium Package - ₱1000
+            4. What is the main goal of your website?
+               - Fully optimized, large-scale business or online presence
+            5. Design Preferences:
+               - Premium design, high performance
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱1000
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'facebook-auto-bot':
-            modalTitle.innerText = 'Facebook Auto Bot - ₱700';
-            document.getElementById('goal').value = 'Automated bot for customer service or marketing on Facebook';
-            document.getElementById('design').value = 'Integration with Facebook page';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Facebook Auto Bot - ₱700
+            4. What is the main goal of your website?
+               - Automated bot for customer service or marketing on Facebook
+            5. Design Preferences:
+               - Integration with Facebook page
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'facebook-ai-bot':
-            modalTitle.innerText = 'Facebook AI Bot - ₱700';
-            document.getElementById('goal').value = 'AI-powered Facebook bot for intelligent responses';
-            document.getElementById('design').value = 'Custom AI bot personality';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Facebook AI Bot - ₱700
+            4. What is the main goal of your website?
+               - AI-powered Facebook bot for intelligent responses
+            5. Design Preferences:
+               - Custom AI bot personality
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'ai-marketing-bot':
-            modalTitle.innerText = 'AI Marketing Bot - ₱700';
-            document.getElementById('goal').value = 'AI-powered bot for marketing automation';
-            document.getElementById('design').value = 'Custom campaign management features';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: AI Marketing Bot - ₱700
+            4. What is the main goal of your website?
+               - AI-powered bot for marketing automation
+            5. Design Preferences:
+               - Custom campaign management features
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         case 'advanced-chatbot':
-            modalTitle.innerText = 'Advanced Chatbot - ₱700';
-            document.getElementById('goal').value = 'Fully customizable chatbot with AI and multi-channel support';
-            document.getElementById('design').value = '24/7 support and multi-language support';
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Advanced Chatbot - ₱700
+            4. What is the main goal of your website?
+               - Fully customizable chatbot with AI and multi-channel support
+            5. Design Preferences:
+               - 24/7 support and multi-language support
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
             break;
         default:
-            modalTitle.innerText = 'Website Request Form';
-            document.getElementById('goal').value = '';
-            document.getElementById('design').value = '';
+            plainTextMessage = "Select a valid package.";
             break;
     }
-}
 
-// Close the form modal
-function closeForm() {
-    document.getElementById('form-modal').style.display = 'none';
-}
-
-// Generate the plain text message for the form
-function generatePlainText(event) {
-    event.preventDefault(); // Prevent form submission
-
-    // Collect the form data
-    const formData = new FormData(document.getElementById('website-form'));
-
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const websiteType = formData.get('website-type');
-    const goal = formData.get('goal');
-    const design = formData.get('design');
-    const color = formData.get('color');
-    const content = formData.get('content');
-    const features = formData.get('features');
-    const maintenance = formData.get('maintenance');
-    const budget = formData.get('budget');
-    const additionalInfo = formData.get('additional-info');
-
-    // Format the data as plain text
-    const plainTextMessage = `
-    Website Request Form:
-    1. Name: ${name}
-    2. Email Address: ${email}
-    3. Website Type: ${websiteType}
-    4. Goal of Website: ${goal}
-    5. Design Preferences: ${design}
-    6. Color/Branding Guidelines: ${color}
-    7. Content Requirements: ${content}
-    8. Specific Features: ${features}
-    9. Ongoing Maintenance: ${maintenance}
-    10. Budget: ${budget}
-    11. Additional Information: ${additionalInfo}
-    `;
-
-    // Show the plain text message
+    // Show the plain text message for the selected package
     document.getElementById('form-text').textContent = plainTextMessage;
     document.getElementById('plain-text-result').style.display = 'block';
 }
