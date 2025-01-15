@@ -122,6 +122,30 @@
 #supportBtn:hover {
     background-color: #0056b3; /* Darker blue on hover */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    .testimonial-slider {
+    display: flex;
+    flex-direction: row;
+    animation: slideText 28s linear infinite;
+    white-space: nowrap;
+}
+
+.testimonial-item {
+    padding: 0 50px;
+    font-size: 1.5rem;
+    color: #dcdcdc;
+    font-style: italic;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+@keyframes slideText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
 }
             
     </style>
