@@ -9,152 +9,121 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body {
-            background-color: #1e1e2f;
-            color: #dcdcdc;
-            font-family: "Fira Code", monospace;
-            background-image: linear-gradient(120deg, #1f2937, #111827);
-            background-attachment: fixed;
-            transition: background 0.5s ease;
-            overflow-x: hidden;
-        }
+      body {
+    background-color: #1e1e2f;
+    color: #dcdcdc;
+    font-family: "Fira Code", monospace;
+    background-image: linear-gradient(120deg, #1f2937, #111827);
+    background-attachment: fixed;
+    transition: background 0.5s ease;
+    overflow-x: hidden;
+}
 
-        .navbar {
-            background: linear-gradient(90deg, #2c2c54, #212642);
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-        }
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #2c2c54, #212642);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
 
-        .navbar-brand {
-            font-weight: bold;
-            color: #58a6ff !important;
-            font-size: 1.5rem;
-        }
+.navbar-brand {
+    font-weight: bold;
+    color: #58a6ff !important;
+    font-size: 1.5rem;
+}
 
-        .navbar-nav .nav-link {
-            color: #dcdcdc !important;
-            font-weight: bold;
-            margin: 0 10px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
+.navbar-nav .nav-link {
+    color: #dcdcdc !important;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
 
-        .navbar-nav .nav-link:hover {
-            color: #7b92ff !important;
-            transform: scale(1.1);
-        }
+.navbar-nav .nav-link:hover {
+    color: #7b92ff !important;
+    transform: scale(1.1);
+}
 
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
-            border-radius: 15px;
-            color: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            margin-top: 1rem;
-        }
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 1rem;
+}
 
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
 
-        @media (min-width: 768px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-        }
+@media (min-width: 768px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}
 
-        .hero p {
-            font-size: 1.5rem;
-            margin: 20px 0;
-        }
+.hero p {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
 
-        .hero .btn {
-            background: #58a6ff;
-            color: white;
-            font-size: 1.2rem;
-            padding: 12px 25px;
-            border-radius: 25px;
-            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
+.hero .btn {
+    background: #58a6ff;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #111827;
-            border-top: 1px solid #383850;
-        }
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111827;
+    border-top: 1px solid #383850;
+}
 
-        .footer a {
-            color: #58a6ff;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
+.footer a {
+    color: #58a6ff;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
 
-        .footer a:hover {
-            color: #7b92ff;
-        }
+.footer a:hover {
+    color: #7b92ff;
+}
 
-        #servicePackages {
-            padding: 50px 20px;
-            text-align: center;
-        }
+/* Floating Support Button */
+#supportBtn {
+    font-size: 1.5rem; /* Adjust size of the emoji */
+    padding: 15px;
+    background-color: #007BFF; /* Optional background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Adjust to make it a circle */
+    height: 60px; /* Same as width for circular shape */
+    position: fixed; /* For floating effect */
+    bottom: 20px; /* Adjust position */
+    right: 20px; /* Adjust position */
+}
 
-        .package-card {
-            background: #2a2a40;
-            border: 1px solid #383850;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Testimonial Section */
-        .testimonial-section {
-            padding: 50px 20px;
-            text-align: center;
-            background-color: #2a2a40;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-slider {
-            display: flex;
-            flex-direction: row;
-            animation: slideText 28s linear infinite;
-            white-space: nowrap;
-        }
-
-        .testimonial-item {
-            padding: 0 50px;
-            font-size: 1.5rem;
-            color: #dcdcdc;
-            font-style: italic;
-            text-align: center;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-item h5 {
-            font-weight: bold;
-            color: #58a6ff;
-        }
-
-        @keyframes slideText {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
+/* Hover Effect */
+#supportBtn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+            
     </style>
 </head>
 
@@ -319,6 +288,7 @@
                 <h5>- Lisa White</h5>
             </div>
         </div>
+        <button id="supportBtn" aria-label="Support" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">📜</button>
     </section>
 
     <footer class="footer">
@@ -330,48 +300,72 @@
         </p>
     </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize Supabase client
         const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j'; // Replace with environment variable
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        // Function to check user authentication status
+    
         async function checkAuthStatus() {
-            const { data: { session }, error } = await _supabase.auth.getSession();
-
-            if (error) {
+            try {
+                const { data: { session } } = await _supabase.auth.getSession();
+    
+                if (session && session.user) {
+                    document.getElementById('profileLink').style.display = 'block';
+                    document.getElementById('logoutLink').style.display = 'block';
+                    document.getElementById('loginLink').style.display = 'none';
+                    document.getElementById('registerLink').style.display = 'none';
+                } else {
+                    document.getElementById('profileLink').style.display = 'none';
+                    document.getElementById('logoutLink').style.display = 'none';
+                    document.getElementById('loginLink').style.display = 'block';
+                    document.getElementById('registerLink').style.display = 'block';
+                }
+            } catch (error) {
                 console.error('Error fetching session:', error.message);
-                return;
-            }
-
-            if (session && session.user) {
-                // User is logged in
-                document.getElementById('profileLink').style.display = 'block';
-                document.getElementById('logoutLink').style.display = 'block';
-                document.getElementById('loginLink').style.display = 'none';
-                document.getElementById('registerLink').style.display = 'none';
-            } else {
-                // User is logged out
-                document.getElementById('profileLink').style.display = 'none';
-                document.getElementById('logoutLink').style.display = 'none';
-                document.getElementById('loginLink').style.display = 'block';
-                document.getElementById('registerLink').style.display = 'block';
             }
         }
-
-        // Log the user out
+    
         function logout() {
             _supabase.auth.signOut().then(() => {
-                // Reload the page to update the UI
                 location.reload();
+            }).catch(error => {
+                console.error('Logout error:', error.message);
             });
         }
-
-        // Run the checkAuthStatus function when the page loads
+    
         window.onload = checkAuthStatus;
+    
+        const supportForm = document.getElementById('supportForm');
+        if (supportForm) {
+            supportForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+    
+                const email = document.getElementById('userEmail').value.trim();
+                const message = document.getElementById('userMessage').value.trim();
+    
+                if (!email || !message) {
+                    alert('Please fill in both the email and message fields.');
+                    return;
+                }
+    
+                emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
+                    user_email: email,
+                    user_message: message
+                }).then(function(response) {
+                    console.log('Message sent successfully:', response);
+                    alert('Your message has been sent!');
+                    document.getElementById('supportModal').style.display = 'none';
+                }).catch(function(error) {
+                    console.error('Error sending message:', error.text || error);
+                    alert('Failed to send your message. Please try again later.');
+                });
+            });
+        }
     </script>
+    
+    
+
 </body>
 
 </html>
