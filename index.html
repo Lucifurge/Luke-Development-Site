@@ -155,7 +155,32 @@
                 transform: translateX(-100%);
             }
         }
-/* Close button styling */
+/* Basic Styles for Buttons and Package Section */
+.packages {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.package-btn {
+    background-color: #002576;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.package-btn:hover {
+    background-color: #7cbbff;
+}
+
+/* Close button styling (for closing modal) */
 .close-btn {
     color: black;
     font-size: 28px;
@@ -164,15 +189,16 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    transition: all 0.3s ease; /* Smooth transition for the effect */
 }
 
 .close-btn:hover {
-    color: rgb(6, 86, 177);
+    color: rgb(6, 86, 177); /* Blue color on hover */
 }
 
 /* Plain Text Result Section */
 #plain-text-result {
-    position: relative; /* Make sure the close button stays on the top right */
+    position: relative; /* Ensure the close button stays on the top right */
     display: none;
     margin-top: 50px;
     padding: 20px;
@@ -192,6 +218,29 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     color: black;
+}
+
+/* Copy Text Button Styling */
+button {
+    background-color: #0078D4; /* Visual Studio blue */
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Smooth transition for the effect */
+}
+
+button:hover {
+    background-color: #005a8c; /* Darker blue on hover */
+    box-shadow: 0 0 10px rgba(6, 86, 177, 0.8), 0 0 20px rgba(6, 86, 177, 0.6), 0 0 30px rgba(6, 86, 177, 0.4); /* Blue glow effect */
+}
+
+/* Focus effect for accessibility */
+button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 10px rgba(6, 86, 177, 0.8), 0 0 20px rgba(6, 86, 177, 0.6), 0 0 30px rgba(6, 86, 177, 0.4); /* Focus glow effect */
 }
 
 
