@@ -156,6 +156,7 @@
             }
         }
         /* Basic Styles */
+/* Basic Styles for Buttons and Package Section */
 .packages {
     text-align: center;
     margin-top: 50px;
@@ -180,19 +181,46 @@
     background-color: #45a049;
 }
 
-/* Form Section */
-.form-section {
-    margin-top: 50px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+/* Modal (Floating Window) Styles */
+.form-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
+    padding-top: 50px;
 }
 
-.form-section input, .form-section textarea {
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Styling */
+input, textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -200,7 +228,7 @@
     border: 1px solid #ccc;
 }
 
-.form-section button {
+button {
     background-color: #4CAF50;
     color: white;
     padding: 12px 30px;
@@ -211,9 +239,19 @@
     transition: background-color 0.3s ease;
 }
 
-.form-section button:hover {
+button:hover {
     background-color: #45a049;
 }
+
+/* Plain Text Display */
+#form-text {
+    white-space: pre-wrap;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 
     /* Floating Support Button */
     #supportBtn {
@@ -431,45 +469,72 @@
 </div>
 <!-- Carousel Section (you can use your existing code for this) -->
 
-<!-- Your Form -->
-<form id="website-form" onsubmit="sendToMessenger(event)">
-    <label for="name">1. Name:</label>
-    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+<!-- Packages Section -->
+<section class="packages">
+    <h2>Select Your Package</h2>
+    <div class="package-buttons">
+        <!-- Package Buttons -->
+        <button class="package-btn" onclick="showForm('starter')">Starter Package - ₱300</button>
+        <button class="package-btn" onclick="showForm('professional')">Professional Package - ₱500</button>
+        <button class="package-btn" onclick="showForm('premium')">Premium Package - ₱1000</button>
+        <button class="package-btn" onclick="showForm('facebook-auto-bot')">Facebook Auto Bot - ₱700</button>
+        <button class="package-btn" onclick="showForm('facebook-ai-bot')">Facebook AI Bot - ₱700</button>
+        <button class="package-btn" onclick="showForm('ai-marketing-bot')">AI Marketing Bot - ₱700</button>
+        <button class="package-btn" onclick="showForm('advanced-chatbot')">Advanced Chatbot - ₱700</button>
+    </div>
+</section>
 
-    <label for="email">2. Email Address:</label>
-    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+<!-- Modal (Floating Window) for Form -->
+<div id="form-modal" class="form-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeForm()">&times;</span>
+        <h3 id="modal-title">Website Request Form</h3>
+        <form id="website-form" onsubmit="generatePlainText(event)">
+            <label for="name">1. Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-    <label for="website-type">3. Website Type:</label>
-    <input type="text" id="website-type" name="website-type" placeholder="Enter website type" required>
+            <label for="email">2. Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-    <label for="goal">4. What is the main goal of your website?</label>
-    <textarea id="goal" name="goal" placeholder="Brief description" required></textarea>
+            <label for="website-type">3. Website Type:</label>
+            <input type="text" id="website-type" name="website-type" placeholder="Enter the website type" required>
 
-    <label for="design">5. Design Preferences:</label>
-    <input type="text" id="design" name="design" placeholder="Design preferences" required>
+            <label for="goal">4. What is the main goal of your website?</label>
+            <textarea id="goal" name="goal" placeholder="Brief description" required></textarea>
 
-    <label for="color">6. Do you have any color preferences or branding guidelines?</label>
-    <input type="text" id="color" name="color" placeholder="Enter color or branding guidelines" required>
+            <label for="design">5. Design Preferences:</label>
+            <input type="text" id="design" name="design" placeholder="Design preferences" required>
 
-    <label for="content">7. Content Requirements:</label>
-    <input type="text" id="content" name="content" placeholder="Do you have content ready?" required>
+            <label for="color">6. Do you have any color preferences or branding guidelines?</label>
+            <input type="text" id="color" name="color" placeholder="Enter color or branding guidelines" required>
 
-    <label for="features">8. Do you need any specific features on the website?</label>
-    <input type="text" id="features" name="features" placeholder="Specify features" required>
+            <label for="content">7. Content Requirements:</label>
+            <input type="text" id="content" name="content" placeholder="Do you have content ready?" required>
 
-    <label for="maintenance">9. Ongoing Maintenance or Updates?</label>
-    <input type="text" id="maintenance" name="maintenance" placeholder="Ongoing maintenance?" required>
+            <label for="features">8. Do you need any specific features on the website?</label>
+            <input type="text" id="features" name="features" placeholder="Specify features" required>
 
-    <label for="budget">11. Budget:</label>
-    <input type="text" id="budget" name="budget" placeholder="Enter your budget range" required>
+            <label for="maintenance">9. Ongoing Maintenance or Updates?</label>
+            <input type="text" id="maintenance" name="maintenance" placeholder="Ongoing maintenance?" required>
 
-    <label for="additional-info">12. Additional Information or Requests:</label>
-    <textarea id="additional-info" name="additional-info" placeholder="Any additional details" required></textarea>
+            <label for="budget">11. Budget:</label>
+            <input type="text" id="budget" name="budget" placeholder="Enter your budget range" required>
 
-    <button type="submit">Submit Form 📜</button>
+            <label for="additional-info">12. Additional Information or Requests:</label>
+            <textarea id="additional-info" name="additional-info" placeholder="Any additional details" required></textarea>
 
+            <button type="submit">Submit Form 📜</button>
+        </form>
+    </div>
+</div>
 
-</form>
+<!-- Plain Text Result Section (for copying) -->
+<div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <h3>Your Form in Plain Text</h3>
+    <pre id="form-text"></pre>
+    <button onclick="copyText()">Copy Text</button>
+</div>
+
 se
 
             </section>
@@ -581,10 +646,70 @@ se
             });
         });
         
-        function sendToMessenger(event) {
-    event.preventDefault(); // Prevents the form from submitting the traditional way
+    // Show the form with package-specific details
+function showForm(packageType) {
+    document.getElementById('form-modal').style.display = 'block';
+    document.getElementById('plain-text-result').style.display = 'none'; // Hide the plain text section
 
-    // Collect form data
+    // Set the title of the modal based on the package type
+    const modalTitle = document.getElementById('modal-title');
+    const websiteTypeField = document.getElementById('website-type');
+    websiteTypeField.value = packageType;
+    
+    switch (packageType) {
+        case 'starter':
+            modalTitle.innerText = 'Starter Package - ₱300';
+            document.getElementById('goal').value = 'Basic website setup with home page, contact page, and about page';
+            document.getElementById('design').value = 'Simple and professional';
+            break;
+        case 'professional':
+            modalTitle.innerText = 'Professional Package - ₱500';
+            document.getElementById('goal').value = 'Advanced website with additional pages, custom styling, and more features';
+            document.getElementById('design').value = 'Advanced, custom design';
+            break;
+        case 'premium':
+            modalTitle.innerText = 'Premium Package - ₱1000';
+            document.getElementById('goal').value = 'Fully optimized, large-scale business or online presence';
+            document.getElementById('design').value = 'Premium design, high performance';
+            break;
+        case 'facebook-auto-bot':
+            modalTitle.innerText = 'Facebook Auto Bot - ₱700';
+            document.getElementById('goal').value = 'Automated bot for customer service or marketing on Facebook';
+            document.getElementById('design').value = 'Integration with Facebook page';
+            break;
+        case 'facebook-ai-bot':
+            modalTitle.innerText = 'Facebook AI Bot - ₱700';
+            document.getElementById('goal').value = 'AI-powered Facebook bot for intelligent responses';
+            document.getElementById('design').value = 'Custom AI bot personality';
+            break;
+        case 'ai-marketing-bot':
+            modalTitle.innerText = 'AI Marketing Bot - ₱700';
+            document.getElementById('goal').value = 'AI-powered bot for marketing automation';
+            document.getElementById('design').value = 'Custom campaign management features';
+            break;
+        case 'advanced-chatbot':
+            modalTitle.innerText = 'Advanced Chatbot - ₱700';
+            document.getElementById('goal').value = 'Fully customizable chatbot with AI and multi-channel support';
+            document.getElementById('design').value = '24/7 support and multi-language support';
+            break;
+        default:
+            modalTitle.innerText = 'Website Request Form';
+            document.getElementById('goal').value = '';
+            document.getElementById('design').value = '';
+            break;
+    }
+}
+
+// Close the form modal
+function closeForm() {
+    document.getElementById('form-modal').style.display = 'none';
+}
+
+// Generate the plain text message for the form
+function generatePlainText(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Collect the form data
     const formData = new FormData(document.getElementById('website-form'));
 
     const name = formData.get('name');
@@ -599,8 +724,8 @@ se
     const budget = formData.get('budget');
     const additionalInfo = formData.get('additional-info');
 
-    // Format message to send to Messenger
-    const message = `
+    // Format the data as plain text
+    const plainTextMessage = `
     Website Request Form:
     1. Name: ${name}
     2. Email Address: ${email}
@@ -615,11 +740,20 @@ se
     11. Additional Information: ${additionalInfo}
     `;
 
-    // Messenger link with pre-filled message
-    const messengerUrl = `https://www.messenger.com/t/8204780316201785?message=${encodeURIComponent(message)}`;
+    // Show the plain text message
+    document.getElementById('form-text').textContent = plainTextMessage;
+    document.getElementById('plain-text-result').style.display = 'block';
+}
 
-    // Open Messenger with the pre-filled message
-    window.open(messengerUrl, '_blank'); // Opens Messenger in a new tab
+// Copy the form text to clipboard
+function copyText() {
+    const formText = document.getElementById('form-text');
+    const range = document.createRange();
+    range.selectNode(formText);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    alert('Form text copied to clipboard!');
 }
 
 </script>
