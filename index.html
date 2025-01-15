@@ -155,42 +155,24 @@
                 transform: translateX(-100%);
             }
         }
-/* Basic Styles for Buttons and Package Section */
-.packages {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.package-btn {
-    background-color: #002576;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px;
+/* Close button styling */
+.close-btn {
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
-.package-btn:hover {
-    background-color: #7cbbff;
+.close-btn:hover {
+    color: rgb(6, 86, 177);
 }
 
-/* Plain Text Display */
-#form-text {
-    white-space: pre-wrap;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Plain Text Result Section (for copying) */
+/* Plain Text Result Section */
 #plain-text-result {
+    position: relative; /* Make sure the close button stays on the top right */
     display: none;
     margin-top: 50px;
     padding: 20px;
@@ -202,6 +184,15 @@
     margin-right: auto;
 }
 
+/* Text inside the result section */
+#form-text {
+    white-space: pre-wrap;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: black;
+}
 
 
     /* Floating Support Button */
@@ -423,7 +414,6 @@
 <section class="packages">
     <h2>Select Your Package</h2>
     <div class="package-buttons">
-        <!-- Package Buttons -->
         <button class="package-btn" onclick="showPlainText('starter')">Starter Package - ₱300</button>
         <button class="package-btn" onclick="showPlainText('professional')">Professional Package - ₱500</button>
         <button class="package-btn" onclick="showPlainText('premium')">Premium Package - ₱1000</button>
@@ -436,20 +426,14 @@
 
 <!-- Plain Text Result Section (for copying) -->
 <div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
-    <h3 id="modal-title">Website Request Form in Plain Text</h3>
-    <pre id="form-text"></pre>
-    <button onclick="copyText()">Copy Text</button>
-</div>
-
-
-<!-- Plain Text Result Section (for copying) -->
-<div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <!-- Close button in the plain text section -->
+    <span class="close-btn" onclick="closePlainText()">&times;</span>
     <h3>Your Form in Plain Text</h3>
     <pre id="form-text"></pre>
     <button onclick="copyText()">Copy Text</button>
 </div>
 
-se
+
 
             </section>
         <section class="testimonial-section">
@@ -559,7 +543,6 @@ se
                 alert('Failed to send your message. Please try again later.');
             });
         });
-        
 // Show plain text form based on selected package
 function showPlainText(packageType) {
     let plainTextMessage = '';
@@ -736,6 +719,11 @@ function showPlainText(packageType) {
     document.getElementById('plain-text-result').style.display = 'block';
 }
 
+// Function to close the plain text result section
+function closePlainText() {
+    document.getElementById('plain-text-result').style.display = 'none';
+}
+
 // Copy the form text to clipboard
 function copyText() {
     const formText = document.getElementById('form-text');
@@ -746,7 +734,6 @@ function copyText() {
     document.execCommand('copy');
     alert('Form text copied to clipboard!');
 }
-
 </script>
-
+</html>
     
