@@ -9,350 +9,352 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-      body {
-    background-color: #1e1e2f;
-    color: #dcdcdc;
-    font-family: "Fira Code", monospace;
-    background-image: linear-gradient(120deg, #1f2937, #111827);
-    background-attachment: fixed;
-    transition: background 0.5s ease;
-    overflow-x: hidden;
-}
+        body {
+        background-color: #1e1e2f;
+        color: #dcdcdc;
+        font-family: "Fira Code", monospace;
+        background-image: linear-gradient(120deg, #1f2937, #111827);
+        background-attachment: fixed;
+        transition: background 0.5s ease;
+        overflow-x: hidden;
+    }
 
-/* Navbar */
-.navbar {
-    background: linear-gradient(90deg, #2c2c54, #212642);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
+    /* Navbar */
+    .navbar {
+        background: linear-gradient(90deg, #2c2c54, #212642);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-.navbar-brand {
-    font-weight: bold;
-    color: #58a6ff !important;
-    font-size: 1.5rem;
-}
+    .navbar-brand {
+        font-weight: bold;
+        color: #58a6ff !important;
+        font-size: 1.5rem;
+    }
 
-.navbar-nav .nav-link {
-    color: #dcdcdc !important;
-    font-weight: bold;
-    margin: 0 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
+    .navbar-nav .nav-link {
+        color: #dcdcdc !important;
+        font-weight: bold;
+        margin: 0 10px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
 
-.navbar-nav .nav-link:hover {
-    color: #7b92ff !important;
-    transform: scale(1.1);
-}
+    .navbar-nav .nav-link:hover {
+        color: #7b92ff !important;
+        transform: scale(1.1);
+    }
 
-/* Hero Section */
-.hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
-            border-radius: 15px;
-            color: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            margin-top: 1rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-
-        @media (min-width: 768px) {
-            .hero h1 {
-                font-size: 3.5rem;
+    /* Hero Section */
+    .hero {
+                text-align: center;
+                padding: 100px 20px;
+                background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
+                border-radius: 15px;
+                color: white;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+                margin-top: 1rem;
             }
-        }
 
-        .hero p {
-            font-size: 1.5rem;
-            margin: 20px 0;
-        }
+            .hero h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
 
-        .hero .btn {
-            background: #58a6ff;
-            color: white;
-            font-size: 1.2rem;
-            padding: 12px 25px;
-            border-radius: 25px;
-            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
+            @media (min-width: 768px) {
+                .hero h1 {
+                    font-size: 3.5rem;
+                }
+            }
 
-/* Footer */
-.footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #111827;
-            border-top: 1px solid #383850;
-        }
+            .hero p {
+                font-size: 1.5rem;
+                margin: 20px 0;
+            }
 
-        .footer a {
-            color: #58a6ff;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
+            .hero .btn {
+                background: #58a6ff;
+                color: white;
+                font-size: 1.2rem;
+                padding: 12px 25px;
+                border-radius: 25px;
+                box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
+                transition: background 0.3s ease, box-shadow 0.3s ease;
+            }
 
-        .footer a:hover {
-            color: #7b92ff;
-        }
+    /* Footer */
+    .footer {
+                text-align: center;
+                padding: 20px;
+                background-color: #111827;
+                border-top: 1px solid #383850;
+            }
 
-        #servicePackages {
-            padding: 50px 20px;
-            text-align: center;
-        }
+            .footer a {
+                color: #58a6ff;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
 
-        .package-card {
-            background: #2a2a40;
-            border: 1px solid #383850;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+            .footer a:hover {
+                color: #7b92ff;
+            }
 
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
+            #servicePackages {
+                padding: 50px 20px;
+                text-align: center;
+            }
 
-/* Floating Support Button */
-#supportBtn {
-    font-size: 1.5rem; /* Adjust size of the emoji */
-    padding: 15px;
-    background-color: #007BFF; /* Optional background color */
-    color: white; /* Text color */
-    border: none;
-    border-radius: 50%; /* Make it circular */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px; /* Adjust to make it a circle */
-    height: 60px; /* Same as width for circular shape */
-    position: fixed; /* For floating effect */
-    bottom: 20px; /* Adjust position */
-    right: 20px; /* Adjust position */
+            .package-card {
+                background: #2a2a40;
+                border: 1px solid #383850;
+                border-radius: 12px;
+                padding: 20px;
+                margin: 15px;
+                text-align: center;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .package-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            }
+
+    /* Floating Support Button */
+    #supportBtn {
+        font-size: 1.5rem; /* Adjust size of the emoji */
+        padding: 15px;
+        background-color: #007BFF; /* Optional background color */
+        color: white; /* Text color */
+        border: none;
+        border-radius: 50%; /* Make it circular */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px; /* Adjust to make it a circle */
+        height: 60px; /* Same as width for circular shape */
+        position: fixed; /* For floating effect */
+        bottom: 20px; /* Adjust position */
+        right: 20px; /* Adjust position */
+    }
+
+    /* Hover Effect */
+    #supportBtn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        .testimonial-slider {
+        display: flex;
+        flex-direction: row;
+        animation: slideText 28s linear infinite;
+        white-space: nowrap;
+    }
+
+    /* Testimonial Section */
+.testimonial-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #2a2a40;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Hover Effect */
-#supportBtn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-    .testimonial-slider {
+.testimonial-slider {
     display: flex;
     flex-direction: row;
     animation: slideText 28s linear infinite;
     white-space: nowrap;
+    overflow: hidden; /* Ensure that testimonials stay within the container */
 }
 
-   /* Testimonial Section */
-   .testimonial-section {
-            padding: 50px 20px;
-            text-align: center;
-            background-color: #2a2a40;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-slider {
-            display: flex;
-            flex-direction: row;
-            animation: slideText 28s linear infinite;
-            white-space: nowrap;
-        }
-
-        .testimonial-item {
-            padding: 0 50px;
-            font-size: 1.5rem;
-            color: #dcdcdc;
-            font-style: italic;
-            text-align: center;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-item h5 {
-            font-weight: bold;
-            color: #58a6ff;
-        }
-
-        @keyframes slideText {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
+.testimonial-item {
+    padding: 0 50px;
+    font-size: 1.5rem;
+    color: #dcdcdc;
+    font-style: italic;
+    text-align: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    margin-right: 20px; /* Optional: Adds spacing between items */
 }
-            
-    </style>
-</head>
-<button id="supportBtn" aria-label="Support" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">📜</button>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Luke Development</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicePackages">Services</a>
-                    </li>
-                    <li class="nav-item" id="profileLink" style="display: none;">
-                        <a class="nav-link" href="profile.html">Profile</a>
-                    </li>
-                    <li class="nav-item" id="loginLink" style="display: none;">
-                        <a class="nav-link" href="login.html">Login</a>
-                    </li>
-                    <li class="nav-item" id="registerLink" style="display: none;">
-                        <a class="nav-link" href="register.html">Register</a>
-                    </li>
-                    <li class="nav-item" id="logoutLink" style="display: none;">
-                        <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <header class="hero">
-        <h1>Welcome to Luke Development Web Services</h1>
-        <p>Your go-to platform for seamless development solutions</p>
-        <a href="#servicePackages" class="btn">Explore Services</a>
-    </header>
+.testimonial-item h5 {
+    font-weight: bold;
+    color: #58a6ff;
+}
 
-    <section id="servicePackages" class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Starter Package</h3>
-                    <p>₱300 - Basic Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Custom domain: +₱100</li>
-                            <li>SEO optimization: +₱200</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+@keyframes slideText {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+    }
+                
+        </style>
+    </head>
+    <button id="supportBtn" aria-label="Support" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">📜</button>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Luke Development</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#servicePackages">Services</a>
+                        </li>
+                        <li class="nav-item" id="profileLink" style="display: none;">
+                            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+                        <li class="nav-item" id="loginLink" style="display: none;">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item" id="registerLink" style="display: none;">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                        <li class="nav-item" id="logoutLink" style="display: none;">
+                            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <h1>Welcome to Luke Development Web Services</h1>
+            <p>Your go-to platform for seamless development solutions</p>
+            <a href="#servicePackages" class="btn">Explore Services</a>
+        </header>
+
+        <section id="servicePackages" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Starter Package</h3>
+                        <p>₱300 - Basic Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Custom domain: +₱100</li>
+                                <li>SEO optimization: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Professional Package</h3>
+                        <p>₱500 - Advanced Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Blog Integration: +₱150</li>
+                                <li>E-commerce setup: +₱400</li>
+                                <li>Analytics setup: +₱250</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Premium Package</h3>
+                        <p>₱1000 - Premium Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Social Media Integration: +₱300</li>
+                                <li>Custom API Development: +₱500</li>
+                                <li>Advanced Security Features: +₱350</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Packages -->
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Facebook Auto Bot Creation</h3>
+                        <p>₱700 - Facebook Auto Bot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Creation of an automated bot for Facebook integration, handling customer service or marketing tasks automatically on your page.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Advanced AI Response System: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Facebook AI Bot Creation</h3>
+                        <p>₱700 - Facebook AI Bot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>AI-powered Facebook bot designed to provide intelligent responses, improve user interaction, and automate tasks.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Custom Bot Personality: +₱200</li>
+                                <li>Sentiment Analysis Integration: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>AI Marketing Bot</h3>
+                        <p>₱700 - AI Marketing Automation</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>AI-powered bot for marketing automation, helping with lead generation, campaign management, and customer outreach on various platforms.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Data Analytics Integration: +₱200</li>
+                                <li>CRM System Integration: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Advanced Chatbot Package</h3>
+                        <p>₱700 - Advanced Chatbot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Fully customizable advanced chatbot with conversational AI, tailored to your business needs, supporting multiple channels like web and mobile.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Multi-language Support: +₱200</li>
+                                <li>24/7 Support System: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Professional Package</h3>
-                    <p>₱500 - Advanced Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Blog Integration: +₱150</li>
-                            <li>E-commerce setup: +₱400</li>
-                            <li>Analytics setup: +₱250</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Premium Package</h3>
-                    <p>₱1000 - Premium Development Package</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Social Media Integration: +₱300</li>
-                            <li>Custom API Development: +₱500</li>
-                            <li>Advanced Security Features: +₱350</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Packages -->
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Facebook Auto Bot Creation</h3>
-                    <p>₱700 - Facebook Auto Bot Development</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Creation of an automated bot for Facebook integration, handling customer service or marketing tasks automatically on your page.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Advanced AI Response System: +₱200</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Facebook AI Bot Creation</h3>
-                    <p>₱700 - Facebook AI Bot Development</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>AI-powered Facebook bot designed to provide intelligent responses, improve user interaction, and automate tasks.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Custom Bot Personality: +₱200</li>
-                            <li>Sentiment Analysis Integration: +₱200</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>AI Marketing Bot</h3>
-                    <p>₱700 - AI Marketing Automation</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>AI-powered bot for marketing automation, helping with lead generation, campaign management, and customer outreach on various platforms.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Data Analytics Integration: +₱200</li>
-                            <li>CRM System Integration: +₱200</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="package-card">
-                    <h3>Advanced Chatbot Package</h3>
-                    <p>₱700 - Advanced Chatbot Development</p>
-                    <div class="description">
-                        <h4>What's Included:</h4>
-                        <p>Fully customizable advanced chatbot with conversational AI, tailored to your business needs, supporting multiple channels like web and mobile.</p>
-                        <p class="add-ons">Add-Ons Available:</p>
-                        <ul>
-                            <li>Multi-language Support: +₱200</li>
-                            <li>24/7 Support System: +₱200</li>
-                        </ul>
-                        <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Contact via Messenger</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
+        </section>
+        
+        
 
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -373,110 +375,120 @@
                 </div>
             </div>
         </div>
+            
+        </section>
+        <section class="testimonial-section">
+            <h2 class="text-center">What Our Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-item">
+                    <p>"Luke Development exceeded our expectations with their amazing service and dedication!"</p>
+                    <h5>- John Doe</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"The team was quick to respond and always helpful. Our website has never looked better!"</p>
+                    <h5>- Sarah Lee</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
+                    <h5>- Mark Spencer</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
+                    <h5>- Emma Green</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
+                    <h5>- David Kim</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"We were able to launch our site on time with the help of Luke Development’s expert team!"</p>
+                    <h5>- Lisa White</h5>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+            <p>
+                <a href="https://github.com/luke" target="_blank">GitHub</a> | 
+                <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
+                <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+            </p>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> <!-- Ensure Supabase is included -->
         
-    </section>
-    <section class="testimonial-section">
-        <h2 class="text-center">What Our Clients Say</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial-item">
-                <p>"Luke Development exceeded our expectations with their amazing service and dedication!"</p>
-                <h5>- John Doe</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"The team was quick to respond and always helpful. Our website has never looked better!"</p>
-                <h5>- Sarah Lee</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
-                <h5>- Mark Spencer</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
-                <h5>- Emma Green</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
-                <h5>- David Kim</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"We were able to launch our site on time with the help of Luke Development’s expert team!"</p>
-                <h5>- Lisa White</h5>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
-        <p>
-            <a href="https://github.com/luke" target="_blank">GitHub</a> | 
-            <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
-            <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
-        </p>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j'; // Replace with environment variable
-        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    
-        async function checkAuthStatus() {
-            try {
-                const { data: { session } } = await _supabase.auth.getSession();
-    
-                if (session && session.user) {
-                    document.getElementById('profileLink').style.display = 'block';
-                    document.getElementById('logoutLink').style.display = 'block';
-                    document.getElementById('loginLink').style.display = 'none';
-                    document.getElementById('registerLink').style.display = 'none';
-                } else {
-                    document.getElementById('profileLink').style.display = 'none';
-                    document.getElementById('logoutLink').style.display = 'none';
-                    document.getElementById('loginLink').style.display = 'block';
-                    document.getElementById('registerLink').style.display = 'block';
+        <script>
+            const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j'; // Replace with environment variable
+            const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+            
+            async function checkAuthStatus() {
+                try {
+                    const { data: { session } } = await _supabase.auth.getSession();
+        
+                    if (session && session.user) {
+                        document.getElementById('profileLink').style.display = 'block';
+                        document.getElementById('logoutLink').style.display = 'block';
+                        document.getElementById('loginLink').style.display = 'none';
+                        document.getElementById('registerLink').style.display = 'none';
+                    } else {
+                        document.getElementById('profileLink').style.display = 'none';
+                        document.getElementById('logoutLink').style.display = 'none';
+                        document.getElementById('loginLink').style.display = 'block';
+                        document.getElementById('registerLink').style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('Error fetching session:', error.message);
                 }
-            } catch (error) {
-                console.error('Error fetching session:', error.message);
             }
-        }
-    
-        function logout() {
-            _supabase.auth.signOut().then(() => {
-                location.reload();
-            }).catch(error => {
-                console.error('Logout error:', error.message);
-            });
-        }
-    
-        window.onload = checkAuthStatus;
-    
-        const supportForm = document.getElementById('supportForm');
-        if (supportForm) {
-            supportForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-    
-                const email = document.getElementById('userEmail').value.trim();
-                const message = document.getElementById('userMessage').value.trim();
-    
-                if (!email || !message) {
-                    alert('Please fill in both the email and message fields.');
-                    return;
-                }
-    
-                emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
-                    user_email: email,
-                    user_message: message
-                }).then(function(response) {
-                    console.log('Message sent successfully:', response);
-                    alert('Your message has been sent!');
-                    document.getElementById('supportModal').style.display = 'none';
-                }).catch(function(error) {
-                    console.error('Error sending message:', error.text || error);
-                    alert('Failed to send your message. Please try again later.');
+        
+            function logout() {
+                _supabase.auth.signOut().then(() => {
+                    location.reload();
+                }).catch(error => {
+                    console.error('Logout error:', error.message);
                 });
-            });
-        }
-    </script>
+            }
+        
+            // Ensure to execute both the Supabase authentication check and testimonial animation when the page loads
+            window.onload = function () {
+                checkAuthStatus(); // Checking authentication status
+                const testimonialSlider = document.querySelector('.testimonial-slider');
+                if (testimonialSlider) {
+                    testimonialSlider.style.animation = "slideText 28s linear infinite"; // Apply testimonial slider animation
+                }
+            };
+        
+            const supportForm = document.getElementById('supportForm');
+            if (supportForm) {
+                supportForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+        
+                    const email = document.getElementById('userEmail').value.trim();
+                    const message = document.getElementById('userMessage').value.trim();
+        
+                    if (!email || !message) {
+                        alert('Please fill in both the email and message fields.');
+                        return;
+                    }
+        
+                    emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
+                        user_email: email,
+                        user_message: message
+                    }).then(function(response) {
+                        console.log('Message sent successfully:', response);
+                        alert('Your message has been sent!');
+                        document.getElementById('supportModal').style.display = 'none';
+                    }).catch(function(error) {
+                        console.error('Error sending message:', error.text || error);
+                        alert('Failed to send your message. Please try again later.');
+                    });
+                });
+            }
+        </script>
+        
     
     
 
