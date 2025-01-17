@@ -261,12 +261,20 @@ button:focus {
         position: fixed;
         bottom: 20px;
         right: 20px;
+        z-index: 1000;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* Hover Effect */
     #supportBtn:hover {
         background-color: #0056b3;
         box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        transform: scale(1.1);
+    }
+
+    /* Active Effect */
+    #supportBtn:active {
+        transform: scale(0.9);
     }
 
     /* Support Form */
@@ -280,7 +288,17 @@ button:focus {
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    }        
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    /* Form Visible */
+    .support-form.visible {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }       
         </style>
       <button id="supportBtn" aria-label="Support" onclick="toggleSupportForm()">📜</button>
 
@@ -546,7 +564,7 @@ button:focus {
         <script>
             // Initialize Supabase client
             const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j';
             const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
         
             // Function to check user authentication status
@@ -587,26 +605,39 @@ button:focus {
             // Function to toggle support form
             function toggleSupportForm() {
               var form = document.getElementById('supportForm');
-              form.style.display = form.style.display === 'none' ? 'block' : 'none';
+              if (form.classList.contains('visible')) {
+                form.classList.remove('visible');
+                setTimeout(() => {
+                  form.style.display = 'none';
+                }, 300); // Match the transition duration
+              } else {
+                form.style.display = 'block';
+                setTimeout(() => {
+                  form.classList.add('visible');
+                }, 10);
+              }
             }
         
             // Function to submit support message
             async function submitSupportMessage(event) {
               event.preventDefault();
+              var email = document.getElementById('userEmail').value;
               var message = document.getElementById('message').value;
         
               const { data, error } = await _supabase
                 .from('support_messages')
-                .insert([{ user_id: 1, message: message }]); // Use actual user_id if applicable
+                .insert([{ user_id: 1, email: email, message: message }]); // Use actual user_id if applicable
         
               if (error) {
                 alert('Error submitting message: ' + error.message);
               } else {
                 alert('Message submitted successfully');
+                document.getElementById('userEmail').value = '';
                 document.getElementById('message').value = '';
                 toggleSupportForm();
               }
             }
+          </script>
 // Show plain text form based on selected package
 function showPlainText(packageType) {
     let plainTextMessage = '';
