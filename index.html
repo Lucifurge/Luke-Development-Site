@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -243,41 +244,57 @@ button:focus {
     box-shadow: 0 0 10px rgba(121, 183, 255, 0.8), 0 0 20px rgba(106, 176, 255, 0.6), 0 0 30px rgba(128, 187, 255, 0.4); /* Focus glow effect */
 }
 
-
-    /* Floating Support Button */
-    #supportBtn {
-        font-size: 1.5rem; /* Adjust size of the emoji */
+#supportBtn {
+        font-size: 1.5rem;
         padding: 15px;
-        background-color: #7bbbff; /* Optional background color */
-        color: white; /* Text color */
+        background-color: #7bbbff;
+        color: white;
         border: none;
-        border-radius: 50%; /* Make it circular */
+        border-radius: 50%;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 60px; /* Adjust to make it a circle */
-        height: 60px; /* Same as width for circular shape */
-        position: fixed; /* For floating effect */
-        bottom: 20px; /* Adjust position */
-        right: 20px; /* Adjust position */
+        width: 60px;
+        height: 60px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
     }
 
     /* Hover Effect */
     #supportBtn:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+        background-color: #0056b3;
         box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-        .testimonial-slider {
-        display: flex;
-        flex-direction: row;
-        animation: slideText 28s linear infinite;
-        white-space: nowrap;
     }
-}
-                
+
+    /* Support Form */
+    .support-form {
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }        
         </style>
-          <button id="supportBtn" aria-label="Support" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">📜</button>
+      <button id="supportBtn" aria-label="Support" onclick="toggleSupportForm()">📜</button>
+
+      <div class="support-form" id="supportForm">
+        <h3>Support</h3>
+        <form onsubmit="submitSupportMessage(event)">
+          <label for="userEmail">Gmail:</label>
+          <input type="email" id="userEmail" name="userEmail" required><br>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea><br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -531,69 +548,65 @@ button:focus {
             const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
             const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6j';
             const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    
+        
             // Function to check user authentication status
             async function checkAuthStatus() {
-                const { data: { session }, error } = await _supabase.auth.getSession();
-    
-                if (error) {
-                    console.error('Error fetching session:', error.message);
-                    return;
-                }
-    
-                if (session && session.user) {
-                    // User is logged in
-                    document.getElementById('profileLink').style.display = 'block';
-                    document.getElementById('logoutLink').style.display = 'block';
-                    document.getElementById('loginLink').style.display = 'none';
-                    document.getElementById('registerLink').style.display = 'none';
-                } else {
-                    // User is logged out
-                    document.getElementById('profileLink').style.display = 'none';
-                    document.getElementById('logoutLink').style.display = 'none';
-                    document.getElementById('loginLink').style.display = 'block';
-                    document.getElementById('registerLink').style.display = 'block';
-                }
+              const { data: { session }, error } = await _supabase.auth.getSession();
+        
+              if (error) {
+                console.error('Error fetching session:', error.message);
+                return;
+              }
+        
+              if (session && session.user) {
+                // User is logged in
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('logoutLink').style.display = 'block';
+                document.getElementById('loginLink').style.display = 'none';
+                document.getElementById('registerLink').style.display = 'none';
+              } else {
+                // User is logged out
+                document.getElementById('profileLink').style.display = 'none';
+                document.getElementById('logoutLink').style.display = 'none';
+                document.getElementById('loginLink').style.display = 'block';
+                document.getElementById('registerLink').style.display = 'block';
+              }
             }
-    
+        
             // Log the user out
             function logout() {
-                _supabase.auth.signOut().then(() => {
-                    // Reload the page to update the UI
-                    location.reload();
-                });
+              _supabase.auth.signOut().then(() => {
+                // Reload the page to update the UI
+                location.reload();
+              });
             }
-    
+        
             // Run the checkAuthStatus function when the page loads
             window.onload = checkAuthStatus;
-
-    // Handle the support form submission (EmailJS)
-    const supportForm = document.getElementById('supportForm');
-    if (supportForm) 
-        supportForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const email = document.getElementById('userEmail').value.trim();
-            const message = document.getElementById('userMessage').value.trim();
-
-            if (!email || !message) {
-                alert('Please fill in both the email and message fields.');
-                return;
+        
+            // Function to toggle support form
+            function toggleSupportForm() {
+              var form = document.getElementById('supportForm');
+              form.style.display = form.style.display === 'none' ? 'block' : 'none';
             }
-
-            // Send the message using EmailJS
-            emailjs.send("service_0b3kfuf", "template_0b3kfuf", {
-                user_email: email,
-                user_message: message
-            }).then(function(response) {
-                console.log('Message sent successfully:', response);
-                alert('Your message has been sent!');
-                document.getElementById('supportModal').style.display = 'none'; // Close the modal
-            }).catch(function(error) {
-                console.error('Error sending message:', error.text || error);
-                alert('Failed to send your message. Please try again later.');
-            });
-        });
+        
+            // Function to submit support message
+            async function submitSupportMessage(event) {
+              event.preventDefault();
+              var message = document.getElementById('message').value;
+        
+              const { data, error } = await _supabase
+                .from('support_messages')
+                .insert([{ user_id: 1, message: message }]); // Use actual user_id if applicable
+        
+              if (error) {
+                alert('Error submitting message: ' + error.message);
+              } else {
+                alert('Message submitted successfully');
+                document.getElementById('message').value = '';
+                toggleSupportForm();
+              }
+            }
 // Show plain text form based on selected package
 function showPlainText(packageType) {
     let plainTextMessage = '';
