@@ -243,62 +243,100 @@ button:focus {
     outline: none; /* Remove default focus outline */
     box-shadow: 0 0 10px rgba(121, 183, 255, 0.8), 0 0 20px rgba(106, 176, 255, 0.6), 0 0 30px rgba(128, 187, 255, 0.4); /* Focus glow effect */
 }
-
+/* Floating Support Button */
 #supportBtn {
-        font-size: 1.5rem;
-        padding: 15px;
-        background-color: #7bbbff;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    }
+    font-size: 1.5rem;
+    padding: 15px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    /* Hover Effect */
-    #supportBtn:hover {
-        background-color: #0056b3;
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-        transform: scale(1.1);
-    }
+/* Hover Effect */
+#supportBtn:hover {
+    background-color: #005bb5;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
 
-    /* Active Effect */
-    #supportBtn:active {
-        transform: scale(0.9);
-    }
+/* Active Effect */
+#supportBtn:active {
+    transform: scale(0.9);
+}
 
-    /* Support Form */
-    .support-form {
-        display: none;
-        position: fixed;
-        bottom: 80px;
-        right: 20px;
-        background-color: white;
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        opacity: 0;
-        transform: translateY(20px);
-    }
+/* Support Form */
+.support-form {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #1e1e1e;
+    border: 1px solid #3c3c3c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    color: white;
+}
 
-    /* Form Visible */
-    .support-form.visible {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
-    }       
+/* Form Visible */
+.support-form.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form Elements */
+.support-form label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.support-form input,
+.support-form textarea,
+.support-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.support-form input,
+.support-form textarea {
+    background-color: #252526;
+    color: white;
+    border: 1px solid #3c3c3c;
+}
+
+.support-form button {
+    background-color: #007acc;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.support-form button:hover {
+    background-color: #005bb5;
+}
+  
         </style>
       <button id="supportBtn" aria-label="Support" onclick="toggleSupportForm()">📜</button>
 
