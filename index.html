@@ -665,6 +665,7 @@ async function submitSupportMessage(event) {
   // Log the data to be submitted
   console.log('Submitting support message:', { email, message });
 
+  // Insert the support message directly using the authenticated user's email
   const { data, error } = await _supabase
     .from('support_messages')
     .insert([{ email: email, message: message }]);
@@ -679,6 +680,7 @@ async function submitSupportMessage(event) {
     toggleSupportForm();
   }
 }
+
 
 
 // Show plain text form based on selected package
