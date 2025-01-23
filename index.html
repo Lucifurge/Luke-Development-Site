@@ -336,7 +336,72 @@ button:focus {
 .support-form button:hover {
     background-color: #005bb5;
 }
-  
+        h1 {
+            text-align: center;
+            color: #58a6ff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        button {
+            background-color: #58a6ff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            width: 100%;
+            margin: 15px 0;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0062cc;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .error {
+            background-color: #cc0000;
+            border-color: #990000;
+        }
+
+        .success {
+            background-color: #28a745;
+            border-color: #006600;
+        }
+
+        #accountsSection {
+            margin-top: 20px;
+            background-color: #2a2a40;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .account-box {
+            background-color: #333;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            color: #dcdcdc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         </style>
       <button id="supportBtn" aria-label="Support" onclick="toggleSupportForm()">📜</button>
 
@@ -588,6 +653,17 @@ button:focus {
                 </div>
             </div>
         </section>
+         <!-- Account Creation Section -->
+    <div class="container" id="accountCreation">
+        <h1>Account Creation</h1>
+        <button id="createAccountBtn">Create Accounts</button>
+        <div id="messages"></div>
+    </div>
+
+    <!-- Stacked Accounts Section -->
+    <div class="container" id="accountsSection">
+        <!-- Created accounts will stack here -->
+    </div>
 
         <footer class="footer">
             <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
@@ -597,6 +673,8 @@ button:focus {
                 <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
             </p>
         </footer>
+           <!-- JavaScript -->
+    <script src="index.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
      <script>   // Initialize Supabase client
