@@ -1,628 +1,692 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pyeulmails</title>
+    <title>Luke Development Web Services</title>
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="design.js"></script>
     <style>
-    /* General page styling */
-    body {
-    background-color: #fce5f2;
-    color: #3f3d56;
-    font-family: "Quicksand", sans-serif;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    transition: background 0.5s ease-in-out;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
+          body {
+            background-color: #1e1e2f;
+            color: #dcdcdc;
+            font-family: "Fira Code", monospace;
+            background-image: linear-gradient(120deg, #1f2937, #111827);
+            background-attachment: fixed;
+            transition: background 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #2c2c54, #212642);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #58a6ff !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: #dcdcdc !important;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #7b92ff !important;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(180deg, rgba(30, 30, 47, 0.95), rgba(18, 18, 32, 0.95));
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            margin-top: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .hero .btn {
+            background: #58a6ff;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #111827;
+            border-top: 1px solid #383850;
+        }
+
+        .footer a {
+            color: #58a6ff;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #7b92ff;
+        }
+
+        #servicePackages {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .package-card {
+            background: #2a2a40;
+            border: 1px solid #383850;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #2a2a40;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            flex-direction: row;
+            animation: slideText 28s linear infinite;
+            white-space: nowrap;
+        }
+
+        .testimonial-item {
+            padding: 0 50px;
+            font-size: 1.5rem;
+            color: #dcdcdc;
+            font-style: italic;
+            text-align: center;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-item h5 {
+            font-weight: bold;
+            color: #58a6ff;
+        }
+
+        @keyframes slideText {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+/* Basic Styles for Buttons and Package Section */
+.packages {
+    text-align: center;
+    margin-top: 50px;
 }
 
-/* Navbar styling */
-.navbar {
-    background: linear-gradient(45deg, #ff66b2, #ff3399);
-    padding: 1.5rem 1.5rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar-brand {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    font-size: 2rem;
-    color: white;
-    transition: color 0.3s ease;
-}
-
-.navbar-brand:hover {
-    color: #ffe6f1;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav .nav-link {
-    color: #ffe6f1 !important;
-    font-weight: bold;
-    margin: 0 12px;
-    transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #ff66b2 !important;
-}
-
-/* Enhanced button in navbar */
-.nav-item label.btn {
-    background: linear-gradient(45deg, #ff66b2, #ff3399);
-    color: white;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
+.package-btn {
+    background-color: #a6c2ff;
     border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.nav-item label.btn:hover {
-    background: linear-gradient(45deg, #ff3399, #ff66b2);
-    transform: scale(1.05);
+.package-btn:hover {
+    background-color: #7cbbff;
 }
 
-/* Hero section */
-.hero {
-    text-align: center;
-    padding: 150px 20px;
-    background: #ff66b2;
-    border-radius: 25px;
-    color: white;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
-    animation: heroAnimation 4s ease-out infinite alternate;
-}
-
-@keyframes heroAnimation {
-    0% {
-        background-color: #ff66b2;
-        transform: scale(1);
-    }
-
-    50% {
-        background-color: #ff3399;
-        transform: scale(1.05);
-    }
-
-    100% {
-        background-color: #ff66b2;
-        transform: scale(1);
-    }
-}
-
-.hero h1 {
-    font-size: 4.5rem;
+/* Close button styling (for closing modal) */
+.close-btn {
+    color: black;
+    font-size: 28px;
     font-weight: bold;
-    animation: rainbow-pink 6s ease infinite;
-    text-shadow: 0 0 15px rgba(255, 121, 198, 0.6);
-}
-
-.hero p {
-    font-size: 1.6rem;
-    margin-top: 20px;
-    letter-spacing: 1px;
-}
-
-/* Button styling */
-.btn-primary {
-    background: linear-gradient(45deg, #ff66b2, #ff3399);
-    color: white;
-    font-size: 1.3rem;
-    font-weight: bold;
-    border-radius: 25px;
-    padding: 14px 28px;
-    transition: all 0.4s ease-in-out;
-    box-shadow: 0 0 10px rgba(255, 51, 153, 0.6);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-primary::before {
-    content: "";
+    cursor: pointer;
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 70%);
-    transform: scale(0);
-    transition: transform 0.4s ease-out;
+    top: 10px;
+    right: 10px;
+    transition: all 0.3s ease; /* Smooth transition for the effect */
 }
 
-.btn-primary:hover::before {
-    transform: scale(1);
+.close-btn:hover {
+    color: rgb(130, 188, 255); /* Blue color on hover */
 }
 
-.btn-primary:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(255, 51, 153, 0.8);
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 51, 153, 0.6);
-    }
-
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(255, 51, 153, 0.8);
-    }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 51, 153, 0.6);
-    }
-}
-
-.btn-primary {
-    animation: pulse 2s infinite;
-}
-
-/* Footer styling */
-.footer {
-    background: #ff66b2;
-    color: white;
-    text-align: center;
+/* Plain Text Result Section */
+#plain-text-result {
+    position: relative; /* Ensure the close button stays on the top right */
+    display: none;
+    margin-top: 50px;
     padding: 20px;
-    border-top: 2px solid #ff3399;
-    margin-top: 3rem;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.footer a {
-    color: #ffe6f1;
-    margin: 0 15px;
-    transition: color 0.3s ease;
+/* Text inside the result section */
+#form-text {
+    white-space: pre-wrap;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    color: black;
 }
 
-.footer a:hover {
-    color: #ff3399;
-}
-
-/* Features Section */
-.features {
-    background: #fff;
-    padding: 60px 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    margin-top: 3rem;
-    animation: fadeIn 2s ease;
-    text-align: center;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.feature-card {
-    background: #ffebf1;
-    color: #ff66b2;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3rem;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: scale(1.05);
-}
-
-.feature-card h4 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.feature-card p {
-    font-size: 1.2rem;
-}
-
-/* About Section */
-.about {
-    background-color: #ffebf1;
-    padding: 50px 20px;
-    border-radius: 15px;
-    margin-top: 3rem;
-    text-align: center;
-}
-
-.about h2 {
-    color: #ff3399;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.about p {
-    font-size: 1.2rem;
-    color: #3f3d56;
-    margin-top: 20px;
-}
-
- /* Testimonial Section */
- .testimonial-section {
-        padding: 50px 20px;
-        text-align: center;
-        background-color: #eda5ff;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .testimonial-slider {
-        display: flex;
-        flex-direction: row;
-        animation: slideText 28s linear infinite;
-        white-space: nowrap;
-    }
-
-    .testimonial-item {
-        padding: 0 50px;
-        font-size: 1.5rem;
-        color: #dcdcdc;
-        font-style: italic;
-        text-align: center;
-        flex-shrink: 0;
-        transition: transform 0.3s ease;
-    }
-
-    .testimonial-item h5 {
-        font-weight: bold;
-        color: #f9b1ff;
-    }
-
-
-/* Floating Arrows Animation */
-.arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
+/* Copy Text Button Styling */
+button {
+    background-color: #4eb2ff; /* Visual Studio blue */
+    border: none;
     color: white;
-    animation: bounce 1.5s infinite;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Smooth transition for the effect */
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(-10px);
-    }
+button:hover {
+    background-color: #1853ad; /* Darker blue on hover */
+    box-shadow: 0 0 10px rgba(118, 182, 255, 0.8), 0 0 20px rgba(148, 198, 255, 0.6), 0 0 30px rgba(116, 181, 255, 0.4); /* Blue glow effect */
 }
 
-/* Floating Hearts Animation */
-@keyframes floatingHearts {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-50px) scale(1.2);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-100px) scale(0.5);
-        opacity: 0;
-    }
+/* Focus effect for accessibility */
+button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 10px rgba(121, 183, 255, 0.8), 0 0 20px rgba(106, 176, 255, 0.6), 0 0 30px rgba(128, 187, 255, 0.4); /* Focus glow effect */
 }
-
-.floating-heart {
-    position: absolute;
+/* Floating Support Button */
+#supportBtn {
     font-size: 1.5rem;
-    color: pink;
-    animation: floatingHearts 3s infinite;
+    padding: 15px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Rotating Star Animation */
-@keyframes rotateStar {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+/* Hover Effect */
+#supportBtn:hover {
+    background-color: #005bb5;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
 }
 
-.rotating-star {
-    position: absolute;
-    font-size: 1.5rem;
-    color: yellow;
-    animation: rotateStar 3s linear infinite;
+/* Active Effect */
+#supportBtn:active {
+    transform: scale(0.9);
 }
-        /* Animated Hearts */
-    .heart {
-        position: fixed;
-        animation: floatUp 5s infinite ease-in-out;
-        color: #ff79c6;
-        font-size: 2rem;
-    }
 
-    @keyframes floatUp {
-        0% {
-            transform: translateY(100vh) scale(1);
-            opacity: 1;
+/* Support Form */
+.support-form {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #1e1e1e;
+    border: 1px solid #3c3c3c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    color: white;
+}
+
+/* Form Visible */
+.support-form.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form Elements */
+.support-form label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.support-form input,
+.support-form textarea,
+.support-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.support-form input,
+.support-form textarea {
+    background-color: #252526;
+    color: white;
+    border: 1px solid #3c3c3c;
+}
+
+.support-form button {
+    background-color: #007acc;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.support-form button:hover {
+    background-color: #005bb5;
+}
+        h1 {
+            text-align: center;
+            color: #58a6ff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
         }
 
-        100% {
-            transform: translateY(-10vh) scale(0.5);
-            opacity: 0;
+        button {
+            background-color: #58a6ff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            width: 100%;
+            margin: 15px 0;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
-    }
 
-    </style>
-</head>
+        button:hover {
+            background-color: #0062cc;
+            transform: scale(1.05);
+        }
 
-<body>
-<!-- Floating Heart -->
-<div class="heart"></div>
+        button:active {
+            transform: scale(0.98);
+        }
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
-<div class="container-fluid">
-    <a class="navbar-brand" href="#">Pyeulmails</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-        
-            <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-            <li class="nav-item"><a class="nav-link" href="#generate">Generate Email</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://mega.nz/file/22Ij1CCT#F6lxbT02K82rywv9IWRmD2h0x4UL1vivxUsP_DP1D7Q" target="_blank">📱 Mobile App</a></li>
-            <li class="nav-item" id="profileLink" style="display: none;">
-            <li class="nav-item">
-                <li class="nav-item" id="profileLink" style="display: none;">
-                    <a class="nav-link" href="profile.html">Profile</a>
-                </li>
-                <li class="nav-item" id="loginLink" style="display: none;">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
-                <li class="nav-item" id="registerLink" style="display: none;">
-                    <a class="nav-link" href="register.html">Register</a>
-                </li>
-                </li>
-                <li class="nav-item" id="logoutLink" style="display: none;">
-                    <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
-                </li>
-                <label for="bgUploader" class="btn">🌆 Change Background</label>
-                <input type="file" id="bgUploader" style="display: none;" />
-  
-            </li>
-        </ul>
-    </div>
-</div>
-</nav>
+        .message {
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
 
-<!-- Hero Section -->
-<section class="hero">
-<h1>Pyeulmails</h1>
-<p>Instant Email Creation & Management for Your Needs</p>
-<a href="#generate" class="btn btn-primary">Get Started</a>
-</section>
+        .error {
+            background-color: #cc0000;
+            border-color: #990000;
+        }
 
-<!-- Animated Arrow -->
-<div class="arrow">↓</div>
+        .success {
+            background-color: #28a745;
+            border-color: #006600;
+        }
 
-<!-- Floating Hearts -->
-<div class="floating-heart" style="top: 50px; left: 30px;">❤️</div>
-<div class="floating-heart" style="top: 100px; left: 80px;">💖</div>
-<div class="floating-heart" style="top: 150px; left: 130px;">💗</div>
+        #accountsSection {
+            margin-top: 20px;
+            background-color: #2a2a40;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
 
-<!-- Rotating Stars -->
-<div class="rotating-star" style="top: 40px; right: 40px;">⭐</div>
-<div class="rotating-star" style="top: 90px; right: 80px;">🌟</div>
-    <!-- Animated Hearts -->
-<span class="heart" style="left: 10%; animation-delay: 0s;">❤️</span>
-<span class="heart" style="left: 30%; animation-delay: 1s;">💖</span>
-<span class="heart" style="left: 50%; animation-delay: 2s;">💕</span>
-<span class="heart" style="left: 70%; animation-delay: 3s;">💞</span>
-<span class="heart" style="left: 90%; animation-delay: 4s;">🎀</span>
+        .account-box {
+            background-color: #333;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            color: #dcdcdc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        </style>
+      <button id="supportBtn" aria-label="Support" onclick="toggleSupportForm()">📜</button>
 
-
-<!-- Features Section -->
-<section id="features" class="features">
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="feature-card">
-                <h4>Email Generation</h4>
-                <p>Generate disposable emails to maintain privacy.</p>
-                <i class="fas fa-envelope feature-icon"></i>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="feature-card">
-                <h4>Email Checking</h4>
-                <p>Check messages for OTP and more.</p>
-                <i class="fas fa-check feature-icon"></i>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="feature-card">
-                <h4>Fast Access</h4>
-                <p>Quick access to your generated emails.</p>
-                <i class="fas fa-fast-forward feature-icon"></i>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-
-<!-- About Section -->
-<section id="about" class="about">
-<div class="container">
-    <h2>About Pyeulmails</h2>
-    <p>Pyeulmails offers an easy-to-use platform for generating temporary email addresses. Whether you need to avoid spam, maintain privacy, or access special services, Pyeulmails is your go-to tool for email management.</p>
-</div>
-</section>
-
-<!-- Modal Popup for Features -->
-<div class="modal" id="featureModal">
-<div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Features</h2>
-    <p>Learn more about each feature...</p>
-</div>
-</div>
-
-<!-- Temporary Email Form -->
-<section id="generate" class="container mt-5">
-<div class="card p-4 rounded-4 shadow-lg" style="background: rgba(255, 102, 178, 0.1); border: 2px solid #ff66b2;">
-    <h4 class="text-center mb-4" style="color: #ff3399; font-weight: bold;">🎀 Generate Temporary Email 🎀</h4>
+      <div class="support-form" id="supportForm">
+        <h3>Support</h3>
+        <form onsubmit="submitSupportMessage(event)">
+          <label for="userEmail">Gmail:</label>
+          <input type="email" id="userEmail" name="userEmail" required><br>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea><br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     
-    <!-- Generated Email Section -->
-    <div class="mb-3 position-relative">
-        <label for="generatedEmail" class="form-label" style="color: #ff3399; font-weight: bold;">Your Temporary Email</label>
-        <div class="input-group">
-            <input type="text" id="generatedEmail" class="form-control rounded-pill" readonly placeholder="Click 'Generate'" 
-                style="border: 2px solid #ff66b2; background: #ffe6f1; color: #ff3399; font-weight: bold;">
-            <button id="copyEmailBtn" class="btn rounded-pill" 
-                style="background: #ff3399; color: white; border: none;">🎗 Copy</button>
-        </div>
-    </div>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Luke Development</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#servicePackages">Services</a>
+                        </li>
+                        <!-- Add Nav Link to Forms Section -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#forms">Forms</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#accountCreation">TempMails</a>
+                        </li>
+                       <li class="nav-item">
+    <a class="nav-link" href="spam.html">SpamShare</a>
+</li>
+                        <li class="nav-item" id="profileLink" style="display: none;">
+                            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+                        <li class="nav-item" id="loginLink" style="display: none;">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item" id="registerLink" style="display: none;">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
+                        </li>
+                        <li class="nav-item" id="logoutLink" style="display: none;">
+                            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <header class="hero">
+            <h1>Welcome to Luke Development Web Services</h1>
+            <p>Your go-to platform for seamless development solutions</p>
+            <a href="#servicePackages" class="btn">Explore Services</a>
+        </header>
 
-    <div class="d-flex justify-content-center mb-4">
-        <button id="generateEmailBtn" class="btn px-4 py-2 rounded-pill" 
-            style="background: linear-gradient(45deg, #ff66b2, #ff3399); color: white; font-size: 1.2rem; transition: 0.3s;">
-            🎀💟 Generate Email
-        </button>
-    </div>
-
-    <hr style="border-top: 2px dashed #ff3399;">
-
-    <!-- Inbox Section -->
-    <h4 class="text-center mb-3" style="color: #ff3399; font-weight: bold;">📩 Check Your Inbox</h4>
-    <div class="mb-3">
-        <label for="emailInput" class="form-label" style="color: #ff3399; font-weight: bold;">Your Temporary Email</label>
-        <div class="input-group">
-            <input type="text" id="emailInput" class="form-control rounded-pill" readonly placeholder="Your generated email" 
-                style="border: 2px solid #ff66b2; background: #ffe6f1; color: #ff3399; font-weight: bold;">
-            <button id="checkBtn" class="btn rounded-pill" 
-                style="background: #ff66b2; color: white; border: none;">💗Check Emails</button>
-        </div>
-    </div>
-
-    <!-- Inbox Display -->
-    <div class="inbox-container mt-4 p-3 rounded-4" style="max-height: 300px; overflow-y: auto; border: 2px solid #ff3399; background: rgba(255, 102, 178, 0.1);">
-        <h5 class="text-center" style="color: #ff3399;">💌 Inbox</h5>
-        <div id="emailContent" class="p-2 text-dark" style="font-weight: bold; color: #ff3399;">No emails yet...</div>
-    </div>
-</div>
-</section>
-    <section class="testimonial-section">
-        <h2 class="text-center">What Our Clients Say</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial-item">
-                <p>"PyeulMails exceeded our expectations with their amazing service and dedication!"</p>
-                <h5>- John Doe</h5>
+        <section id="servicePackages" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Starter Package</h3>
+                        <p>₱300 - Basic Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Basic website setup, including a home page, contact page, and about page. Great for small businesses and personal portfolios.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Custom domain: +₱100</li>
+                                <li>SEO optimization: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Professional Package</h3>
+                        <p>₱500 - Advanced Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Includes everything from the Starter Package, plus additional pages, custom styling, and more advanced features.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Blog Integration: +₱150</li>
+                                <li>E-commerce setup: +₱400</li>
+                                <li>Analytics setup: +₱250</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Premium Package</h3>
+                        <p>₱1000 - Premium Development Package</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>All the features from the Professional Package with extra attention to performance, advanced functionality, and support for a large-scale business or online presence.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Social Media Integration: +₱300</li>
+                                <li>Custom API Development: +₱500</li>
+                                <li>Advanced Security Features: +₱350</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Packages -->
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Facebook Auto Bot Creation</h3>
+                        <p>₱700 - Facebook Auto Bot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Creation of an automated bot for Facebook integration, handling customer service or marketing tasks automatically on your page.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Advanced AI Response System: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Facebook AI Bot Creation</h3>
+                        <p>₱700 - Facebook AI Bot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>AI-powered Facebook bot designed to provide intelligent responses, improve user interaction, and automate tasks.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Custom Bot Personality: +₱200</li>
+                                <li>Sentiment Analysis Integration: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>AI Marketing Bot</h3>
+                        <p>₱700 - AI Marketing Automation</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>AI-powered bot for marketing automation, helping with lead generation, campaign management, and customer outreach on various platforms.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Data Analytics Integration: +₱200</li>
+                                <li>CRM System Integration: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <h3>Advanced Chatbot Package</h3>
+                        <p>₱700 - Advanced Chatbot Development</p>
+                        <div class="description">
+                            <h4>What's Included:</h4>
+                            <p>Fully customizable advanced chatbot with conversational AI, tailored to your business needs, supporting multiple channels like web and mobile.</p>
+                            <p class="add-ons">Add-Ons Available:</p>
+                            <ul>
+                                <li>Multi-language Support: +₱200</li>
+                                <li>24/7 Support System: +₱200</li>
+                            </ul>
+                            <button onclick="window.location.href='https://www.messenger.com/t/100035009110886';" class="btn btn-primary">Buy now!📜</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial-item">
-                <p>"The team was quick to respond and always helpful. PyeulMails"</p>
-                <h5>- Sarah Lee</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
-                <h5>- Mark Spencer</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
-                <h5>- Emma Green</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
-                <h5>- David Kim</h5>
-            </div>
-            <div class="testimonial-item">
-                <p>"Such Great Emails From PyeulMails"</p>
-                <h5>- Lisa White</h5>
+        </section>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="as.png" class="d-block w-100" alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="saaa.png" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="fs.png" class="d-block w-100" alt="Slide 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="sh.png" class="d-block w-100" alt="Slide 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="fg.png" class="d-block w-100" alt="Slide 5">
+                </div>
             </div>
         </div>
     </section>
- 
-<!-- Footer -->
-<footer class="footer">
-<div class="container">
-    <p>&copy; 2025 Pyeulmails. All Rights Reserved Made By The Husband of Pyeul Lihm.</p>
-    <a href="#about">About Us</a> | <a href="https://twitter.com/pyeulmails">Twitter</a> | <a href="#features">Features</a>
+<section class="forms">
+    <section id="forms">
+        <h2>Select Your Package Form</h2>
+        <div class="package-buttons">
+            <button class="package-btn" onclick="showPlainText('starter')">Starter Package - ₱300</button>
+            <button class="package-btn" onclick="showPlainText('professional')">Professional Package - ₱500</button>
+            <button class="package-btn" onclick="showPlainText('premium')">Premium Package - ₱1000</button>
+            <button class="package-btn" onclick="showPlainText('facebook-auto-bot')">Facebook Auto Bot - ₱700</button>
+            <button class="package-btn" onclick="showPlainText('facebook-ai-bot')">Facebook AI Bot - ₱700</button>
+            <button class="package-btn" onclick="showPlainText('ai-marketing-bot')">AI Marketing Bot - ₱700</button>
+            <button class="package-btn" onclick="showPlainText('advanced-chatbot')">Advanced Chatbot - ₱700</button>
+        </div>
+    </section>
+    
+
+<!-- Plain Text Result Section (for copying) -->
+<div id="plain-text-result" style="display:none; margin-top: 50px; padding: 20px; background-color: #f4f4f4; border-radius: 8px; width: 80%; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <!-- Close button in the plain text section -->
+    <span class="close-btn" onclick="closePlainText()">&times;</span>
+    <h3>Your Form in Plain Text</h3>
+    <pre id="form-text"></pre>
+    <button onclick="copyText()">Copy Text</button>
 </div>
-</footer>
 
-<!-- Add your scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// Modal open and close function
-function openModal() {
-    document.getElementById('featureModal').style.display = "block";
-}
-function closeModal() {
-    document.getElementById('featureModal').style.display = "none";
-}
-</script>
 
-    <script>
-        const bgUploader = document.getElementById("bgUploader");
-        
-        bgUploader.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-        
-                reader.onload = (e) => {
-                    document.body.style.backgroundImage = `url('${e.target.result}')`;
-                    document.body.style.backgroundSize = "cover";
-                    document.body.style.backgroundRepeat = "no-repeat";
-                    document.body.style.backgroundAttachment = "fixed";
-                };
-        
-                reader.onerror = () => {
-                    alert("Failed to load the image. Please try again with a valid image.");
-                };
-        
-                reader.readAsDataURL(file);
-            } else {
-                alert("No file selected. Please select an image.");
-            }
-        });
-        const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
+
+            </section>
+        <section class="testimonial-section">
+            <h2 class="text-center">What Our Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-item">
+                    <p>"Luke Development exceeded our expectations with their amazing service and dedication!"</p>
+                    <h5>- John Doe</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"The team was quick to respond and always helpful. Our website has never looked better!"</p>
+                    <h5>- Sarah Lee</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Their custom solutions were exactly what we needed. Highly recommend!"</p>
+                    <h5>- Mark Spencer</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Luke Development helped us scale our online presence and took our business to the next level."</p>
+                    <h5>- Emma Green</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Their attention to detail and expertise is unmatched. A great experience from start to finish."</p>
+                    <h5>- David Kim</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>"We were able to launch our site on time with the help of Luke Development’s expert team!"</p>
+                    <h5>- Lisa White</h5>
+                </div>
+            </div>
+        </section>
+         <!-- Account Creation Section -->
+    <div class="container" id="accountCreation">
+        <h1>Account Creation</h1>
+        <button id="createAccountBtn">Create Accounts</button>
+        <div id="messages"></div>
+    </div>
+
+    <!-- Stacked Accounts Section -->
+    <div class="container" id="accountsSection">
+        <!-- Created accounts will stack here -->
+    </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Luke Development. All Rights Reserved.</p>
+            <p>
+                <a href="https://github.com/luke" target="_blank">GitHub</a> | 
+                <a href="https://twitter.com/luke" target="_blank">Twitter</a> | 
+                <a href="https://www.linkedin.com/in/luke" target="_blank">LinkedIn</a>
+            </p>
+        </footer>
+           <!-- JavaScript -->
+    <script src="index.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+     <script>   // Initialize Supabase client
+const supabaseUrl = 'https://ehrwsusgkzerozjnddib.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVocndzdXNna3plcm96am5kZGliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY0Nzk4OTgsImV4cCI6MjA1MjA1NTg5OH0.2gC_pxtLhwrAGA2wR6jvXKuIhNMe_L_IsMWgSa3KKds';
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
@@ -703,5 +767,199 @@ async function submitSupportMessage(event) {
   }
 }
 
-            </script>
-        </html>
+
+
+// Show plain text form based on selected package
+function showPlainText(packageType) {
+    let plainTextMessage = '';
+    
+    switch (packageType) {
+        case 'starter':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Starter Package - ₱300
+            4. What is the main goal of your website?
+               - Basic website setup with home page, contact page, and about page
+            5. Design Preferences:
+               - Simple and professional design
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱300
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'professional':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Professional Package - ₱500
+            4. What is the main goal of your website?
+               - Advanced website with additional pages, custom styling, and more features
+            5. Design Preferences:
+               - Advanced, custom design
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱500
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'premium':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Premium Package - ₱1000
+            4. What is the main goal of your website?
+               - Fully optimized, large-scale business or online presence
+            5. Design Preferences:
+               - Premium design, high performance
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱1000
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'facebook-auto-bot':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Facebook Auto Bot - ₱700
+            4. What is the main goal of your website?
+               - Automated bot for customer service or marketing on Facebook
+            5. Design Preferences:
+               - Integration with Facebook page
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'facebook-ai-bot':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Facebook AI Bot - ₱700
+            4. What is the main goal of your website?
+               - AI-powered Facebook bot for intelligent responses
+            5. Design Preferences:
+               - Custom AI bot personality
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'ai-marketing-bot':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: AI Marketing Bot - ₱700
+            4. What is the main goal of your website?
+               - AI-powered bot for marketing automation
+            5. Design Preferences:
+               - Custom campaign management features
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        case 'advanced-chatbot':
+            plainTextMessage = `
+            Website Request Form:
+            1. Name: ____________________________
+            2. Email Address: ____________________________
+            3. Website Type: Advanced Chatbot - ₱700
+            4. What is the main goal of your website?
+               - Fully customizable chatbot with AI and multi-channel support
+            5. Design Preferences:
+               - 24/7 support and multi-language support
+            6. Do you have any color preferences or branding guidelines?
+               - ____________________________
+            7. Content Requirements:
+               - ____________________________
+            8. Do you need any specific features on the website?
+               - ____________________________
+            9. Ongoing Maintenance or Updates?
+               - ____________________________
+            10. Budget: ₱700
+            11. Additional Information or Requests:
+               - ____________________________
+            `;
+            break;
+        default:
+            plainTextMessage = "Select a valid package.";
+            break;
+    }
+
+    // Show the plain text message for the selected package
+    document.getElementById('form-text').textContent = plainTextMessage;
+    document.getElementById('plain-text-result').style.display = 'block';
+}
+
+// Function to close the plain text result section
+function closePlainText() {
+    document.getElementById('plain-text-result').style.display = 'none';
+}
+
+// Copy the form text to clipboard
+function copyText() {
+    const formText = document.getElementById('form-text');
+    const range = document.createRange();
+    range.selectNode(formText);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    alert('Form text copied to clipboard!');
+}
+</script>
+</html>
+    
